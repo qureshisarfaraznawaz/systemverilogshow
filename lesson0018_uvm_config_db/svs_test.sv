@@ -13,7 +13,7 @@ class svs_test extends uvm_test;
    function void end_of_elaboration_phase(uvm_phase phase);
       uvm_top.print_topology();
    endfunction
-   
+
    task run_phase(uvm_phase phase);
       phase.raise_objection(this);
       repeat (4) `uvm_info("DBG","message1 goes here",UVM_NONE)

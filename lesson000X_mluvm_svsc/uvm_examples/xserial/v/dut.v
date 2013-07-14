@@ -5,7 +5,7 @@
 //Developers  : Richard Vialls
 //Created     : 09-May-2002
 //Description : A simple 3 input, 3 output router
-//Notes       : 
+//Notes       :
 //---------------------------------------------------------------------------
 //Copyright (c) 2005-20010 Cadence Design Systems, Inc. All rights reserved worldwide.
 //Please refer to the terms and conditions in $IPCM_HOME.
@@ -26,7 +26,7 @@ module router (reset,
 
    input reset;
    input clock;
-   
+
    input port_a_in_data;
    output port_a_err;
    output port_a_out_data;
@@ -41,7 +41,7 @@ module router (reset,
 
    wire   reset;
    wire   clock;
-   
+
    wire   port_a_in_data;
    wire   port_a_err;
    wire   port_a_out_data;
@@ -54,8 +54,8 @@ module router (reset,
    wire   port_c_err;
    wire   port_c_out_data;
 
-   
- 
+
+
    wire [1:0] id_a;
    assign id_a = 2'b00;
 
@@ -93,7 +93,7 @@ module router (reset,
    reg [11:0]  data_bus;
    reg         data_bus_valid;
    wire        full;
-   
+
 
 
    in_channel in_port_a(.clock(clock),
@@ -107,7 +107,7 @@ module router (reset,
                         .flow_req(chan_a_flow_req),
                         .flow_halt(chan_a_flow_halt),
                         .flow_ack(chan_a_flow_ack));
-   
+
    in_channel in_port_b(.clock(clock),
                         .reset(reset),
                         .in_data(port_b_in_data),
@@ -131,12 +131,12 @@ module router (reset,
                         .flow_req(chan_c_flow_req),
                         .flow_halt(chan_c_flow_halt),
                         .flow_ack(chan_c_flow_ack));
-   
-  
-  
-  
- 
- 
+
+
+
+
+
+
    out_channel out_port_a(.id(id_a),
                           .clock(clock),
                           .reset(reset),
@@ -149,7 +149,7 @@ module router (reset,
                           .full(chan_a_full),
                           .halted(chan_a_halted),
                           .out_data(port_a_out_data));
-   
+
    out_channel out_port_b(.id(id_b),
                           .clock(clock),
                           .reset(reset),
@@ -162,7 +162,7 @@ module router (reset,
                           .full(chan_b_full),
                           .halted(chan_b_halted),
                           .out_data(port_b_out_data));
-      
+
    out_channel out_port_c(.id(id_c),
                           .clock(clock),
                           .reset(reset),
@@ -175,16 +175,16 @@ module router (reset,
                           .full(chan_c_full),
                           .halted(chan_c_halted),
                           .out_data(port_c_out_data));
-   
-  
+
+
    // If any of the output FIFOs are full, then we cannot guarantee
    // to be able to route a frame, so stall the router.
    assign full = chan_a_full | chan_b_full | chan_c_full;
-   
+
    // This process is the actual router. Frames from each of the
    // input channels are merged onto a single data bus (the channels
    // are prioritised, A, B then C). Each output channel then only
-   // picks off the frames that are addressed to it. 
+   // picks off the frames that are addressed to it.
    always@(reset or full or chan_a_valid or chan_a_data
            or chan_b_valid or chan_b_data or chan_c_valid
            or chan_c_data)
@@ -195,7 +195,7 @@ module router (reset,
                chan_b_ack <= 1'b0;
                chan_c_ack <= 1'b0;
             end // if (reset == 1'b1)
-         else 
+         else
             begin
                if ((chan_a_valid == 1'b1) && (full == 1'b0))
                   begin
@@ -217,7 +217,7 @@ module router (reset,
                            chan_b_ack <= 1'b1;
                            chan_c_ack <= 1'b0;
                         end // if ((chan_b_valid == 1'b1) && (full == 1'b0))
-                     else 
+                     else
                         begin
                            if ((chan_c_valid == 1'b1) && (full == 1'b0))
                               begin

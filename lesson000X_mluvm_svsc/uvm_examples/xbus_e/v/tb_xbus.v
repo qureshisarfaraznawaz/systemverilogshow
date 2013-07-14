@@ -2,11 +2,11 @@
 //File name   : tb_xbus.v
 //Title       : Verilog testbench for XBus eVC demo
 //Project     : XBus eVC
-//Developers  : 
+//Developers  :
 //Created     : 2001
-//Description : 
-//Notes       : 
-//--------------------------------------------------------------------------- 
+//Description :
+//Notes       :
+//---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -28,14 +28,14 @@
 //---------------------------------------------------------------------------
 
 module xbus_evc_demo;
-   
+
 
   // xbus signals by agent
   reg xbus_req_master_0;
   reg xbus_gnt_master_0;
   reg xbus_req_master_1;
   reg xbus_gnt_master_1;
-    
+
   // xbus signals
   reg xbus_clock;
   reg xbus_reset;
@@ -49,7 +49,7 @@ module xbus_evc_demo;
   reg xbus_wait;
   reg xbus_error;
 
-initial    
+initial
    begin
       xbus_reset <= 1'b1;
       xbus_clock <= 1'b1;

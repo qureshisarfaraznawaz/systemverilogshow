@@ -1,14 +1,14 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : test_1.e
 Title       : XSerial eVC demo - example testcase file
 Project     : XSerial eVC
 Created     : 2008
 Description : Example testcase file for demo purposes
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
   All rights reserved worldwide.
-----------------------------------------------------------------------------*/ 
+----------------------------------------------------------------------------*/
 
 <'
 
@@ -21,7 +21,7 @@ extend sys {
         -- Print in hexadecimal by default
         set_config(print, radix, hex);
     };
-    
+
 }; -- extend sys
 
 extend XSERIAL_A MAIN MAIN_TEST xserial_sequence {
@@ -30,7 +30,7 @@ extend XSERIAL_A MAIN MAIN_TEST xserial_sequence {
 
 extend XSERIAL_B MAIN MAIN_TEST xserial_sequence {
     keep count == 20;
-};  
+};
 
 extend XSERIAL_C MAIN MAIN_TEST  xserial_sequence {
     keep count == 10;

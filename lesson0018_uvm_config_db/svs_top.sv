@@ -5,7 +5,7 @@ module svs_top ();
    logic [31:0] outbus;
 
    svs_if svs_if_u[3:0](.clk(clk), .resetn(resetn));
-   
+
    svs_test svs_test_u = new();
    //svs_test_u = new;
 
@@ -30,6 +30,6 @@ module svs_top ();
 		   );
 
    initial begin
-      run_test("");//svs_test");      
+      run_test("");//svs_test");
    end
 endmodule // svs_top

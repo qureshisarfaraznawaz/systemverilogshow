@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_arbiter_sequence.e
 Title       : Sequence interface for ACTIVE arbiter agents
 Project     : XBus UVC
@@ -7,8 +7,8 @@ Description : This file provides a sequence interface for the arbiter. By
             : default, this sequence driver will take a random decision for
             : each arbitration phase. However, the user can over-ride the
             : default behaviour to control specific arbitration decisions.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -27,7 +27,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -42,14 +42,14 @@ struct xbus_arbiter_decision_s like any_sequence_item {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-        keep bus_name == read_only(driver.bus_name);    
-   
+        keep bus_name == read_only(driver.bus_name);
+
     -- This field is used to sub-type the decision struct according to which
     -- arbiter agent it is for. This field is automatically constrained by the
     -- UVC and should not be constrained by the user.
     arbiter_name : xbus_agent_name_t;
         keep arbiter_name == read_only(driver.arbiter_name);
-    
+
     -- This field contains the list of masters that are requesting the bus.
     -- This field is automatically constrained by the UVC and should not be
     -- constrained or altered by the user.
@@ -61,9 +61,9 @@ struct xbus_arbiter_decision_s like any_sequence_item {
     -- mentioned in the requests field or NULL.
     granted_master : MASTER xbus_agent_u;
         keep read_only(requests).is_empty() => granted_master == NULL;
-        keep not read_only(requests).is_empty() => 
+        keep not read_only(requests).is_empty() =>
                                       granted_master in read_only(requests);
-    
+
 }; -- struct xbus_arbiter_decision_s
 
 
@@ -83,8 +83,8 @@ extend xbus_arbiter_sequence {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-        keep bus_name == read_only(driver.bus_name);    
-   
+        keep bus_name == read_only(driver.bus_name);
+
     -- This field holds the logical name of the arbiter. This field is
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
@@ -95,24 +95,24 @@ extend xbus_arbiter_sequence {
     -- do "do decision ...".
     !decision : xbus_arbiter_decision_s;
 
-    // Cover the sequence. 
+    // Cover the sequence.
     // Ignore the pre-defined kinds, they do not add info to the coverage
     cover ended is {
         item kind using ignore = (kind == RANDOM or
                                   kind == SIMPLE or
                                   kind == MAIN);
-    }; 
+    };
 }; -- extend xbus_arbiter_sequence
 
 
-// since arbitration should begin immediately after reset this sequence is 
+// since arbitration should begin immediately after reset this sequence is
 // an init_dut phase seq and not main_test seq
 extend MAIN INIT_DUT xbus_arbiter_sequence {
-    
+
     -- The arbiter sequence driver is a reactive sequence driver so, by
     -- default we don't want it to ever run out of sequence items.
     keep soft count == MAX_UINT;
-      
+
     body() @driver.clock is only {
         for i from 0 to MAX_UINT {
             do decision;
@@ -135,13 +135,13 @@ extend xbus_arbiter_driver_u {
     synch : xbus_synchronizer_u;
 
     // tf_phase_clock if the testflow clock and might change according to
-    // current test phase. it is recommended to bind driver.clock to this 
+    // current test phase. it is recommended to bind driver.clock to this
     // clock;
     event tf_phase_clock is only @synch.unqualified_clock_fall;
     on tf_phase_clock {
         emit clock;
     };
-    
+
     // sequences are influenced by test phases but do not influence
     // the test flow (usually they use while TRUE loops) this behavior is
     // declared by this flag
@@ -151,7 +151,7 @@ extend xbus_arbiter_driver_u {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-   
+
     -- This field holds the logical name of the arbiter. This field is
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
@@ -161,7 +161,7 @@ extend xbus_arbiter_driver_u {
     -- currently requesting the bus immediately prior to calling
     -- try_next_item().
     package !requests : list of MASTER xbus_agent_u;
-    
+
 }; -- extend xbus_arbiter_driver_u
 
 

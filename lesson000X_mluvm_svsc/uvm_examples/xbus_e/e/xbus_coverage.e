@@ -1,12 +1,12 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_coverage.e
 Title       : Coverage
 Project     : XBus UVC
 Created     : 2008
 Description : This file provides functional coverage in the bus and agent
             : monitors.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,7 +25,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -37,7 +37,7 @@ package cdn_xbus;
 extend xbus_bus_monitor_u {
     cover transfer_end is {
         item addr : uint(bits:16) = transfer.addr;
-        item read_write :xbus_read_write_t = transfer.read_write 
+        item read_write :xbus_read_write_t = transfer.read_write
             using ignore = (read_write == NOP);
         item size : uint [1, 2, 4, 8] = transfer.size;
     };
@@ -51,7 +51,7 @@ extend xbus_agent_monitor_u {
         item name : xbus_agent_name_t = agent.agent_name
             using per_instance;
         item addr : uint(bits:16) = bus_monitor.transfer.addr;
-        item read_write :xbus_read_write_t = bus_monitor.transfer.read_write 
+        item read_write :xbus_read_write_t = bus_monitor.transfer.read_write
             using ignore = (read_write == NOP);
         item size : uint [1, 2, 4, 8] = bus_monitor.transfer.size;
     };

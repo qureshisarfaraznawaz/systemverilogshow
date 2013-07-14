@@ -11,11 +11,11 @@ package leaf_pkg;
 endpackage : leaf_pkg
 
 /*module mod(input logic a_signal, clk);
-   q9876543210: assert property 
+   q9876543210: assert property
    (@(posedge clk) !$isunknown(a_signal));
 endmodule // mod
 */
 checker mod(input logic a_signal, clk);
-   q9876543210: assert property 
+   q9876543210: assert property
    (@(posedge clk) !$isunknown(a_signal));
 endchecker // mod

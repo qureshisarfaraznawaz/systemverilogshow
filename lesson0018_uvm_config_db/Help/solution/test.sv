@@ -21,10 +21,10 @@ svs_dut svs_dut(
 .clk(clk),
 .resetn(resetn),
 
-.inbus[3]() , 
-.inbus[2]() , 
-.inbus[1]() , 
-.inbus[0]() , 
+.inbus[3]() ,
+.inbus[2]() ,
+.inbus[1]() ,
+.inbus[0]() ,
 .outbus(outbus)
 );
 
@@ -41,9 +41,9 @@ output logic [31:0] outbus
 
 
 always@(posedge clk) begin
-if (!resetn) 
+if (!resetn)
 outbus <= 32'd0;
-else 
+else
 outbus <= inbus[3]|inbus[2]|inbus[1]|inbus[0];
 end
 

@@ -5,6 +5,6 @@ program test(my_if this_if);
 	 class_stimulus_u.run_t();
       join_none
       #122;
-      $finish;   
+      $finish;
    end
-endprogram 
+endprogram

@@ -28,10 +28,10 @@ module xbus_tb_top;
 
 
   reg rst;
-  
+
   dut_top dut(rst);
 
- 
+
 
   initial begin
     rst <= 1'b1;

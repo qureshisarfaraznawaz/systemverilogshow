@@ -1,10 +1,10 @@
 #
-# For the definition of the possible targets and macros, 
-# please see the README in `ncroot`/tools/systemc/files/make 
+# For the definition of the possible targets and macros,
+# please see the README in `ncroot`/tools/systemc/files/make
 #
 
-# Whichever line below is not commented is the default. Override 
-# by specifying on the make command line. For example 
+# Whichever line below is not commented is the default. Override
+# by specifying on the make command line. For example
 #  "make dynamic COMPILER=gnu"
 
 GCC_VERS =
@@ -14,9 +14,9 @@ COMPILER = native
 #COMPILER = gnu
 
 #user can put their own ncsc, elaborator and simulator options
-USER_SIM_OPTIONS = 
-USER_ELAB_OPTIONS = 
-USER_NCSC_OPTIONS = 
+USER_SIM_OPTIONS =
+USER_ELAB_OPTIONS =
+USER_NCSC_OPTIONS =
 
 # User should list the systemc source files on this macro
 SYSTEMC_SOURCES = tbtop.cpp
@@ -25,10 +25,10 @@ SYSTEMC_SOURCES = tbtop.cpp
 VERILOG_SOURCES = test.sv
 
 # User should list the VHDL source files on this macro
-VHDL_SOURCES = 
+VHDL_SOURCES =
 
 # User should name top level module in the hdl hierarchy
-DESIGN_TOP = 
+DESIGN_TOP =
 
 # For user to add their own -D on the compiler command line.
 USER_DFLAGS =
@@ -37,19 +37,19 @@ USER_DFLAGS =
 USER_IFLAGS =
 
 # For user to add their own -L on the compiler command line.
-USER_LFLAGS = 
+USER_LFLAGS =
 
-# For user to add their own libraries to link with the simulation. 
-USER_LIBS = 
+# For user to add their own libraries to link with the simulation.
+USER_LIBS =
 
-# Do not modify. Location of the SystemC make files. 
+# Do not modify. Location of the SystemC make files.
 SYSTEMC_MAKEFILES = `ncroot`/tools/systemc/files/make
 
 # User should modify this to point at their own dependency file.
 DEPENDENCIES_FILE = Makefile.depends
 
 # Build a shared object to be linked into NC.
-dynamic: 
+dynamic:
 	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc 		        \
 	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}"                     \
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
@@ -61,7 +61,7 @@ dynamic:
 	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"	\
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" dynamic
 
-# Build a version of the elaborator and the simulator that 
+# Build a version of the elaborator and the simulator that
 # contain the user's SystemC model statically linked in.
 static:
 	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc 		        \
@@ -75,7 +75,7 @@ static:
            "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" static
 
-simulate_dynamic: 
+simulate_dynamic:
 	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc            		\
 	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}" 			\
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
@@ -92,7 +92,7 @@ simulate_dynamic:
 	   "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" simulate_dynamic
 
-simulate_static: 
+simulate_static:
 	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc             		\
 	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}" 			\
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
@@ -112,7 +112,7 @@ simulate_static:
 
 TARGET_TEST_INSTALL	= simulate_dynamic
 
-test_install: clean use_irun 
+test_install: clean use_irun
 
 use_irun:
 	@echo "############################"
@@ -123,14 +123,14 @@ use_irun:
 	grep -v "ncsim> source" ncsim.log | grep -v "DEPUVM" |grep -v "CDNS" | grep -v "Mentor Graphics" | grep -v "Synopsys" | grep -v "Cadence Design" | grep -v "uvm_root.svh" | sed 's,\/.*\/tools,INST_PATH\/tools,' > ncsim_.log
 	cp ncsim_.log ncsim.log
 	diff ncsim.au ncsim.log > ncsim.log.df
-	rm -rf *.df 
+	rm -rf *.df
 	irun -clean
 
 clean:
 	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                        \
 	SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES} NC_ROOT=`ncroot`         \
         "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                        \
-	ARCH=`cds_plat` "GCC_VERS=${GCC_VERS}" COMPILER=${COMPILER} clean 
+	ARCH=`cds_plat` "GCC_VERS=${GCC_VERS}" COMPILER=${COMPILER} clean
 	irun -clean
 
 automatic:

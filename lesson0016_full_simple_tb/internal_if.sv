@@ -2,7 +2,7 @@ interface internal_if(input clk);
 
    logic [31:0] data_bus;
    logic [31:0] bus_data;
- 
+
    modport smp_mp (input clk, data_bus, bus_data);
 
    //add assertions here

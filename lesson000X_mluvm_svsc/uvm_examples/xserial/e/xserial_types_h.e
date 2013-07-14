@@ -1,15 +1,15 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xserial_types_h.e
 Title       : Common type declarations
-Project     : UVM XSerial eVC 
-Developers  :  
+Project     : UVM XSerial eVC
+Developers  :
 Created     : 2008
 Description : This file declares common types used throughout the eVC.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
 All rights reserved worldwide
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 

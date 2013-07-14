@@ -1,20 +1,20 @@
-//--------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------
 //File name   : tb_xserial.v
 //Title       : Verilog testbench for XSerial eVC demo
 //Project     : XSerial eVC
 //Developers  : Richard Vialls
 //Created     : 09-May-2002
-//Description : 
-//Notes       : 
-//--------------------------------------------------------------------------- 
+//Description :
+//Notes       :
+//---------------------------------------------------------------------------
 //Copyright (c) 2005-20010 Cadence Design Systems, Inc. All rights reserved worldwide.
 //Please refer to the terms and conditions in $IPCM_HOME.
-//--------------------------------------------------------------------------- 
-   
-module xserial_evc_demo;
-   
+//---------------------------------------------------------------------------
 
-  
+module xserial_evc_demo;
+
+
+
    reg reset;
    reg clock;
    reg port_a_in_data;
@@ -38,10 +38,10 @@ module xserial_evc_demo;
                   .port_c_in_data(port_c_in_data),
                   .port_c_err(port_c_err),
                   .port_c_out_data(port_c_out_data));
- 
- 
 
-  
+
+
+
 
    always
       #100 clock = ~clock;
@@ -53,5 +53,5 @@ module xserial_evc_demo;
          clock = 1'b1;
          #500 reset = 1'b0;
       end // initial begin
-   
+
 endmodule // xserial_evc_demo

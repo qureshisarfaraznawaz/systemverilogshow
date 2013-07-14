@@ -1,5 +1,5 @@
 
-# SimVision Command Script 
+# SimVision Command Script
 #
 # Design Browser windows
 #

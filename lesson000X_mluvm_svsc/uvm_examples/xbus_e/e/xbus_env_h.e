@@ -1,11 +1,11 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_env_h.e
 Title       : Declaration of top level env unit for UVC
 Project     : XBus UVC
 Created     : 2008
 Description : This file declares the env unit.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,7 +24,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
-------------------------------------------------------------------------*/ 
+------------------------------------------------------------------------*/
 
 <'
 
@@ -45,12 +45,12 @@ unit xbus_env_u like uvm_env {
     -- UVM_SIGNAL, UVM_TLM, UVM_ACCEL, UVM_SIGNAL_SC
     abstraction_level : uvm_abstraction_level_t;
       keep soft abstraction_level == UVM_SIGNAL;
-    
+
     -- This field provides a screen logger for each UVC instance. By default,
     -- it's verbosity is set to NONE so that it is disabled.
     logger : message_logger is instance;
     keep soft logger.verbosity == NONE;
-    
+
 
     -- This field holds the logical name of this physical bus. This field is
     -- automatically constrained by the UVC and should not be constrained by
@@ -84,7 +84,7 @@ unit xbus_env_u like uvm_env {
     -- to being empty.
     active_master_names : list of xbus_agent_name_t;
     keep soft active_master_names.size() == 0;
-        
+
     -- This field holds a list of the logical names of all passive masters
     -- contained by the env. The user should constrain this field to create
     -- all the passive masters required as part of the configuration file. The
@@ -93,7 +93,7 @@ unit xbus_env_u like uvm_env {
     -- to being empty.
     passive_master_names : list of xbus_agent_name_t;
     keep soft passive_master_names.size() == 0;
-        
+
     -- This field holds a list of the logical names of all active slaves
     -- contained by the env. The user should constrain this field to create
     -- all the active slaves required as part of the configuration file. The
@@ -111,7 +111,7 @@ unit xbus_env_u like uvm_env {
     -- to being empty.
     passive_slave_names : list of xbus_agent_name_t;
     keep soft passive_slave_names.size() == 0;
-    
+
     -- This field is the instance of the bus monitor.
     bus_monitor : xbus_bus_monitor_u is instance;
 
@@ -179,7 +179,7 @@ unit xbus_env_u like uvm_env {
 // CONFIGURATION:
 // --------------
 
-// the macro defines xbus_env_config_u and xbus_env_config_params_s, 
+// the macro defines xbus_env_config_u and xbus_env_config_params_s,
 // and instantiates them in xbus_env_u.
 uvm_build_config env xbus_env_u xbus_env_config_u xbus_env_config_params_s;
 

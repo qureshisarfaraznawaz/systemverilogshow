@@ -1,14 +1,14 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_master_bfm.e
 Title       : Master BFM
 Project     : XBus UVC
 Created     : 2008
 Description : This file adds master functionality to the generic BFM.
 Notes       : This is a proactive sequence driver
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 Copyright (c) 2008 Cadence Design Systems,Inc.
 All rights reserved worldwide
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -17,33 +17,33 @@ package cdn_xbus;
 
 
 extend MASTER xbus_bfm_u {
-    
-    // testflow induced reset does not rerun the driver but might stop 
-    // the bfm before it emitted item_done event to the driver. Since this 
-    // causes an error, the following flag is needed to manually emit 
+
+    // testflow induced reset does not rerun the driver but might stop
+    // the bfm before it emitted item_done event to the driver. Since this
+    // causes an error, the following flag is needed to manually emit
     // item_done in these cases.
     // Note: this is old code. Now item done that was not set
     //       is handled automatically by the Testflow domain manager
    //!item_done_not_set: bool;
 
-    // testflow main methods are expected to be found in the top portion 
+    // testflow main methods are expected to be found in the top portion
     // of the unit to better recognize the functional behavior of the unit
-    
+
     // Run the main master BFM in MAIN_TEST phase.
     tf_main_test() @tf_phase_clock is also {
         message(LOW, "Master BFM started");
         start drive_transfers();
         // Register the thread as running until POST_TEST, non blocking
-         tf_get_domain_mgr().register_thread_by_name(me, "drive_transfers", 
+         tf_get_domain_mgr().register_thread_by_name(me, "drive_transfers",
                                                      POST_TEST,  FALSE);
     }; -- tf_main_test()
-    
+
     tf_reset() @tf_phase_clock is also {
         -- make sure master does not request the bus after reset
         msmp.sig_request$ = 0;
     }; -- tf_reset()
-        
-    
+
+
     -- This is a pointer to the specific signals of the master
     msmp : xbus_master_signal_map_u;
 
@@ -53,7 +53,7 @@ extend MASTER xbus_bfm_u {
         wait true (msmp.sig_grant$ == 1);
         msmp.sig_request$ = 0;
     }; -- arbitrate_for_bus()
-    
+
     -- This TCM drives the Address Phase of a transfer.
     private drive_address_phase(t : MASTER xbus_trans_s) @tf_phase_clock is {
         -- Drive the address phase signals
@@ -64,15 +64,15 @@ extend MASTER xbus_bfm_u {
         wait cycle;
         -- now stop driving the address phase signals
 
-        smp.sig_addr.put_mvl_string("32'bz");   
-        smp.sig_size.put_mvl_string("2'bz");   
-        smp.sig_read.put_mvl_string("1'bz");   
-        smp.sig_write.put_mvl_string("1'bz");   
+        smp.sig_addr.put_mvl_string("32'bz");
+        smp.sig_size.put_mvl_string("2'bz");
+        smp.sig_read.put_mvl_string("1'bz");
+        smp.sig_write.put_mvl_string("1'bz");
     }; -- drive_address_phase()
-    
-    -- This TCM handles one byte of the Data Phase of a read transfer. It 
+
+    -- This TCM handles one byte of the Data Phase of a read transfer. It
     -- returns TRUE if an error occured on this byte.
-    private read_byte(t : MASTER xbus_trans_s, i : uint) : 
+    private read_byte(t : MASTER xbus_trans_s, i : uint) :
                                      bool @tf_phase_clock is {
         wait cycle;
         sync @bus_collector.data_valid;
@@ -82,7 +82,7 @@ extend MASTER xbus_bfm_u {
 
     -- This TCM handles one byte of the Data Phase of a write transfer. It
     -- returns TRUE if an error occured on this byte.
-    private write_byte(t : MASTER xbus_trans_s, i : uint) : 
+    private write_byte(t : MASTER xbus_trans_s, i : uint) :
                                       bool @tf_phase_clock is {
         smp.sig_data$ = t.data[i];
         wait @bus_collector.data_valid;
@@ -96,35 +96,35 @@ extend MASTER xbus_bfm_u {
             if i == (t.size-1) {
                 smp.sig_bip$ = 0;
             } else {
-                smp.sig_bip$ = 1;            
+                smp.sig_bip$ = 1;
             };
             case t.read_write {
                 READ  : { err = read_byte(t, i); };
                 WRITE : { err = write_byte(t, i); };
-                default : { wait;}; 
+                default : { wait;};
             };
             if err {
-                check err_sig_unexpected that 
+                check err_sig_unexpected that
                   (not t.check_error) or (t.error_pos_master == i)
-                    else dut_error("ERR_UNEXPECTED_ERROR\n", 
+                    else dut_error("ERR_UNEXPECTED_ERROR\n",
                                    "Error signal was unexpectedly asserted");
                 break
             } else {
-                check no_err_sig 
+                check no_err_sig
                       that (not t.check_error) or (t.error_pos_master != i)
-                    else dut_error("ERR_EXPECTED_ERROR_MISSING\n", 
+                    else dut_error("ERR_EXPECTED_ERROR_MISSING\n",
                                    "Error signal assertion was expected ",
                                    "but did not occur");
             };
         };
-        smp.sig_bip.put_mvl_string("1'bz");   
-        smp.sig_data.put_mvl_string("8'bz");   
+        smp.sig_bip.put_mvl_string("1'bz");
+        smp.sig_data.put_mvl_string("8'bz");
     }; -- drive_data_phase()
-    
+
     -- This TCM drives all phases of a transfer.
     private drive_transfer(t : MASTER xbus_trans_s) @tf_phase_clock is {
         msg_started(MEDIUM, "Driving transfer", t);
-        message(FULL, "Waiting for transmit delay of ", dec(t.transmit_delay), 
+        message(FULL, "Waiting for transmit delay of ", dec(t.transmit_delay),
                       " cycles");
         wait [t.transmit_delay] * cycle;
         message(MEDIUM, "Transfer started: ", t);
@@ -142,21 +142,21 @@ extend MASTER xbus_bfm_u {
     private drive_transfers() @tf_phase_clock is {
         while TRUE {
             // Perhaps tranmission of former data item was interrupted.
-            // Here the proper emission of former item_done 
+            // Here the proper emission of former item_done
             // is checked, and emitted if necessary.
             // Note: this is old code. Now item done that was not set
             //       is handled automatically by the Testflow domain manager
             // if item_done_not_set then {
             //    emit driver.item_done;
             //    item_done_not_set = FALSE;
-            //};                
-            
+            //};
+
             var next_trans := driver.get_next_item();
             drive_transfer(next_trans);
             emit driver.item_done;
-            
-        }; 
-    }; -- drive_transfers()    
+
+        };
+    }; -- drive_transfers()
 }; -- extend MASTER xbus_bfm_u {
 
 -- in case of rerun_phase - clean the driver from previous bfm calls

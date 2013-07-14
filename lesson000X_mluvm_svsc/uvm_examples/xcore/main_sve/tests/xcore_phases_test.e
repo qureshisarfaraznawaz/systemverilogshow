@@ -5,10 +5,10 @@ File name    : xcore_phases_test.e
 Title        : Testflow Demonstrated
 Project      : XCore eVC
 Created On   : 2008
-Description  : 
-             : Dummy activities, demoing how the components go from phase 
+Description  :
+             : Dummy activities, demoing how the components go from phase
              : to phase, and wait when required - xserial and xcore depend
-             : on xbus's reset,  the three domain synch on MAIN_TEST and 
+             : on xbus's reset,  the three domain synch on MAIN_TEST and
              : POST_TEST
 ----------------------------------------------------------------------------
 >>>>>>>>>>>>>>>>>>>>>>>>>>> COPYRIGHT NOTICE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -47,10 +47,10 @@ extend MASTER xbus_agent_u {
     };
     tf_post_test() @tf_phase_clock is also {
         wait [100] * cycle;
-    };   
+    };
 };
 
-       
+
 extend MAIN RESET xcore_combined_sequence {
     body() @driver.clock is also {
         wait [50] * cycle;

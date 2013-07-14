@@ -1,11 +1,11 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_top.e
 Title       : Top Level of UVC
 Project     : UVM XBus UVC
 Created     : 2008
 Description : This file imports all the files of the UVC.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,9 +24,9 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
-<' 
+<'
 
 package cdn_xbus;
 
@@ -64,7 +64,7 @@ import xbus_arbiter_agent;
 import xbus_master_bfm;
 import xbus_slave_bfm;
 
-import xbus_slave_agent; 
+import xbus_slave_agent;
 import xbus_master_agent;
 import xbus_arbiter_bfm;
 import xbus_slave_agent;

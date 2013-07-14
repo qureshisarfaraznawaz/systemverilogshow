@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : test_1.e
 Title       : XBus eVC demo - example testcase file
 Project     : XBus eVC
@@ -7,8 +7,8 @@ Description : Example testcase file for demo purposes.
             : Master0 sends 10..12 transfers
             : Master1 sends 1..5 transfers
             : The slaves respond with error for every transfer longer than 4
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -27,7 +27,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 package cdn_xbus;
@@ -40,13 +40,13 @@ import xbus_e/examples/xbus_config;
 -- position 4.
 extend xbus_slave_response_s {
     keep read_only(transfer.size > 4) => error_pos == 4;
-}; 
+};
 
 -- Make sure masters expect errors as described above.
 extend MASTER xbus_trans_s {
-    
+
     keep read_only(size > 4) =>  error_pos_master == 4;
-    
+
 };
 
 
@@ -67,9 +67,9 @@ extend MASTER_1 MAIN MAIN_TEST xbus_master_sequence {
 extend xbus_bus_monitor_u {
     on transfer_end {
         message(LOW, "bus_monitor saw transfer sent from ",
-                transfer.master_name, 
-                " of length ", transfer.data.size(), 
-                transfer.error_pos_mon == 0 ? "" : " and Error raised"); 
+                transfer.master_name,
+                " of length ", transfer.data.size(),
+                transfer.error_pos_mon == 0 ? "" : " and Error raised");
     };
 };
 '>

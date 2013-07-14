@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_types_h.e
 Title       : Common type declarations
-Project     : UVM XBus UVC 
-Developers  :  
+Project     : UVM XBus UVC
+Developers  :
 Created     : 2008
 Description : This file declares common types used throughout the UVC.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,7 +25,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -41,14 +41,14 @@ package cdn_xbus;
 
 
 
--- This type enumerates the logical names of each bus in the Verification 
+-- This type enumerates the logical names of each bus in the Verification
 -- Environment.
 type xbus_bus_name_t : [NO_BUS=0];
 
 
 
 -- This type enumerates the logical names of each agent (master, slave or
--- arbiter) in the Verification Environment. 
+-- arbiter) in the Verification Environment.
 type xbus_agent_name_t : [NO_AGENT=0];
 
 
@@ -85,7 +85,7 @@ unit xbus_slave_config_u like uvm_agent_config {
     -- is for. This field is automatically constrained by the UVC and should
     -- not be constrained by the user.
     slave_name : xbus_agent_name_t;
-          
+
 
 };
 
@@ -93,7 +93,7 @@ struct xbus_slave_params like uvm_config_params {
     -- This field specifies the lowest address of the range that the slave will
     -- respond to.
     min_addr : xbus_addr_t;
-   
+
     -- This field specifies the highest address of the range that the slave
     -- will respond to.
     max_addr : xbus_addr_t;

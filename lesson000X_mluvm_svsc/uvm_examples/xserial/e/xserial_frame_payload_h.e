@@ -1,15 +1,15 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xserial_frame_payload_h.e
 Title       : XSerial eVC frame payload structure
 Project     : XSerial eVC
 Created     : 2008
 Description : his file declares the format of the generic XSerial frame
-            : payload. 
-Notes       : 
---------------------------------------------------------------------------- 
+            : payload.
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
   All rights reserved worldwide
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -19,13 +19,13 @@ package cdn_xserial;
 -- The various possible sub-types are extended in the files that declare
 -- the sub-type formats. Note that the UNDEFINED value is used in the case
 -- where the user wants to generate a payload with an illegal frame_format
--- value. 
+-- value.
 type xserial_frame_format_t : [UNDEFINED = UNDEF];
 
 
 
--- This type is used to indicate the status of a frame. In this file, 
--- only the values that are relevant to payloads are declared. 
+-- This type is used to indicate the status of a frame. In this file,
+-- only the values that are relevant to payloads are declared.
 -- The xserial_frame.e file extends this type to give other status
 -- values. Note that because the XSerial protocol does not provide any
 -- means of identifying the end of a frame other than the value of the
@@ -44,24 +44,24 @@ struct xserial_frame_payload_s {
 
     -- For generated payloads, this field is automatically updated by the
     -- eVC during post_generate() to indicate what error conditions are
-    -- present in the payload. The user should not attempt to constrain 
-    -- or assign a value to this field. When a payload is unpacked, this 
-    -- field reflects the result of the unpacking. If this field is an 
+    -- present in the payload. The user should not attempt to constrain
+    -- or assign a value to this field. When a payload is unpacked, this
+    -- field reflects the result of the unpacking. If this field is an
     -- empty list then no errors are present in the payload.
     !status : list of xserial_frame_status_t;
-        
+
     -- This field holds the destination address for the frame. This can be
     -- used by routers but is otherwise ignored.
     %destination : uint(bits:2);
 
-    -- This field specifies the format of frame. 
-    -- The xserial_frame_format_t type can be extended to define 
+    -- This field specifies the format of frame.
+    -- The xserial_frame_format_t type can be extended to define
     -- various frame formats as required. Note that this field can only
-    -- take values that are declared legal frame formats or UNDEFINED. 
-    -- For this reason, the actual physical coding of this field in the 
+    -- take values that are declared legal frame formats or UNDEFINED.
+    -- For this reason, the actual physical coding of this field in the
     -- payload is held in the physical_frame_format field - which allows
     -- the user to generate frames with specific illegal formats.
-    -- For generated frames, this field will not be UNDEFINED by default. 
+    -- For generated frames, this field will not be UNDEFINED by default.
     -- To generate frames will random illegal frame format values,
     -- constrain this field to UNDEFINED. To generate frames with specific
     -- illegal frame format values, constrain this field to UNDEFINED and
@@ -70,7 +70,7 @@ struct xserial_frame_payload_s {
     -- frame format or UNDEFINED for illegal frame formats.
     frame_format : xserial_frame_format_t;
         keep soft frame_format != UNDEFINED;
-     
+
     -- This field is the actual physical frame format field as encoded
     -- in the frame. See the frame_format field for more details.
     %physical_frame_format : uint(bits:2);
@@ -80,20 +80,20 @@ struct xserial_frame_payload_s {
             physical_frame_format not in
                 all_values(xserial_frame_format_t).all(it != UNDEFINED).
                            apply(it.as_a(uint));
-        
+
     post_generate() is also {
         update_status();
     }; -- post_generate()
-    
+
     -- This method returns the payload as a list of bits. By using this
-    -- method rather than explicitly packing the struct, the user does 
+    -- method rather than explicitly packing the struct, the user does
     -- not need to be aware of the details of how a payload is packed.
     -- Note that in the XSerial eVC example, this is trivial, but in more
     -- complex eVCs, the process of packing a struct may be complex.
     pack_payload() : list of bit is {
         result = pack(packing.low, me);
     }; -- pack_payload()
-    
+
     -- This method takes a bitstream and unpacks it into the payload struct.
     -- As with pack_payload(), this method hides the implementation details
     -- of the struct packing/unpacking from the user. In addition, if the
@@ -104,20 +104,20 @@ struct xserial_frame_payload_s {
 
         unpack_payload_internal(bitstream, check_protocol);
         update_status();
-    
+
     }; -- unpack_payload()
-    
+
     -- The unpack_payload() method calls the unpack_payload_internal()
-    -- method and then calls update_status(). This allows sub-types of 
+    -- method and then calls update_status(). This allows sub-types of
     -- the payload to extend the unpacking behaviour while still ensuring
     -- that update_status() gets called last.
-    unpack_payload_internal(bitstream      : list of bit, 
+    unpack_payload_internal(bitstream      : list of bit,
                             check_protocol : bool) is {
-    
-    
+
+
         -- The payload should always be exactly 12 bits long. NOTE: this
-        -- isn't a DUT error (as the protocol provides no means of 
-        -- detecting that a DUT has sent a frame that isn't 15 bits long) 
+        -- isn't a DUT error (as the protocol provides no means of
+        -- detecting that a DUT has sent a frame that isn't 15 bits long)
         -- - so this is really an eVC usage error.
         if bitstream.size() != 12 {
             error("FATAL: Frame payload is not 12 bits long");
@@ -132,47 +132,47 @@ struct xserial_frame_payload_s {
         } else {
             frame_format = UNDEFINED;
         };
-        
+
         -- Make sure we've got a legal frame format. We'll assume that if
         -- the user extends xserial_frame_format_t then this makes the
         -- new value a legal frame format and the user will extend this
         -- subtype appropriately.
         if check_protocol {
             check illegal_frame_format that frame_format != UNDEFINED
-                else dut_error("Illegal frame format found: ", 
+                else dut_error("Illegal frame format found: ",
                                physical_frame_format);
         };
-        
+
     }; -- unpack_payload_internal()
-    
-    -- This method returns a convenient string representation of the 
+
+    -- This method returns a convenient string representation of the
     -- contents of the payload. This is used for logging, waveform viewing,
     -- etc.
     nice_string(): string is {
         result = appendf("DEST:%01d", destination);
     }; -- nice_string()
-    
+
     -- This method compares this payload with a payload supplied as a
     -- parameter. If the compare_dest field is false, then differences in
     -- the destination fields are ignored. It returns a list of strings that
     -- contains all detected differences.
-    compare_payloads(exp_payload : xserial_frame_payload_s, 
+    compare_payloads(exp_payload : xserial_frame_payload_s,
                      compare_dest : bool) : list of string is {
         if compare_dest and exp_payload.destination != destination {
-            result.add(append("Expected destination field: ", 
+            result.add(append("Expected destination field: ",
                               bin(exp_payload.destination),
-                              ", Actual destination field: ", 
+                              ", Actual destination field: ",
                               bin(destination)));
         };
         if exp_payload.frame_format != frame_format {
-            result.add(append("Expected format field: ", 
+            result.add(append("Expected format field: ",
                               exp_payload.frame_format,
-                              ", Actual format field: ", 
+                              ", Actual format field: ",
                               frame_format));
             return result;
         };
     }; -- compare_payloads()
-    
+
     -- This method is called in post_generate() and also in unpack_payload()
     -- to update the status field according to the detected errors in the
     -- payload.
@@ -189,8 +189,8 @@ struct xserial_frame_payload_s {
         };
 
     }; -- update_status()
-    
-    -- Called by Structured Messages 
+
+    -- Called by Structured Messages
     get_attribute_value(name: string): string is {
         if name == "destination" {
             result = append(destination);
@@ -213,16 +213,16 @@ extend UNDEFINED xserial_frame_payload_s {
     unpack_payload(bitstream : list of bit, check_protocol : bool) is also {
         unpack(packing.low, bitstream[4..11], dummy);
     }; -- unpack_payload()
-    
+
     -- Make sure that if this payload gets printed, the bad frame format
     -- is included in the string.
     nice_string(): string is also {
-        result = appendf("%s BAD_FORMAT:%02b ", 
-                         result, 
+        result = appendf("%s BAD_FORMAT:%02b ",
+                         result,
                          physical_frame_format.as_a(uint(bits:2)));
     }; -- nice_string()
-   
-    
+
+
 }; -- extend UNDEFINED xserial_frame_payload_s
 
 '>

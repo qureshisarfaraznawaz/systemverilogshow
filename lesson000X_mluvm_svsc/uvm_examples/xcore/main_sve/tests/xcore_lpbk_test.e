@@ -6,12 +6,12 @@ Title        : XCore eVC demo - example testcase file
 Project      : XCore eVC
 Created On   : 2008
 Description  : Repeat 5 times:
-             :   XSerial agent sends 1 XSerial frame to the XCore, 
-             :   XBus Master reads the frame from the XCore 
+             :   XSerial agent sends 1 XSerial frame to the XCore,
+             :   XBus Master reads the frame from the XCore
              :   XBus Master write to the XCore, programs it to transmit
              :   a frame
              :   XCore expected to transmit a frame on the XSerial.
-Notes        :  
+Notes        :
 
 ----------------------------------------------------------------------------
 >>>>>>>>>>>>>>>>>>>>>>>>>>> COPYRIGHT NOTICE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -32,7 +32,7 @@ extend XCORE_XSERIAL MAIN MAIN_TEST xserial_sequence {
    keep count == 5;
    keep sequence.kind == XCORE_SEND_FRAME;
 
-     
+
 };
 
 
@@ -44,7 +44,7 @@ extend MAIN vr_ad_sequence {
    keep count == 5;
    keep sequence.kind == XCORE_XBUS_READ_WRITE;
 
-    
+
    keep prevent_test_done == TRUE;
 
 };

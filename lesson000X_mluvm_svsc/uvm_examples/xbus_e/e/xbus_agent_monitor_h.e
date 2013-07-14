@@ -1,4 +1,4 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_agent_monitor_h.e
 Title       : Agent Monitor Declaration
 Project     : XBus UVC
@@ -7,7 +7,7 @@ Description : This file declares the agent monitor unit.
 Notes       : The agent monitor (used in masters and slaves) filters the
             : information collected by the bus monitor to isolate those
             : transfers being handled by a specific agent.
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -26,7 +26,7 @@ Notes       : The agent monitor (used in masters and slaves) filters the
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -43,7 +43,7 @@ unit xbus_agent_monitor_u like uvm_monitor {
     -- monitoring. This field is automatically constrained by the UVC and
     -- should not be constrained by the user.
     bus_name: xbus_bus_name_t;
-    
+
     -- This field is the logical name of the agent this agent monitor is
     -- monitoring. This field is automatically constrained by the UVC and
     -- should not be constrained by the user.
@@ -53,7 +53,7 @@ unit xbus_agent_monitor_u like uvm_monitor {
     -- UVM_SIGNAL, UVM_TLM, UVM_ACCEL, UVM_SIGNAL_SC
     abstraction_level : uvm_abstraction_level_t;
       keep soft abstraction_level == UVM_SIGNAL;
-    
+
     -- This field indicates whether this agent monitor for a MASTER, SLAVE or
     -- ARBITER. Note that arbiter monitors don't actually have any
     -- functionality. This field is automatically constrained by the UVC and
@@ -64,13 +64,13 @@ unit xbus_agent_monitor_u like uvm_monitor {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     has_checks : bool;
-        
+
     -- If this field is not "" then the agent monitor writes a log file of
     -- that name (with a ".elog" extension). By default, no log file is
     -- written by the agent monitor.
     log_filename : string;
         keep soft log_filename == "";
-        
+
     -- This is the logger used for creating log files. The user should not
     -- normally constrain this field.
     file_logger : message_logger is instance;
@@ -84,7 +84,7 @@ unit xbus_agent_monitor_u like uvm_monitor {
     transfer_ended_i : in interface_port of tlm_analysis of
                                           MONITOR xbus_trans_s is instance;
        keep bind (transfer_ended_i, empty);
-    
+
     write(transfer : MONITOR xbus_trans_s ) is empty;
 
     -- This method port is the scoreboard hook for the agent monitor. This
@@ -98,8 +98,8 @@ unit xbus_agent_monitor_u like uvm_monitor {
 
     -- This field counts the number of transfers monitored at this agent
     -- during the test. The user should not alter this field.
-    !num_transfers : uint; 
-    
+    !num_transfers : uint;
+
 }; -- unit xbus_agent_monitor_u
 
 '>
@@ -111,7 +111,7 @@ extend MASTER xbus_agent_monitor_u {
     -- This field is a pointer to the synchronizer. This pointer is needed for
     -- protocol checking.
     synch : xbus_synchronizer_u;
-    
+
     -- This is a pointer to the specific signals of the master. This pointer is
     -- needed for protocol checking.
     msmp : xbus_master_signal_map_u;

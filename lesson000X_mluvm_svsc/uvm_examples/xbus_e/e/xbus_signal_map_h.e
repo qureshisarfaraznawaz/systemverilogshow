@@ -1,11 +1,11 @@
-/*-------------------------------------------------------------------------   
+/*-------------------------------------------------------------------------
 File name   : xbus_signal_map_h.e
 Title       : Declaration of signal maps
 Project     : XBus UVC
 Created     : 2008
 Description : This file declares the signal maps required for the UVC.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,7 +24,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 package cdn_xbus;
@@ -44,7 +44,7 @@ unit xbus_synchronizer_u like uvm_signal_map {
 
     -- This port connects the UVC to the CLOCK signal.
     sig_clock : in simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the RESET signal.
     sig_reset : simple_port of bit is instance;
 
@@ -73,27 +73,27 @@ unit xbus_synchronizer_u like uvm_signal_map {
 
     -- This event is the rising edge of the bus clock, qualified by reset.
     event clock_rise is true(not reset_asserted) @unqualified_clock_rise;
-    
+
     -- This event is the falling edge of the bus clock, qualified by reset.
     event clock_fall is true(not reset_asserted) @unqualified_clock_fall;
-    
+
     -- This event gets emitted each time the reset signal changes state.
-    event reset_change is change(sig_reset$) @unqualified_clock_rise; 
+    event reset_change is change(sig_reset$) @unqualified_clock_rise;
 
     -- This event gets emitted when reset is asserted.
     event reset_start is
         true((not reset_asserted) and sig_reset$ == 1) @reset_change;
-    
+
     -- This event gets emitted when reset is de-asserted.
-    event reset_end is 
+    event reset_end is
         true(reset_asserted and sig_reset$ ==0) @reset_change;
-    
+
     -- This field is used to keep track of the current reset state. By
     -- default reset is assumed to be asserted at the start of the test.
     -- The user should not normally need to constrain this field.
     reset_asserted : bool;
         keep soft reset_asserted == TRUE;
-    
+
     -- This code ensures that reset_asserted tracks the reset signal.
     on reset_start { reset_asserted = TRUE; };
     on reset_end   { reset_asserted = FALSE; };
@@ -117,33 +117,33 @@ unit xbus_signal_map_u like uvm_signal_map {
     -- UVM_SIGNAL, UVM_TLM, UVM_ACCEL, UVM_SIGNAL_SC
     abstraction_level : uvm_abstraction_level_t;
       keep soft abstraction_level == UVM_SIGNAL;
-    
+
     -- The following ports represent all the common bus signals.
-    
+
     -- This port connects the UVC to the START signal.
     sig_start : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the ADDR signal.
     sig_addr : inout simple_port of xbus_addr_t is instance;
-    
+
     -- This port connects the UVC to the SIZE signal.
     sig_size : inout simple_port of uint(bits:2) is instance;
-    
+
     -- This port connects the UVC to the READ signal.
     sig_read : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the WRITE signal.
     sig_write : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the BIP signal.
     sig_bip : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the WAIT signal.
     sig_wait : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the ERROR signal.
     sig_error : inout simple_port of bit is instance;
-    
+
     -- This port connects the UVC to the DATA signal.
     sig_data : inout simple_port of byte is instance;
 
@@ -182,7 +182,7 @@ unit xbus_signal_map_u like uvm_signal_map {
 
     -- This method samples the READ and WRITE signals and returns
     -- the appropriate enumerated value. Note that it is assumed that this
-    -- method will only be called when the use of these signals is legal 
+    -- method will only be called when the use of these signals is legal
     -- (i.e. either a READ, WRITE or a NOP is in progress). Protocol checking
     -- is done elsewhere.
     package get_read_write() : xbus_read_write_t is {
@@ -190,9 +190,9 @@ unit xbus_signal_map_u like uvm_signal_map {
             ((sig_read$ == 1) and (sig_write$ ==0)) : { result = READ; };
             ((sig_read$ == 0) and (sig_write$ ==1)) : { result = WRITE; };
             ((sig_read$ == 0) and (sig_write$ ==0)) : { result = NOP; };
-            default : { 
+            default : {
                 message(FULL, "Both READ and WRITE signals were asserted simultaneously");
-               result = NOP; 
+               result = NOP;
             };
         };
     }; -- get_read_write()
@@ -200,7 +200,7 @@ unit xbus_signal_map_u like uvm_signal_map {
 }; -- unit xbus_signal_map_u
 
 '>
- 
+
 <'
 
 -- This unit is the signal map for the signals specific to a particular master.
@@ -215,18 +215,18 @@ unit xbus_master_signal_map_u like uvm_signal_map {
     -- UVM_SIGNAL, UVM_TLM, UVM_ACCEL, UVM_SIGNAL_SC
     abstraction_level : uvm_abstraction_level_t;
       keep soft abstraction_level == UVM_SIGNAL;
-    
+
     -- This field holds the name of master which this signal map belongs to.
     -- This field is automatically constrained by the UVC and should not be
     -- constrained by the user.
     master_name : xbus_agent_name_t;
-    
+
     -- This port connects the UVC to the GRANT signal for this master.
     sig_grant : inout simple_port of bit is instance;
 
     -- This port connects the UVC to the REQUEST signal for this master.
     sig_request : inout simple_port of bit is instance;
-    
+
 
 }; -- unit xbus_master_signal_map_u
 

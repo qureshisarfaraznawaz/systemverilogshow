@@ -1,4 +1,4 @@
-//--------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------
 //File name   : xcore.v
 //Title       : Verilog block providing an XBus to XSerial gateway
 //Project     : XCore eVC
@@ -18,56 +18,56 @@
 //            : reads and writes are zero wait state.
 //            :
 //            : The four registers are:
-//            : 
+//            :
 //            : XSerial TX data register (offset 0)
 //            :    Writing a byte to this register causes that byte to be
 //            :    transmitted on the XSerial port. It is illegal to write
 //            :    to this register without first reading from it and getting
 //            :    bit 0 = 0. Attempting to do this results in a bus error.
-//            :    Reading this register returns a flag in bit 0 (all other 
-//            :    bits return 0). If the flag is 1, then the port is busy and 
-//            :    a further byte cannot yet be sent. If the flag is 0, then 
-//            :    the port is not busy and it is safe to write to this 
+//            :    Reading this register returns a flag in bit 0 (all other
+//            :    bits return 0). If the flag is 1, then the port is busy and
+//            :    a further byte cannot yet be sent. If the flag is 0, then
+//            :    the port is not busy and it is safe to write to this
 //            :    register.
-//            : 
+//            :
 //            : XSerial TX mode register (offset 1)
-//            :    Bits 0-1 of this register form the Destination address of 
+//            :    Bits 0-1 of this register form the Destination address of
 //            :    subsequently transmitted frames.
-//            :    Bits 2-3 of this register form the frame_kind of 
+//            :    Bits 2-3 of this register form the frame_kind of
 //            :    subsequently transmitted frames.
-//            :    Bits 4-7 are unused and return 0 on reads. They should 
+//            :    Bits 4-7 are unused and return 0 on reads. They should
 //            :    always be written as 0 for future compatibility
 //            :    This register can be written to and read from.
 //            :
 //            : XSerial RX data register (offset 2)
-//            :    If bit 5 of register 3 is 1, then reading this register 
-//            :    returns the least significant 8 bits of the frame payload. 
-//            :    It is illegal to read this register without first reading 
-//            :    the RX mode register and getting bit 5 = 1. Attempting to 
+//            :    If bit 5 of register 3 is 1, then reading this register
+//            :    returns the least significant 8 bits of the frame payload.
+//            :    It is illegal to read this register without first reading
+//            :    the RX mode register and getting bit 5 = 1. Attempting to
 //            :    do this results in a bus error.
 //            :    Reading this register causes the information in both this
-//            :    register and in register 3 to be discarded and also causes 
+//            :    register and in register 3 to be discarded and also causes
 //            :    bit 5 of register 3 to be cleared to 0. When the next frame
-//            :    is received, both registers will be updated with the new 
-//            :    frame information and bit 5 of register 3 will be set to 1 
+//            :    is received, both registers will be updated with the new
+//            :    frame information and bit 5 of register 3 will be set to 1
 //            :    again.
 //            :    Writing to this register causes a bus error.
 //            :
 //            : XSerial RX mode register (offset 3)
-//            :    Bits 0-1 of this register form the Destination address of 
+//            :    Bits 0-1 of this register form the Destination address of
 //            :    the most recently received frame.
 //            :    Bits 2-3 of this register form the Frame_kind of the most
 //            :    recently received frame.
-//            :    Bit 4 of this register is 1 if the most recently received 
+//            :    Bit 4 of this register is 1 if the most recently received
 //            :    frame has a parity error or 0 if it does not.
-//            :    Bit 5 of this register is 1 if registers 2 and 3 contain a 
+//            :    Bit 5 of this register is 1 if registers 2 and 3 contain a
 //            :    valid frame.
 //            :    Bits 6-7 are unused and return 0 on reads.
 //            :    Writing to this register causes a bus error.
 //Notes       : xserial_rx_clock and xserial_tx_clock should run at the same
 //            : nominal frequency. This nominal frequency should be not
 //            : greater than the nominal frequency of the xbus_clock signal.
-//--------------------------------------------------------------------------- 
+//---------------------------------------------------------------------------
 //Copyright (c) 2005-2010 Cadence Design Systems,Inc.
 // All rights reserved worldwide
 //(Acquired from Verisity Design,Inc.,2005).
@@ -81,7 +81,7 @@ module xcore(base_addr,
              xbus_clock,
              xbus_reset,
              xbus_start,
-	     xbus_request,	
+	     xbus_request,
 	     xbus_grant,
              xbus_addr,
              xbus_size,
@@ -95,7 +95,7 @@ module xcore(base_addr,
              xserial_rx_data,
              xserial_tx_clock,
              xserial_tx_data);
-   
+
    input [15:8]base_addr;
    input       xbus_clock;
    input       xbus_reset;
@@ -114,11 +114,11 @@ module xcore(base_addr,
    input        xserial_rx_data;
    input        xserial_tx_clock;
    output       xserial_tx_data;
-   
+
    wire [7:0]   xbus_data;
-   
-   
-   
+
+
+
    wire [15:8]  base_addr;
    wire       xbus_clock;
    wire       xbus_reset;
@@ -138,11 +138,11 @@ module xcore(base_addr,
    wire         xserial_tx_clock;
    wire         xserial_tx_data;
    assign xbus_data = xcore_xbus_data;
-   
-   
-   
-   
-   
+
+
+
+
+
    // RX interface signals
    wire [12:0]  rx_frame; // Next item in RX FIFO
    wire         rx_frame_valid; // high if RX FIFO contains frames
@@ -152,22 +152,22 @@ module xcore(base_addr,
    wire         flow_req; // high if need to send message to remote end of link
    wire         flow_halt; // high if required message is HALT, low for RESUME
    wire         flow_ack; // high to acknowledge that message has been sent
-   
+
    // TX interface signals
    reg [11:0]   tx_frame; // the frame to be transmitted
    wire         tx_frame_req;
    wire         tx_frame_ack; // indicates frame sent.
-   
+
    // XBus decode signals
    reg          xbus_start_c;
    reg          xbus_selected;
    wire         xbus_reg;
-  
+
    reg          xbus_reg0;
    reg          xbus_reg1;
    reg          xbus_reg2;
    reg          xbus_reg3;
-   
+
    reg          xbus_reg_c;
    reg          xbus_reg0_c ;
    reg          xbus_reg1_c;
@@ -190,9 +190,9 @@ module xcore(base_addr,
    reg          tx_data_req;
    reg          tx_write_safe; // high if a write to tx_data_reg is safe
    reg          rx_read_safe;  // high if a read from rx_data_reg is safe
-   
-   
-   
+
+
+
    xcore_in_chan in_chan_inst(.xbus_clock(xbus_clock),
                            .xbus_reset(xbus_reset),
                            .frame(rx_frame),
@@ -204,7 +204,7 @@ module xcore(base_addr,
                            .flow_ack(flow_ack),
                            .xserial_rx_clock(xserial_rx_clock),
                            .xserial_rx_data(xserial_rx_data));
-   
+
    xcore_out_chan out_chan_inst(.xbus_clock(xbus_clock),
                              .xbus_reset(xbus_reset),
                              .frame(tx_frame),
@@ -213,11 +213,11 @@ module xcore(base_addr,
                              .halted(halted),
                              .xserial_tx_clock(xserial_tx_clock),
                              .xserial_tx_data(xserial_tx_data));
-   
+
    // If we have requested a frame be sent and the handshaking across the
    // clock domains has not yet finished, then the TX port is busy.
    assign tx_busy = tx_frame_req | tx_frame_ack;
-   
+
 
    always@(posedge xbus_clock)
       begin
@@ -230,12 +230,12 @@ module xcore(base_addr,
                xbus_start_c <= xbus_start;
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-         
-    
+
+
+
    // This process determines whether the current XBus address selects this
    // instance of the XCore.
-   
+
    always@(xbus_addr or base_addr)
       begin
          if(xbus_addr[15:8] == base_addr[15:8])
@@ -247,9 +247,9 @@ module xcore(base_addr,
                xbus_selected <= 1'b0;
             end // else: !if(xbus_addr[15:8] == base_addr[15:8])
       end // always@ (xbus_addr or base_addr)
-   
-   
-   
+
+
+
    // This process ensures that the xbus_wait signal is driven low (i.e. no
    // wait states are inserted) at the correct point of the transfer.
    always@(posedge xbus_clock)
@@ -260,7 +260,7 @@ module xcore(base_addr,
             end // if (xbus_reset == 1'b1)
          else
             begin
-               if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) && 
+               if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) &&
                   ((xbus_read == 1'b1)||(xbus_write == 1'b1)))
                   begin
                      xbus_wait <= 1'b0;
@@ -271,8 +271,8 @@ module xcore(base_addr,
                   end // else: !if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) &&...
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
+
+
    // xbus_reg is high in the address phase of any transfer directed at this
    // XCore instance.
    //always@(xbus_start_c or xbus_selected or xbus_read or xbus_write)
@@ -286,14 +286,14 @@ module xcore(base_addr,
         //       xbus_reg <=1'b0;
         //    end // else: !if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) && ((xbus_read === 1'b1) || (xbus_write === 1'b1)))
       //end // always@ (xbus_start_c or xbus_selected or xbus_read or xbus_write)
-   
+
    assign xbus_reg = xbus_start_c & xbus_selected & (xbus_read | xbus_write);
-   
-    
+
+
    // This process further decodes the address signals to determine if any of
    // the four internal registers are selected.
-   
-   
+
+
    always@(xbus_addr)
       begin
          if (xbus_addr[7:0] == 8'b00000000)
@@ -329,12 +329,12 @@ module xcore(base_addr,
                xbus_reg3 <= 1'b0;
             end // else: !if(xbus_addr[7:0] == 8'b00000011)
       end // always@ (xbus_addr)
-   
-   
-    
+
+
+
    // This process provides delayed versions of the various register signals
    // and the write signal that are valid in the data phase.
-  
+
    always@(posedge xbus_clock)
       begin
          if (xbus_reset == 1'b1)
@@ -356,15 +356,15 @@ module xcore(base_addr,
                xbus_write_c <= xbus_write;
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-    
+
+
    // This process determines if the transfer should return a bus error.
    // Possible errors are: size of transfer is larger than 1 byte; block
    // is selected but address does not select one of the four registers;
    // an attempt to write to register 0 when it is busy; a write to
    // register 2 or 3; Attempt to read register 2 when there is no valid
    // frame to be read.
-   
+
    always@(posedge xbus_clock)
       begin
          if (xbus_reset == 1'b1)
@@ -395,7 +395,7 @@ module xcore(base_addr,
                                     end // if ((xbus_reg0 == 1'b1) && (xbus_write == 1'b1)...
                                  else
                                     begin
-                                       if (((xbus_reg2 == 1'b1) || (xbus_reg3 == 1'b1)) 
+                                       if (((xbus_reg2 == 1'b1) || (xbus_reg3 == 1'b1))
                                            && (xbus_write == 1'b1))
                                           begin
                                              xbus_error_internal <= 1'b1;
@@ -422,17 +422,17 @@ module xcore(base_addr,
                   end // else: !if(xbus_reg == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-                     
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
+
+
+
+
    // This process drives the xbus_error signal at the appropriate point
    // in the transfer.
    always@(xbus_reset or xbus_reg_c or xbus_error_internal)
@@ -453,10 +453,10 @@ module xcore(base_addr,
                   end // else: !if(xbus_reg_c == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always (xbus_reset or xbus_reg_c or xbus_error_internal)
-   
-   
-   
-    
+
+
+
+
    // This process drives the data bus on reads.
    always@(posedge xbus_clock)
       begin
@@ -487,7 +487,7 @@ module xcore(base_addr,
                               end // if ((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) && (xbus_reg2 == 1'b1)...
                            else
                               begin
-                                 if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) && (xbus_reg3 == 1'b1) 
+                                 if((xbus_start_c == 1'b1) && (xbus_selected == 1'b1) && (xbus_reg3 == 1'b1)
                                     && (xbus_read == 1'b1))
                                     begin
                                        if(rx_frame_valid == 1'b1)
@@ -529,7 +529,7 @@ module xcore(base_addr,
                   end // if ((xbus_reg2_c == 1'b1) && (xbus_write_c == 1'b0) &&...
                else
                   begin
-                     if ((xbus_reg3_c == 1'b1) && (xbus_write_c == 1'b0) && 
+                     if ((xbus_reg3_c == 1'b1) && (xbus_write_c == 1'b0) &&
                          (xbus_error_internal == 1'b0) && (rx_frame_valid_c == 1'b1))
                         begin
                            rx_read_safe <= 1'b1;
@@ -537,8 +537,8 @@ module xcore(base_addr,
                   end // else: !if((xbus_reg2_c == 1'b1) && (xbus_write_c == 1'b0) &&...
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
+
+
    // This process determines when a frame is read from the input channel FIFO
    always@(posedge xbus_clock)
       begin
@@ -559,8 +559,8 @@ module xcore(base_addr,
                   end // else: !if((xbus_reg2_c == 1'b1) && (xbus_write_c == 1'b0) &&...
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
+
+
    // This process implements writes to register 1.
    always@(posedge xbus_clock)
       begin
@@ -577,8 +577,8 @@ module xcore(base_addr,
                   end // if ((xbus_reg1_c == 1'b1) && (xbus_write_c == 1'b1)...
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
+
+
    // This process determines when a write to register 0 has happened.
    always@(xbus_reg0_c or xbus_write_c or xbus_error_internal)
       begin
@@ -592,8 +592,8 @@ module xcore(base_addr,
                write_tx_data <= 1'b0;
             end // else: !if((xbus_reg0_c == 1'b1) && (xbus_write_c == 1'b1)...
       end // always@ (xbus_reg0_c or xbus_write_c or xbus_error_internal)
-   
-   
+
+
    // This process determines when it is safe to write to the TX_DATA register and when this
    // would generate a bus error.
    always@(posedge xbus_clock)
@@ -612,7 +612,7 @@ module xcore(base_addr,
                   end // if (write_tx_data == 1'b1)
                else
                   begin
-                     if ((xbus_reg0_c == 1'b1) && (xbus_write_c == 1'b0) && 
+                     if ((xbus_reg0_c == 1'b1) && (xbus_write_c == 1'b0) &&
                          (xbus_error_internal == 1'b0) && (tx_busy_reg_c == 1'b0))
                         begin
                            tx_write_safe <= 1'b1;
@@ -637,10 +637,10 @@ module xcore(base_addr,
                   end // if (write_tx_data == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-         
-               
-   
+
+
+
+
    // This process determines when we need to send a flow control message.
    // These take priority over all other frames.
    always@(flow_req or tx_busy)
@@ -654,12 +654,12 @@ module xcore(base_addr,
                flow <= 1'b0;
             end // else: !if((flow_req == 1'b1) && (tx_busy == 1'b0))
       end // always@ (flow_req or tx_busy)
-   
-   
+
+
    // Make sure we acknowledge that the flow control message has been sent.
    assign flow_ack = flow;
-   
-   
+
+
    // This process keeps track of any data sends that have been pre-empted
    // by a flow control request. These get send after the flow control message
    // has been sent.
@@ -679,16 +679,16 @@ module xcore(base_addr,
                   begin
                      if ((tx_pend == 1'b1) && (tx_busy == 1'b0) && (flow == 1'b0))
                         begin
-                           // Following line change May 2007 - It used to be 
+                           // Following line change May 2007 - It used to be
                            // set to 1, I modified to 0. efrat
                            tx_pend <= 1'b0;
                         end
                   end // else: !((write_tx_data == 1'b1) && ((tx_busy == 1'b1) || (flow == 1'b1))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-                           
-   
+
+
+
    // This process creates HALT and RESUME requests to the output channel as
    // required.
    always@(posedge xbus_clock)
@@ -721,9 +721,9 @@ module xcore(base_addr,
                   end // else: !if((flow == 1'b1) && (flow_halt == 1'b1))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-                           
-   
+
+
+
    // This process ensures that writes to register 0 cause the output channel
    // to be kicked into play.
    always@(posedge xbus_clock)
@@ -754,18 +754,18 @@ module xcore(base_addr,
                   end // else: !if ((write_tx_data == 1'b1) && (tx_busy == 1'b0) && (flow == 1'b0))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
+
+
    // XBus should see 'busy' if either the TX channel is busy or we have a data
    // frame pending.
    assign tx_busy_reg = tx_busy | tx_pend;
-   
-  
+
+
    // If either a flow message or a data frame needs to be sent, inform the TX
    // channel.
    assign tx_frame_req = tx_halt_req | tx_resume_req | tx_data_req;
-   
-         
+
+
    // This process decides whether user data or flow control messages get sent
    // to the output channel.
    always@(tx_halt_req or tx_resume_req or tx_data_reg or tx_mode_reg)

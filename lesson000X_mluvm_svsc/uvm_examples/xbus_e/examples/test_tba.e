@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : test_tba.e
 Title       : XBus eVC demo - example testcase file
 Project     : XBus eVC
 Created     : 2008
 Description : Example testcase file for demo purposes.
-            : 
-Notes       : 
---------------------------------------------------------------------------- 
+            :
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,7 +25,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 package cdn_xbus;
@@ -49,7 +49,7 @@ extend MASTER_0 MAIN xbus_master_sequence {
 };
 
 extend MASTER_0 MAIN ENV_SETUP xbus_master_sequence {
-    
+
     body() @driver.clock is only {
         // Generate one transfer
         gen trans keeping {it.driver == driver; it.size == 4};
@@ -65,8 +65,8 @@ extend MASTER_0 MAIN ENV_SETUP xbus_master_sequence {
             driver.queue_item(me, deep_copy(trans));
             trans.read_write = READ;
             trans.addr = 0x0000 + 4 + i;
-            driver.queue_item(me, deep_copy(trans));             
-        };    
+            driver.queue_item(me, deep_copy(trans));
+        };
     };
 };
 
@@ -80,7 +80,7 @@ extend MASTER xbus_trans_s {
     keep for each in wait_states  {
         soft it == 0;
     };
-}; 
+};
 
 // For self checking - see what the monitor saw
 

@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xserial_config.e
 Title       : XSerial eVC example config file
 Project     : XSerial eVC
@@ -8,10 +8,10 @@ Description : Provides XSerial eVC configuration that is common to all test
 Notes       : The DUT for this demonstration verification environment is
             : a 3 input, 3 output router. See the EXAMPLES_README file
             : for more info.
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
   All rights reserved worldwide
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -20,7 +20,7 @@ import xserial/e/xserial_top;
 
 import xserial/e/xserial_port_config;
 
--- Create a logical name for each eVC instance. 
+-- Create a logical name for each eVC instance.
 extend xserial_env_name_t : [XSERIAL_A, XSERIAL_B, XSERIAL_C];
 
 -- Instantiate the eVC instances under sys.
@@ -69,7 +69,7 @@ extend XSERIAL_A xserial_agent_u {
 extend XSERIAL_B xserial_agent_u {
     -- eVC does not drive clock
     keep tx_clock_period == 0;
-    
+
     -- These are the signal names for this agent
     keep sig_tx_clock.hdl_path() == "clock";
     keep sig_tx_data.hdl_path()  == "port_b_in_data";
@@ -82,7 +82,7 @@ extend XSERIAL_B xserial_agent_u {
 extend XSERIAL_C xserial_agent_u {
     -- eVC does not drive clock
     keep tx_clock_period == 0;
-    
+
     -- These are the signal names for this agent
     keep sig_tx_clock.hdl_path() == "clock";
     keep sig_tx_data.hdl_path()  == "port_c_in_data";
@@ -97,7 +97,7 @@ extend XSERIAL_C xserial_agent_u {
 extend xserial_agent_u {
     keep tx_log_filename == append(name, "_tx");
     keep rx_log_filename == append(name, "_rx");
-}; 
+};
 
 
 
@@ -107,7 +107,7 @@ extend xserial_agent_u {
 extend sys {
     init() is also {
         // Use a performance enhancement feature
-        set_config(simulation, enable_ports_unification, TRUE);   
+        set_config(simulation, enable_ports_unification, TRUE);
     };
 };
 '>

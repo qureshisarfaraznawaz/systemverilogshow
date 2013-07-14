@@ -5,11 +5,11 @@ module queue3;
    initial begin
       qqq  = {-2,1,4,0,4,-8,9};
       show_q();
-      results  = qqq.min(x) with (x<-1);      
+      results  = qqq.min(x) with (x<-1);
       show_q2();
-      results  = qqq.max(x) with (x<7);      
+      results  = qqq.max(x) with (x<7);
       show_q2();
-      results = qqq.unique(x)  with (x>-1);      
+      results = qqq.unique(x)  with (x>-1);
       show_q2();
    end
 
@@ -20,7 +20,7 @@ module queue3;
       $display("");  $write("     ");
       for (int iii=0; iii<qqq.size(); iii++)
 	 $write("%2d  ",       qqq[iii]);
-      $display("");      
+      $display("");
    endfunction
    function void show_q2();
       $write("res=");
@@ -32,4 +32,4 @@ module queue3;
       $display("");
    endfunction
 
-endmodule 
+endmodule

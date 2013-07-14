@@ -1,11 +1,11 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_bfm.e
 Title       : BFM unit declaration and implemenentation
 Project     : XBus UVC
 Created     : 2008
 Description : This file is the declaration and implementation of the BFM unit.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,7 +24,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -39,7 +39,7 @@ unit xbus_bfm_u like uvm_bfm {
     -- This field specifies whether this is a MASTER, SLAVE or ARBITER BFM?
     const kind : xbus_agent_kind_t;
 
-    
+
     // declare the unit as testflow unit.
     tf_testflow_unit;
     keep soft tf_domain == XBUS_TF;
@@ -59,7 +59,7 @@ unit xbus_bfm_u like uvm_bfm {
 
     -- This field is a pointer to the synchronizer.
     synch : xbus_synchronizer_u;
-    
+
     -- This field is a pointer to the bus signal map.
     smp : xbus_signal_map_u;
 

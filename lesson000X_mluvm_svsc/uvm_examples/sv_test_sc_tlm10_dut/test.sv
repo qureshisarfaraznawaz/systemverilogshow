@@ -62,7 +62,7 @@ import ml_uvm::*;
   class env extends uvm_env;
     producer #(packet) prod;
     checker #(packet) chk;
-  
+
     function new (string name, uvm_component parent=null);
       super.new(name,parent);
     endfunction
@@ -92,7 +92,7 @@ import ml_uvm::*;
     function new (string name, uvm_component parent=null);
       super.new(name,parent);
     endfunction
-    
+
     function void build();
       super.build();
       top_env = new("top_env", this);
@@ -100,7 +100,7 @@ import ml_uvm::*;
 
     `uvm_component_utils(test)
 
-  endclass    
-    
+  endclass
+
 endmodule
 

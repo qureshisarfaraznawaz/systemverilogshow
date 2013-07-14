@@ -8,8 +8,8 @@ module svs_top ();
    initial               //w/ initial works!
      svs_test_u = new();
 // * /
-   
+
    initial begin
-      run_test("");//svs_test");      
+      run_test("");//svs_test");
    end
 endmodule // svs_top

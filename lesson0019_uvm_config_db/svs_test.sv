@@ -4,9 +4,9 @@ import uvm_pkg::*;
 class svs_test extends uvm_test;
    string receiver;
    int albert;
-      
+
    `uvm_component_utils(svs_test)
-   
+
    function new(string name="svs_test", uvm_component parent=null);
       super.new(name,parent);
       uvm_config_db#(string)::set(uvm_root::get(),"*","my_string","linc_learns");
@@ -19,9 +19,9 @@ class svs_test extends uvm_test;
       void'(uvm_config_db#(string)::get(uvm_root::get(),"*","my_string",receiver));
       void'(uvm_config_db#(int)::get(null,null,"albert_variable",albert));
 
-      repeat(3) 
+      repeat(3)
 	`uvm_info("DBG",$psprintf("Got: >>%0s<<>>%0d<<",receiver,albert),UVM_NONE)
-      
+
       phase.drop_objection(this);
    endtask : run_phase
 endclass : svs_test

@@ -7,25 +7,25 @@ class dice;
 				 && value2>=1 && value2<=6; }
 
    constraint seven_eleven { ((value+value2)==7) || ((value+value2)==11); }
-   
-   function void pre_randomize();      
+
+   function void pre_randomize();
       $write(" dice ready to be rolled ....");
-   endfunction   
-   
-   function void post_randomize();      
+   endfunction
+
+   function void post_randomize();
       $display(" dice roll is now = %0d %0d", value, value2);
-   endfunction   
+   endfunction
 endclass
 
    initial begin
       dice my_dice;
       my_dice  = new();
 
-      my_dice.six_sides.constraint_mode(0);      
+      my_dice.six_sides.constraint_mode(0);
       repeat (6) begin
 //	 assert (my_dice.randomize()) else
 //	   $display(" Mister SVS, randomization failed, miserably.");
-	 if (my_dice.randomize()) 
+	 if (my_dice.randomize())
 	   ;
 	 else
 	   $display(" ERROR: Mister SVS, randomization failed, miserably.");
@@ -42,7 +42,7 @@ endmodule // dice_game
 //RUN  - result: bad second roll
 //edit original constraint
 //RUN - result: good roll
-//add second constraint for 7s,11s. 
+//add second constraint for 7s,11s.
 //           POINT: use ==, not =  EXPRESSIONS, not ASSIGNMENT.
 //RUN - maybe get 11, maybe need to increase repeat
 //make conflicting constraints

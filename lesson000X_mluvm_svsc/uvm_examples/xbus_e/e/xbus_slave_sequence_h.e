@@ -1,11 +1,11 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_slave_sequence.e
 Title       : Sequence interface for ACTIVE slave agents
 Project     : XBus UVC
 Created     : 2008
 Description : This file provides a sequence interface for the slave.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,7 +24,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -40,10 +40,10 @@ struct xbus_slave_response_s like any_sequence_item {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-        keep bus_name == read_only(driver.bus_name);    
-   
+        keep bus_name == read_only(driver.bus_name);
+
     -- This field is used to sub-type the slave response struct according to
-    -- which slave agent it is for. This field is automatically constrained 
+    -- which slave agent it is for. This field is automatically constrained
     -- by the UVC and should not be constrained by the user.
     slave_name : xbus_agent_name_t;
         keep slave_name == read_only(driver.slave_name);
@@ -51,9 +51,9 @@ struct xbus_slave_response_s like any_sequence_item {
     -- This field is used to build up the transfer as it is received. This
     -- field is automatically constrained by the UVC and should not be
     -- constrained by the user.
-    %transfer : MONITOR xbus_trans_s;    
+    %transfer : MONITOR xbus_trans_s;
         keep transfer == read_only(driver.transfer);
-    
+
     -- This field controls the number of wait states for each byte of the
     -- transfer.
     wait_states : list of uint;
@@ -61,27 +61,27 @@ struct xbus_slave_response_s like any_sequence_item {
         keep for each in wait_states {
             soft it in [0..4]; -- by default up to four wait states
         };
-    
+
     -- This field controls the byte position of an error. If no error is
     -- required, then it should be constrained to UNDEF.
     error_pos : int;
         keep error_pos < read_only(transfer.size);
         keep soft error_pos == UNDEF; -- by default, no errors
-    
-    
-        
-    -- Called by Structured Messages 
+
+
+
+    -- Called by Structured Messages
     get_attribute_value(name: string): string is {
-     
+
         if transfer != NULL {
             if name == "read_write"  {
                 result = append(transfer.read_write);
             };
-            
+
             if name == "addr" {
                 result = append(transfer.addr);
             };
-        };  
+        };
     };
 }; -- struct xbus_slave_response_s
 
@@ -102,8 +102,8 @@ extend xbus_slave_sequence {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-        keep bus_name == read_only(driver.bus_name);    
-   
+        keep bus_name == read_only(driver.bus_name);
+
     -- This field holds the logical name of the slave. This field is
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
@@ -114,13 +114,13 @@ extend xbus_slave_sequence {
     -- do "do response ...".
     !response: xbus_slave_response_s;
 
-    // Cover the sequence. 
+    // Cover the sequence.
     // Ignore the pre-defined kinds, they do not add info to the coverage
     cover ended is {
         item kind using ignore = (kind == RANDOM or
                                   kind == SIMPLE or
                                   kind == MAIN);
-    }; 
+    };
 }; -- extend xbus_slave_sequence
 
 
@@ -137,7 +137,7 @@ extend MAIN xbus_slave_sequence {
 
 -- Hook up the driver to the slave BFM
 extend xbus_slave_driver_u {
-    
+
     keep soft tf_domain == XBUS_TF;
 
     -- This field holds the abstraction level:
@@ -146,30 +146,30 @@ extend xbus_slave_driver_u {
       keep soft abstraction_level == UVM_SIGNAL;
 
     synch : xbus_synchronizer_u;
-    
+
     // tf_phase_clock if the testflow clock and might change according to
-    // current test phase. it is recommended to bind driver.clock to this 
+    // current test phase. it is recommended to bind driver.clock to this
     // clock;
     event tf_phase_clock is only @synch.unqualified_clock_rise;
     on tf_phase_clock {
         emit clock;
     };
-    
+
     // slave sequences are influenced by test phases but do not influence
     // the test flow (usually they use while TRUE loops) this behavior is
     // declared by this flag
     keep tf_nonblocking == TRUE;
-    
+
     -- This field holds the logical name of the physical bus. This field is
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     bus_name : xbus_bus_name_t;
-   
+
     -- This field holds the logical name of the slave. This field is
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     slave_name : xbus_agent_name_t;
-    
+
     -- This field is where the slave BFM puts the detected transfer the slave
     -- needs to respond to immediately prior to calling try_next_item().
     package !transfer : MONITOR xbus_trans_s;

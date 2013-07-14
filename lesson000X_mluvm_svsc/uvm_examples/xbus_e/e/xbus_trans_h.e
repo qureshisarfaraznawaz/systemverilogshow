@@ -1,4 +1,4 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_trans_h.e
 Title       : Transfer structure
 Project     : XBus UVC
@@ -12,7 +12,7 @@ Notes       : The addr, read_write and data fields are marked as physical
             : are the fields that are physically driven to the DUT. It
             : also facilitates the use of the deep_compare_physical()
             : method, should the user need to do so.
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -31,7 +31,7 @@ Notes       : The addr, read_write and data fields are marked as physical
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -40,7 +40,7 @@ package cdn_xbus;
 
 
 -- This type is used to sub-type the transfer struct. By default the transfer
--- is a generic transfer, but other code can extend this type to create 
+-- is a generic transfer, but other code can extend this type to create
 -- sub-types that can have extra fields etc for special purposes (e.g.
 -- a master can create a MASTER xbus_trans_s with extra fields).
 type xbus_trans_kind_t : [GENERIC];
@@ -58,17 +58,17 @@ struct xbus_trans_s like any_sequence_item {
     -- with extra fields).
     kind : xbus_trans_kind_t;
         keep soft kind == GENERIC;
-        
+
     -- This field contains the address for the transfer.
     %addr : xbus_addr_t;
-         
+
     -- This field indicates value to be written to bus
     %size_ctrl : uint (bits : 2);
        keep size == 1 => size_ctrl == 0;
        keep size == 2 => size_ctrl == 1;
        keep size == 4 => size_ctrl == 2;
        keep size == 8 => size_ctrl == 3;
-      
+
     -- This field indicates whether this is a a read or write transfer.
     %read_write : xbus_read_write_t;
         keep read_write in [READ, WRITE];
@@ -76,43 +76,43 @@ struct xbus_trans_s like any_sequence_item {
     -- This field indicates the size of the transfer in bytes.
     size : uint [1, 2, 4, 8];
 
-    
-    -- This field is used to pass information when transctors are in 
+
+    -- This field is used to pass information when transctors are in
     -- another language
-   
+
     -- This field contains the data to be transferred as a list of bytes, the
     -- size of the list depends on the size field.
     %data[size] : list of byte;
-    
-    
+
+
     master_name : xbus_agent_name_t;
       keep soft master_name == NO_AGENT;
     slave_name  : xbus_agent_name_t;
       keep soft slave_name == NO_AGENT;
 
-    
+
     -- This method returns the transfer in a "nice" string form that gives a
     -- brief summary of the transfer.
     nice_string() : string is only {
         if read_write == WRITE {
-            result = append(read_write, 
-                        "(", 
+            result = append(read_write,
+                        "(",
                         size,
-                        ",", 
+                        ",",
                         addr,
                         ",{",
                         data,
                         "})");
         } else {
-            result = append(read_write, 
-                        "(", 
+            result = append(read_write,
+                        "(",
                         size,
-                        ",", 
+                        ",",
                         addr,
                         ")");
         };
     }; -- nice_string()
-    
+
 }; -- struct xbus_trans_s
 
 '>

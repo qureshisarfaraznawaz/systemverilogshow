@@ -1,11 +1,11 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_agent_h.e
 Title       : Agent unit declaration
 Project     : XBus UVC
 Created     : 2008
 Description : This file declares the agent unit.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -24,20 +24,20 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
 package cdn_xbus;
-     
-     
+
+
 
 -- This unit is the base type for all agents (masters, slaves and arbiters)
 -- that are connected to the bus.
 unit xbus_agent_u like uvm_agent {
 
     tf_testflow_unit;
-    
+
     -- This unit and all units under it belong to the XBUS_TF
     -- TestFlow domain
     keep soft tf_domain == XBUS_TF;
@@ -47,13 +47,13 @@ unit xbus_agent_u like uvm_agent {
     -- UVM_SIGNAL, UVM_TLM, UVM_ACCEL, UVM_SIGNAL_SC
     abstraction_level : uvm_abstraction_level_t;
       keep soft abstraction_level == UVM_SIGNAL;
-    
+
     -- This field provides a screen logger for each UVC instance. By default,
     -- it's verbosity is set to NONE so that it is disabled.
     logger : message_logger is instance;
         keep soft logger.verbosity == NONE;
         keep soft logger.tags == {TESTFLOW_EX};
-      
+
     -- This field is the logical name of the bus the agent is connected to.
     -- This field is automatically constrained by the UVC and should not be
     -- constrained by the user.
@@ -63,7 +63,7 @@ unit xbus_agent_u like uvm_agent {
     -- automatically constrained by the UVC and should not be constrained by
     -- the user.
     agent_name : xbus_agent_name_t;
-    
+
     -- This field controls what sort of agent this is (MASTER, SLAVE or
     -- ARBITER). This field is automatically constrained by the UVC and should
     -- not be constrained by the user.
@@ -76,10 +76,10 @@ unit xbus_agent_u like uvm_agent {
        keep agent_monitor.agent == read_only(me);
        keep agent_monitor.abstraction_level == read_only(abstraction_level);
 
-    
+
     -- This field is a pointer to the synchronizer.
     synch : xbus_synchronizer_u;
-    
+
     -- This field is a pointer to the bus signal map.
     smp : xbus_signal_map_u;
 
@@ -93,7 +93,7 @@ unit xbus_agent_u like uvm_agent {
     -- The short_name() method should return the name of this agent instance.
     short_name(): string is {
         result = append(agent_name);
-    }; -- short_name()    
+    }; -- short_name()
 }; -- unit xbus_agent_u
 
 '>
@@ -115,15 +115,15 @@ extend xbus_master_signal_map_u {
 
     -- This field is a pointer to the MASTER agent that uses this signal map.
     master : MASTER xbus_agent_u;
-    
+
 }; -- extend xbus_master_signal_map_u
 '>
 
 
-  Configuration 
+  Configuration
 
 <'
-// the macro instantiates unit xserial_agent_config_u and struct 
+// the macro instantiates unit xserial_agent_config_u and struct
 // xserial_agent_config_params, in xserial_agent_u.
 // In this example, xserial_agent_config_u xserial_agent_config_params have
 // been defined earlier (in xbus_types_h.e)
@@ -147,7 +147,7 @@ extend xbus_slave_config_u {
     -- max_addr).
     in_range(addr : xbus_addr_t) : bool is {
         result = (addr >= params.min_addr) and (addr <= params.max_addr);
-    }; -- in_range()    
+    }; -- in_range()
 };
 '>
 

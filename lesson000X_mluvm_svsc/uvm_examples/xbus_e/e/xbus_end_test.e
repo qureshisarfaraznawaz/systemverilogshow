@@ -1,4 +1,4 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_end_test.e
 Title       : End of test stuff
 Project     : XBus UVC
@@ -6,9 +6,9 @@ Created     : 2008
 Description : This file handles 'end of test'.
 Notes       : End of test handling is done using the objection mechanism.
             : Each proactive MAIN sequence (note that for XBus, only MASTER
-            : sequences are proactive) raises an objection to TEST_DONE 
+            : sequences are proactive) raises an objection to TEST_DONE
             : in ENV_SETUP phase, and drops the objection in POST_TEST phase
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -27,7 +27,7 @@ Notes       : End of test handling is done using the objection mechanism.
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
-------------------------------------------------------------------------*/ 
+------------------------------------------------------------------------*/
 
 <'
 
@@ -63,7 +63,7 @@ extend MAIN POST_TEST xbus_master_sequence {
     -- This field is used to control the delay between the end of the MAIN
     -- sequence and the dropping of the objection to TEST_DONE - i.e. the
     -- time allowed for the last data to drain through the DUT. This is
-    -- measured in clock cycles. 
+    -- measured in clock cycles.
     drain_time : uint;
         keep soft drain_time == 10;
 
@@ -76,7 +76,7 @@ extend MAIN POST_TEST xbus_master_sequence {
             driver.drop_objection(TEST_DONE);
         };
     }; -- post_body()
-    
+
 }; -- extend MAIN POST_TEST xbus_master_sequence
 
 '>
@@ -104,4 +104,4 @@ extend MAIN POST_TEST xbus_master_sequence {
 
 
 
-    
+

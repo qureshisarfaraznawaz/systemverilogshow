@@ -1,12 +1,12 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_port_config.e
 Title       : Deault binding of ports. Used in RTL
 Project     : XBus UVC
 Created     : March 2008
-Description : This file binds the signal ports to external, and default 
+Description : This file binds the signal ports to external, and default
             : signal names
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,7 +25,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 package cdn_xbus;
@@ -50,7 +50,7 @@ extend xbus_signal_map_u {
 
 extend xbus_master_signal_map_u {
     keep  bind(sig_request, external);
-    keep  bind(sig_grant, external);  
+    keep  bind(sig_grant, external);
 };
 
 '>
@@ -71,7 +71,7 @@ extend xbus_signal_map_u {
     keep soft sig_bip.hdl_path()   == "xbus_bip";
     keep soft sig_wait.hdl_path()  == "xbus_wait";
     keep soft sig_error.hdl_path() == "xbus_error";
-    keep soft sig_data.hdl_path()  == "xbus_data";  
+    keep soft sig_data.hdl_path()  == "xbus_data";
 };
 
 

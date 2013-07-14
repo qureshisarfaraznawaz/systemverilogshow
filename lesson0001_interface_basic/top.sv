@@ -1,14 +1,14 @@
 module top;
-   integer dut_score;   
-   score_if that_if();   
-   stimulus stimulus( .the_if(that_if)   
-		      );   
+   integer dut_score;
+   score_if that_if();
+   stimulus stimulus( .the_if(that_if)
+		      );
    dut dut( .this_if(that_if),
             .out_score(dut_score)
-	    );       
+	    );
    initial begin
       $monitor($time, " new score is: %0d", dut_score);
-   end       
+   end
 endmodule
 
 

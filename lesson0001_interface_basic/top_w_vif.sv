@@ -1,6 +1,6 @@
 class top;
 
-   virtual 
-   
+   virtual
+
 endclass : top
-     
+

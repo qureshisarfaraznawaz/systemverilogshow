@@ -1,15 +1,15 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : test_multi_reset.e
 Title       : XSerial demo of multiple resets
 Project     : XSerial eVC
 Created     : 2008
 Description : Example testcase file for demo purposes - demonstrates
             : multiple resets.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
   All rights reserved worldwide.
-----------------------------------------------------------------------------*/ 
+----------------------------------------------------------------------------*/
 
 <'
 
@@ -22,7 +22,7 @@ extend sys {
         -- Print in hexadecimal by default
         set_config(print, radix, hex);
     };
-    
+
 }; -- extend sys
 
 extend XSERIAL_A MAIN MAIN_TEST xserial_sequence {
@@ -47,7 +47,7 @@ extend xserial_frame_payload_s {
 
 
 extend xserial_env_u {
-    
+
     // One of the envs resets the environment during the run
     when XSERIAL_A xserial_env_u {
     do_extra_reset() @sys.any is {
@@ -55,20 +55,20 @@ extend xserial_env_u {
         agent.sig_reset$ = 1;
         wait [5];
         agent.sig_reset$ = 0;
-        
+
         message(LOW, "Calling rerun_phase(RESET)");
         agent.tf_get_domain_mgr().rerun_phase(RESET);
      }; -- do_extra_reset()
-    
+
     run() is also {
         start do_extra_reset();
     }; -- run()
-        
+
     };
-    
-    
+
+
     event device_reset is cycle @agent.reset_start;
-    
+
     on device_reset {
         // Inform the verification env about the reset
         agent.tf_get_domain_mgr().rerun_phase(RESET);
@@ -94,5 +94,5 @@ extend sys {
     };
 };
 
-   
+
 '>

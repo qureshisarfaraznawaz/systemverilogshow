@@ -32,10 +32,10 @@ while [ $# -gt 0 ]; do
 	;;
       -run)
          quit_cmd="-c @$2"
-	
+
          shift
     esac
-    shift   
+    shift
 done
 #================================================================
 if [ $run_mode = batch ]; then

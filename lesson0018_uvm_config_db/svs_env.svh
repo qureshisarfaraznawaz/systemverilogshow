@@ -12,7 +12,7 @@ class svs_env extends uvm_env;
 
 
    function void build_phase(uvm_phase phase);
-      
+
    endfunction : build_phase
 
 endclass : svs_env

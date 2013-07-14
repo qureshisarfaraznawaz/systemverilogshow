@@ -29,7 +29,7 @@ import ml_uvm::*;
 
     `uvm_component_utils(env)
 
-  endclass    
+  endclass
 
   class svtest extends uvm_env;
     env top_env;
@@ -45,6 +45,6 @@ import ml_uvm::*;
     endfunction
 
     `uvm_component_utils(svtest)
-  endclass    
+  endclass
 
 endmodule

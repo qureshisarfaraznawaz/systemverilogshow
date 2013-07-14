@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------------- 
+/*---------------------------------------------------------------------------
 File name   : xcore_out_chan.v
 Title       : XCore output channel
 Project     : XCore eVC
@@ -22,49 +22,49 @@ module  xcore_out_chan(xbus_clock,
                        halted,
                        xserial_tx_clock,
                        xserial_tx_data);
-   
+
    input xbus_clock;
    input xbus_reset;
    input [11:0] frame ; // the frame to be transmitted
    input        frame_req; // held high to send frame until frame_ack goes high
    output       frame_ack; // indicates frame sent.
    input        halted; // high if HALT message has been received
-   
-   
+
+
    input        xserial_tx_clock;
    output       xserial_tx_data;
-   
-   
+
+
    wire         xbus_clock;
    wire         xbus_reset;
    wire [11:0]  frame ; // the frame to be transmitted
    wire         frame_req; // held high to send frame until frame_ack goes high
    reg          frame_ack; // indicates frame sent.
    wire         halted; // high if HALT message has been received
-   
-   
+
+
    wire         xserial_tx_clock;
    reg          xserial_tx_data;
-   
+
    reg          frame_req_c;
    reg          frame_req_cc;
    reg          latch_frame;
    reg          frame_done;
    reg          frame_done_c;
-   
+
    reg [14:0]   shift_reg;
    reg [3:0]    drive_count;
    reg          parity;
 
 `ifdef XCORE_SIM
-//Transaction creation for tx_frame   
+//Transaction creation for tx_frame
 trview_tx_frame: cover property (
      @(posedge xbus_clock) (
                    $rose(frame_ack) ##[1:$] $rose(drive_count == 4'b0000)));
 
 `endif
-   
-   
+
+
    // This process crosses the frame request signal into the XSerial TX cloock
    // domain.
    always@(posedge xserial_tx_clock)
@@ -80,10 +80,10 @@ trview_tx_frame: cover property (
                frame_req_c <= frame_req;
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_tx_clock)
-   
-         
-        
-   
+
+
+
+
    // This process determines if a new request to send a frame has been
    // received and the shift register is ready to send the next frame.
    always@(frame_req_cc or frame_done or drive_count or halted)
@@ -98,8 +98,8 @@ trview_tx_frame: cover property (
                latch_frame <= 1'b0;
             end // else: !if((frame_req_cc == 1'b1) && (frame_done == 1'b0) && (drive_count == 4'b0000)...
       end // always@ (frame_req_cc or frame_done or drive_count or halted)
-   
-    
+
+
    // This process generates the frame_done signal which indicates that the
    // frame has been latched into the shift register but the core hasn't yet
    // de-asserted frame_req.
@@ -124,8 +124,8 @@ trview_tx_frame: cover property (
                   end // else: !if(latch_frame == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_tx_clock)
-   
-   
+
+
    // This process double clocks the frame_done signal into the XBus clock
    // domain to form the frame_ack signal.
    always@(posedge xbus_clock)
@@ -141,10 +141,10 @@ trview_tx_frame: cover property (
                frame_done_c <= frame_done;
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-               
-               
-   
+
+
+
+
    // This process counts the bits sent to the output port.
    always@(posedge xserial_tx_clock)
       begin
@@ -167,7 +167,7 @@ trview_tx_frame: cover property (
                   end // else: !if(latch_frame == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_tx_clock)
-   
+
    // This process shifts the bits to form the serial frame.
    always@(posedge xserial_tx_clock)
       begin
@@ -188,9 +188,9 @@ trview_tx_frame: cover property (
                   end // else: !if(latch_frame == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_tx_clock)
-   
-                 
-         
+
+
+
 
    // This process calculates the parity as the frame is shifted out.
    always@(posedge xserial_tx_clock)
@@ -211,8 +211,8 @@ trview_tx_frame: cover property (
                   end // else: !if(drive_count == 4'b1110)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_tx_clock)
-   
-   
+
+
    // This process inserts the parity into the outgoing serial data stream.
    always@(posedge xserial_tx_clock)
       begin

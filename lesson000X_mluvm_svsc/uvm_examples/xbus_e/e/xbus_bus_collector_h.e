@@ -1,4 +1,4 @@
-/*-------------------------------------------------------------------------  
+/*-------------------------------------------------------------------------
 File name   : xbus_bus_collector_h.e
 Title       : Bus collector declaration
 Project     : XBus UVC
@@ -9,7 +9,7 @@ Notes       : The bus collector collects all activity on the bus and collects
             : It passes the collected info, after basic processing, to the
             : monitor.
             : The monitor performs higher level process, coverage and checks
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -28,10 +28,10 @@ Notes       : The bus collector collects all activity on the bus and collects
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
-  
-  
+
+
 <'
 
 package cdn_xbus;
@@ -57,13 +57,13 @@ extend MONITOR xbus_trans_s {
     -- This field is used by the monitor to collect the actual number of waits
     -- states for each byte of the transfer.
     !waits : list of uint;
-    
+
     -- This field is used by the monitor to log the position of any error. A
     -- 0 value means no error occurred.
     !error_pos_mon : uint;
 
 }; -- extend MONITOR xbus_trans_s
-            
+
 '>
 
 
@@ -75,7 +75,7 @@ extend MONITOR xbus_trans_s {
 -- This unit is the Bus Collector. The Bus Monitor monitors all activity on the
 -- bus and collects information on each transfer that occurs.
 unit xbus_bus_collector_u like uvm_collector {
-    
+
     -- This field holds the logical name of the bus containing this bus
     -- monitor. This field is automatically constrained by the UVC and should
     -- not be constrained by the user.
@@ -98,7 +98,7 @@ unit xbus_bus_collector_u like uvm_collector {
 
     -- This field is a pointer to the synchronizer.
     synch : xbus_synchronizer_u;
-    
+
     -- This field is a pointer to the bus signal map.
     smp : xbus_signal_map_u;
 
@@ -106,54 +106,54 @@ unit xbus_bus_collector_u like uvm_collector {
     msmps : list of xbus_master_signal_map_u;
 
     -- Events
-    
+
     -- This event is the rising edge of the START signal.
     event start_rise;
-        
+
     -- This event is the falling edge of the START signal.
     event start_fall;
 
     -- This event is emitted at the rising edge of clock at the end of each
     -- Arbitration Phase.
     event arbitration_phase;
-    
+
     -- This event is emitted at the rising edge of clock at the end of each
     -- Address Phase.
     event address_phase;
-    
+
     -- This event is emitted at the rising edge of clock at the end of each
     -- NOP Address Phase.
     event nop_cycle;
-    
+
     -- This event is emitted at the rising edge of clock at the end of each
     -- non-NOP Address Phase
     event normal_address_phase;
-    
+
     -- This event is emitted at the rising edge of clock at the end of the
     -- first cycle of Data Phase.
     event data_start;
-    
+
 
     -- This event is emitted at the rising edge of clock at the end of the
     -- last cycle of the Data Phase. This event signifies that a transfer
     -- (not a NOP) has completed. At this stage the transfer field contains
     -- a record of the transfer that occurred.
     event data_end;
-    
+
     -- This event is emitted at the rising edge of clock at the end of each
     -- cycle of Data Phase.
     event data_phase;
-    
+
     -- This event is emitted each time a wait state is inserted on the bus.
     event wait_state;
-    
+
     -- This event is emitted each time a byte of data is valid on the bus.
     event data_valid;
-    
+
     -- This event is emitted each time the Data Phase is terminated by an
     -- error.
     event data_error;
-    
+
     -- This event is emitted each time a single byte transfer occurs in the
     -- Address Phase.
     event single_data;

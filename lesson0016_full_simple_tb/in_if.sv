@@ -3,11 +3,11 @@ interface in_if (input clk);
 
    //clocking blocks
    clocking drv_cb @(posedge clk);
-      output data_bus;      
+      output data_bus;
    endclocking
 
    clocking smp_cb @(posedge clk);
-      input data_bus;      
+      input data_bus;
    endclocking
 
    //modports

@@ -58,7 +58,7 @@ sn_compile.sh   $UVM_ACCEL_DIR/e/uvm_accel_pipes_direct.e -D SCEMI_PIPE_DIRECT_C
   -D UXE -D NO_IXCOM -t scemi_adapter -e scemi_adapter -l ./uvm_accel_pipes.o -shlib -exe \
   -o sn_scemi_adapter || exit 6
 
- 
+
 # compile the env with the top referencing the adapter
 if [  "$TBA" = 1 ]; then
 sn_compile.sh  -enable_DAC -shlib -exe -s scemi_adapter/sn_scemi_adapter \

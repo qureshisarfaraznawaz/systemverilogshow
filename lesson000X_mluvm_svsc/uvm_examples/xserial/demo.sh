@@ -2,7 +2,7 @@
 #!/bin/sh -v
 #
 # Script for running xserial demo
-# 
+#
 #   demo.sh mti|vcs|nc[sim]|xl verilog|vhdl
 # =============================================================================
 
@@ -27,8 +27,8 @@ vlg_hdl_files="$xserial_path/v/*.v"
 vhd_hdl_files="$xserial_path/vhdl/in_chan.vhd $xserial_path/vhdl/out_chan.vhd $xserial_path/vhdl/dut.vhd $xserial_path/vhdl/tb_xserial.vhd"
 debussy_do_file="$package_path/examples/debussy_cmd.txt"
 mti_do_file="$package_path/examples/sv.do"
-nc_do_file="$package_path/examples/nc.i"      
-vcs_do_file="$package_path/examples/vcs.i"    
+nc_do_file="$package_path/examples/nc.i"
+vcs_do_file="$package_path/examples/vcs.i"
 vtop="xserial_evc_demo"
 #----------------------------------------------------------------------
 
@@ -90,7 +90,7 @@ while [ $# -gt 0 ]; do
                         shift
                         ;;
       esac
-	shift       
+	shift
 done
 
 
@@ -99,7 +99,7 @@ do_file="$nc_do_file"
 
 if [ -n "$run_file" ]; then
    cat $do_file > sim_cmd.txt
-   cat $run_file >> sim_cmd.txt 
+   cat $run_file >> sim_cmd.txt
    do_file="sim_cmd.txt"
 fi
 
@@ -109,7 +109,7 @@ hdl_files="$vlg_hdl_files"
 if [ $run_mode = batch ]; then
     gui_flag=""
     echo "run"  >> ./ncsim_run.tcl
-    echo "exit" >> ./ncsim_run.tcl 
+    echo "exit" >> ./ncsim_run.tcl
 
 fi
 
@@ -125,7 +125,7 @@ demo_file=`sn_which.sh $package_path/examples/$demo_file`
     $tcl_flag \
     -nosncomp \
     -input ./ncsim_run.tcl \
-    -defineall SPECMAN_INCLUDED 
+    -defineall SPECMAN_INCLUDED
 
 
 

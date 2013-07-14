@@ -7,10 +7,10 @@ Project      : XCore eVC
 Created On   : 2008
 Description  : Send 5 frames on XSserial, not all DATA. XBus reads and
              : writes back all the DATA frames.
-Notes        : This test uncover a bug in the XCore. 
+Notes        : This test uncover a bug in the XCore.
              : It demonstrates setting effect of a check, using it name -
-             :         set_check_by_name("xserial_scoreboard_u", 
-             :             "scbd_empty", 
+             :         set_check_by_name("xserial_scoreboard_u",
+             :             "scbd_empty",
              :             WARNING);
 ----------------------------------------------------------------------------
 >>>>>>>>>>>>>>>>>>>>>>>>>>> COPYRIGHT NOTICE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -31,7 +31,7 @@ extend XCORE_XSERIAL MAIN MAIN_TEST xserial_sequence {
    keep count == 5;
    keep sequence.kind == XCORE_SEND_FRAME;
 
-   keep prevent_test_done == TRUE; 
+   keep prevent_test_done == TRUE;
 };
 
 
@@ -45,13 +45,13 @@ extend xserial_frame_payload_s {
     keep soft frame_format == select {
         50 : DATA;
         50 : MESSAGE;
-    }; 
-}; 
+    };
+};
 
 -- Only IDLE messages
 extend MESSAGE xserial_frame_payload_s {
   keep frame_message == IDLE;
-}; 
+};
 
 -- Program the XCore to read the frames
 extend MAIN vr_ad_sequence {
@@ -64,8 +64,8 @@ extend MAIN vr_ad_sequence {
 
    -- Not all frames are expected to be reflected (not all are DATA),
    -- so this sequence should not stop the test
-   keep prevent_test_done == FALSE; 
-   
+   keep prevent_test_done == FALSE;
+
 };
 
 -- No virtaul sequence in this test, scneraio created by BFM sequences
@@ -77,5 +77,5 @@ extend MAIN MAIN_TEST xcore_combined_sequence {
 
 '>
 
-   
-   
+
+

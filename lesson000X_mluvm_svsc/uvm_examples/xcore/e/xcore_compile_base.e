@@ -1,16 +1,16 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xcore_compile_base.e
 Title       : Compile base of XCore eVC
 Project     : XCore eVC
 Created     : 2008
-Description : This file imports the files that are to be compiled before 
+Description : This file imports the files that are to be compiled before
             : everything
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.All rights reserved worldwide.
 Please refer to the terms and conditions in $IPCM_HOME
 
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 

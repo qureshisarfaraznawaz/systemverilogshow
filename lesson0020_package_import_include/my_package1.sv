@@ -1,7 +1,7 @@
 package my_package1;
 
    import my_package2::*;
-   
+
    int valueA;
 
    function void tellmex();

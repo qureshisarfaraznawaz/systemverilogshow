@@ -8,7 +8,7 @@ Created On   : 2008
 Description  : XSerial agent sends frames.
              : XCore is expected to transmit HALT frame after 2 frames.
              : XBus agent reads the frames after both are sent.
-Notes        :  
+Notes        :
 
 ----------------------------------------------------------------------------
 >>>>>>>>>>>>>>>>>>>>>>>>>>> COPYRIGHT NOTICE <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -30,7 +30,7 @@ extend MAIN MAIN_TEST xcore_combined_sequence {
 
    keep prevent_test_done == TRUE;
 
-}; 
+};
 
 
 extend XCORE_XSERIAL MAIN MAIN_TEST xserial_sequence {
@@ -38,7 +38,7 @@ extend XCORE_XSERIAL MAIN MAIN_TEST xserial_sequence {
 };
 
 
-extend MAIN vr_ad_sequence { 
+extend MAIN vr_ad_sequence {
    keep count == 0;
 };
 

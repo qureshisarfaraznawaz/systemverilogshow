@@ -13,8 +13,8 @@ Description  : Reset scneario:
              : XSerial components should wait until xbus is out of reset.
              :
              : Repeat 3 times:
-             :   XSerial agent sends 1 XSerial frame to the XCore, 
-             :   XBus Master reads the frame from the XCore 
+             :   XSerial agent sends 1 XSerial frame to the XCore,
+             :   XBus Master reads the frame from the XCore
              :   XBus Master write to the XCore, programs it to transmit
              :   a frame
              :   XCore expected to transmit a frame on the XSerial.
@@ -24,7 +24,7 @@ Description  : Reset scneario:
              : Verbosity of logger is set to FULL, to see all TESTFLOW
              : related messages coming from the eVCs.
              :
-             : For seeing messages of the utility itself, set the verbosity 
+             : For seeing messages of the utility itself, set the verbosity
              : of the tag TESTFLOW to FULL.
              :
 ----------------------------------------------------------------------------
@@ -46,7 +46,7 @@ extend XCORE_XSERIAL MAIN MAIN_TEST xserial_sequence {
    keep count == 3;
    keep sequence.kind == XCORE_SEND_FRAME;
 
-     
+
 };
 
 extend xbus_agent_u {
@@ -62,7 +62,7 @@ extend MAIN vr_ad_sequence {
    -- Reflect all 3 input frames back to the output
    keep count == 3;
    keep sequence.kind == XCORE_XBUS_READ_WRITE;
-    
+
    keep prevent_test_done == TRUE;
 
 };
@@ -70,17 +70,17 @@ extend MAIN vr_ad_sequence {
 
 extend MAIN INIT_LINK xbus_master_sequence {
     body() @driver.clock is also {
-        // Do nothing, just to see how the others wait for me to 
+        // Do nothing, just to see how the others wait for me to
         // get to MAIN_TEST
         wait [100] * cycle;
-        if driver.tf_get_domain_mgr().get_invocation_count(INIT_LINK) < 2 
+        if driver.tf_get_domain_mgr().get_invocation_count(INIT_LINK) < 2
                                                                   then {
             wait [80];
             message(TESTFLOW_EX, LOW, "Calling rerun_phase(RESET)");
             driver.tf_get_domain_mgr().rerun_phase(RESET);
         };
-        
-    };    
+
+    };
 
 };
 

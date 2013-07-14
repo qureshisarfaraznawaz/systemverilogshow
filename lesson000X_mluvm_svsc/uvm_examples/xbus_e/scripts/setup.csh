@@ -4,12 +4,12 @@
 # Author      : Cadence Design Systems
 # Date        : January 2011
 # Description : Environment configuration script
-#               This script is divided into 2 main sections. The 
+#               This script is divided into 2 main sections. The
 #               USER CONFIGURABLE VARIABLES section contains variables
-#               that should be defined by the user. The 
-#               AUTOMATIC VARIABLE CONFIGURATION section contains 
+#               that should be defined by the user. The
+#               AUTOMATIC VARIABLE CONFIGURATION section contains
 #               variables that should be set automatically. These
-#               variables should not be changed by the user.  
+#               variables should not be changed by the user.
 ########################################################################
 ########################################################################
 # USER CONFIGURABLE VARIABLES

@@ -11,7 +11,7 @@ class class_stimulus;
    task run_t();
       repeat (3) begin
 	 port_vif.some_data  = $urandom;
-	 #2;	 
+	 #2;
       end
    endtask
-endclass 
+endclass

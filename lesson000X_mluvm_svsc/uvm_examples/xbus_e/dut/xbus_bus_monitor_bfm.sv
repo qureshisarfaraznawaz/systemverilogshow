@@ -36,7 +36,7 @@ reg [7:0] [7:0] o_data;
 
 
 reg [15:0] temp_grant=0;
-always@(sig_grant[0] or sig_grant[1] or sig_grant[2] or sig_grant[3] or sig_grant[4] or sig_grant[5] or sig_grant[6] or sig_grant[7] or sig_grant[8] or sig_grant[9] or sig_grant[10] or sig_grant[11] or sig_grant[12] or sig_grant[13] or sig_grant[14] or sig_grant[15]) 
+always@(sig_grant[0] or sig_grant[1] or sig_grant[2] or sig_grant[3] or sig_grant[4] or sig_grant[5] or sig_grant[6] or sig_grant[7] or sig_grant[8] or sig_grant[9] or sig_grant[10] or sig_grant[11] or sig_grant[12] or sig_grant[13] or sig_grant[14] or sig_grant[15])
 begin
   temp_grant = sig_grant;
   odata_r = sig_grant;
@@ -82,7 +82,7 @@ begin
           odata_a[19] = sig_write;
           odata_a[23:20] = 4'h0;
           //$display("BM BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b", $time, sig_addr, sig_read, sig_write, sig_size);
-          case(odata_a[17:16]) 
+          case(odata_a[17:16])
             2'b00: word_cnt = 1;
             2'b01: word_cnt = 2;
             2'b10: word_cnt = 4;

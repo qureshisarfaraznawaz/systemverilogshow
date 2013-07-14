@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : dut_if_wrap.sv
 Title       : XSerial router wrapper (using a interface)
 Project     : XSerial golden example
-Developers  : 
-Created     : 
-Description : [Future] This file defines a module that wraps the XSerial 
+Developers  :
+Created     :
+Description : [Future] This file defines a module that wraps the XSerial
             : router DUT and defines an interface port.
-Notes       : 
+Notes       :
               This file is NOT currently used by the scripts, until modport
               expressions are supported.
 
@@ -16,7 +16,7 @@ Please refer to the terms and conditions in $IPCM_HOME.
 ------------------------------------------------------------------- */
 
 
- 
+
  module dut_wrap (interface dut_if);
 
    router dut(
@@ -31,6 +31,6 @@ Please refer to the terms and conditions in $IPCM_HOME.
               .port_c_in_data(     dut_if.port_c_in_data),
               .port_c_err(         dut_if.port_c_err),
               .port_c_out_data(    dut_if.port_c_out_data)   );
-   
+
 endmodule : dut_wrap
 

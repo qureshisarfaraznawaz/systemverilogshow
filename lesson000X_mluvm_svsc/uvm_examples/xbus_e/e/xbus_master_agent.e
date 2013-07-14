@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_master_agent.e
 Title       : XBus Master Agent
 Project     : UVM XBus UVC
-Developers  :  
+Developers  :
 Created     : 2008
-Description : 
-Notes       : 
---------------------------------------------------------------------------- 
+Description :
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,8 +25,8 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
- 
+-------------------------------------------------------------------------*/
+
 <'
 
 package cdn_xbus;
@@ -47,20 +47,20 @@ extend MASTER xbus_agent_u {
     keep agent_monitor is a MASTER xbus_agent_monitor_u (mam) =>
         mam.synch == read_only(synch) and
         mam.msmp == read_only(msmp);
-    
+
 }; -- extend MASTER xbus_agent_u
 
 
 
 extend ACTIVE MASTER xbus_agent_u {
-    
-    
+
+
     // testflow main methods are expected to be found in the top portion of the
     // unit to better recognize the functional behavior of the unit
     tf_reset() @tf_phase_clock is also {
         reset_dut();
     };
-    
+
     reset_dut() @synch.unqualified_clock_rise is {
         message(TESTFLOW_EX, LOW, "reset start");
         synch.sig_reset$ = 1;
@@ -68,7 +68,7 @@ extend ACTIVE MASTER xbus_agent_u {
         synch.sig_reset$ = 0;
         message(TESTFLOW_EX, LOW, "reset done");
     };
-    
+
 
     -- This is the sequence driver for an ACTIVE MASTER agent.
     driver: xbus_master_driver_u is instance;

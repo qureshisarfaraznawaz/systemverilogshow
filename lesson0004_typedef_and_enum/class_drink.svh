@@ -6,11 +6,11 @@ module tb;
 
    initial begin
       some_cost  = -1;
-      #1;      
+      #1;
       some_cost  = {100{1'b1}};
-      #1;      
+      #1;
       some_cost  = 12;
-      #1;      
+      #1;
       some_cost  = -4;
    end
 

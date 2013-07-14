@@ -2,7 +2,7 @@
 #!/bin/sh -f
 #
 # Script for running xbus demo
-# 
+#
 #   demo.sh mti|vcs|nc[sim] verilog|vhdl
 # =============================================================================
 
@@ -24,13 +24,13 @@ fi
 
 package_path=`sn_which.sh xbus_e`
 xbus_path=`sn_which.sh xbus_e`
-demo_file="test_1.e" 
+demo_file="test_1.e"
 vlg_hdl_files="$xbus_path/v/tb_xbus.v"
 vhd_hdl_files="$xbus_path/vhdl/tb_xbus.vhd"
 debussy_do_file="$package_path/examples/debussy_cmd.txt"
 mti_do_file="$package_path/examples/sv.do"
-vcs_do_file="$package_path/examples/vcs.i"   
-nc_do_file="$package_path/examples/nc.i"    
+vcs_do_file="$package_path/examples/vcs.i"
+nc_do_file="$package_path/examples/nc.i"
 nc_waves="$package_path/examples/xbus.sv"
 vtop="xbus_evc_demo"
 abstract_l=SIGNAL
@@ -100,9 +100,9 @@ while [ "$#" -gt 0 ]; do
                         run_file="$2"
                         shift
                         ;;
-   
+
       esac
-	shift       
+	shift
 done
 
 
@@ -111,7 +111,7 @@ do_file="$nc_do_file"
 
 if [ -n "$run_file" ]; then
    cat $do_file > sim_cmd.txt
-   cat $run_file >> sim_cmd.txt 
+   cat $run_file >> sim_cmd.txt
    do_file="sim_cmd.txt"
 fi
 
@@ -122,12 +122,12 @@ echo ""  >> ./ncsim_run.tcl
 if [ $run_mode = batch ]; then
     gui_flag=""
     echo "run"  >> ./ncsim_run.tcl
-    echo "exit" >> ./ncsim_run.tcl 
+    echo "exit" >> ./ncsim_run.tcl
 
 fi
 
 
-if [ $abstract_l = ACCEL_SIM ]; then    
+if [ $abstract_l = ACCEL_SIM ]; then
   $package_path/scripts/demo_on_sim.sh 1 $demo_file $gui_flag
   exit
 fi
@@ -139,8 +139,8 @@ if [ $abstract_l = ACCEL_PXP ]; then
 fi
 
 demo_file=`sn_which.sh $package_path/examples/$demo_file`
- 
-cat $nc_waves > xbus.sv    
+
+cat $nc_waves > xbus.sv
 
 
  irun \
@@ -153,8 +153,8 @@ cat $nc_waves > xbus.sv
     $tcl_flag \
     -nosncomp  \
     -input ./ncsim_run.tcl \
-    -defineall SPECMAN_INCLUDED 
- 
+    -defineall SPECMAN_INCLUDED
+
 
 
 exit

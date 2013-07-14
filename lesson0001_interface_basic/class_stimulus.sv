@@ -1,6 +1,6 @@
 class class_stimulus;
 
-   virtual 
+   virtual
 
-   
+
 endclass : class_stimulus

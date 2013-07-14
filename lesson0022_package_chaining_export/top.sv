@@ -16,5 +16,5 @@ module top;
    always begin  clk = #2 ~clk;   end
 
    mod mod(.*);
-   
+
 endmodule // top

@@ -91,7 +91,7 @@ begin
           begin
             ipipe.receive(1,num_valid_ele,idata, eom);
 	     // $display("got from ipipe num_valid_ele %d ", num_valid_ele);
-	     
+
             i_addr = idata[15:0];
 	   //  $display("iaddr %h ", i_addr);
 
@@ -138,7 +138,7 @@ begin
 `ifdef MULTIPLE_MS
             active = 1'b1;
 `endif
-	     
+
             sig_request = 1'b0;
             sig_addr = i_addr;
             sig_size = i_size;
@@ -150,14 +150,14 @@ begin
           end
           end
     4'd2: begin
-       
+
           sig_addr = 16'b0;
           sig_size = 2'b0;
           sig_read = 1'b0;
           sig_write = 1'b0;
           if ({i_read,i_write} == 2'b01)
             begin
-	       
+
             n = 0;
             word_cnt = word_cnt -1;
             if (word_cnt == 0)
@@ -165,7 +165,7 @@ begin
             else
               sig_bip = 1;
             sig_data = i_data[n];
-	       
+
             n = n+1;
             //$display("MD BFM @ %0t: data = %0x", $time, sig_data);
             if(word_cnt > 0)
@@ -173,9 +173,9 @@ begin
             else
               state = 4'd4;
           end
-          else 
+          else
             begin
-	       
+
             odata = idata;
             i = 0;
             state = 4'd3;
@@ -186,13 +186,13 @@ begin
           if(!sig_wait && word_cnt > 0)
           begin
             if ({i_read,i_write} == 2'b01)
-            begin 
+            begin
               word_cnt = word_cnt - 1;
               if (word_cnt == 0)
                 sig_bip = 0;
               else
                 sig_bip = 1;
-           
+
               //$display("MD BFM @ %0t: data = %0x", $time, sig_data);
               sig_data = i_data[n];
               n = n+1;
@@ -201,9 +201,9 @@ begin
                 state = 4'd4;
               end
             end
-            else 
+            else
             begin
-              
+
               word_cnt = word_cnt -1;
               case(i)
                 0: begin odata[31:24] = sig_data; end
@@ -220,7 +220,7 @@ begin
               if(word_cnt == 0)
               begin
                 sig_data = 8'b0;
-                sig_bip = 1'b0;		 
+                sig_bip = 1'b0;
                  opipe.send(1,odata,1);
 		 slave_ctrl = 1'b0;
                 state = 4'd0;
@@ -247,7 +247,7 @@ begin
           end
   endcase
 end // always @ (posedge sig_clock )
-   
 
-   
+
+
 endmodule

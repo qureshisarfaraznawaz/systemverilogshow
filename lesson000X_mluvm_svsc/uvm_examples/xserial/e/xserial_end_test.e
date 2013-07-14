@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xserial_end_test.e
 Title       : End of test stuff
 Project     : XSerial eVC
@@ -7,13 +7,13 @@ Description : This file handles 'end of test'.
 Notes       : End of test handling is done using the objection mechanism.
             : Each proactive MAIN sequence raises an objection to TEST_DONE
             : at the start of the sequence and drops the objection at the
-            : end of the sequence. A built in drain time is used to ensure 
+            : end of the sequence. A built in drain time is used to ensure
             : that the test has really finished.
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
   All rights reserved worldwide
 
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -23,7 +23,7 @@ package cdn_xserial;
 extend MAIN xserial_sequence {
     prevent_test_done : bool;
        keep soft prevent_test_done == TRUE;
-}; -- extend xserial_sequence 
+}; -- extend xserial_sequence
 
 extend MAIN ENV_SETUP xserial_sequence {
     -- Raise an objection to TEST_DONE at setup
@@ -39,7 +39,7 @@ extend MAIN POST_TEST xserial_sequence {
     -- This field is used to control the delay between the end of the MAIN
     -- sequence and the dropping of the objection to TEST_DONE - i.e. the
     -- time allowed for the last data to drain through the DUT. This is
-    -- measured in clock cycles. 
+    -- measured in clock cycles.
     drain_time : uint;
         keep soft drain_time == 10;
 };
@@ -55,7 +55,7 @@ extend MAIN POST_TEST xserial_sequence {
             driver.drop_objection(TEST_DONE);
         };
     }; -- post_body()
-    
+
 }; -- extend MAIN xserial_sequence
 
 

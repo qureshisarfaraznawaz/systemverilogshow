@@ -24,11 +24,11 @@ class dice;
 				      2:=1,  // 1/(5+1+1+1+1+1)
 				      1:=1   // 1/(5+1+1+1+1+1)
 				      }; }
-*/ 
+*/
 //   constraint fixed_odds{ value dist {[6:4]:/1, 3:/1, 2:/1, 1:/1}; }// BAD RANGE [low:high]. error
-//   constraint fixed_odds{ value dist {[4:6]:/1, 3:/1, 2:/1, 1:/1}; }  
-   constraint fixed_odds{ value dist {[4:6]:=1, 3:/1, 2:/1, 1:/1}; }  
-   
+//   constraint fixed_odds{ value dist {[4:6]:/1, 3:/1, 2:/1, 1:/1}; }
+   constraint fixed_odds{ value dist {[4:6]:=1, 3:/1, 2:/1, 1:/1}; }
+
    function void post_randomize();
       $display(" dice roll is now = %0d", value);
       stats[value]  = stats[value]+1;
@@ -49,16 +49,16 @@ endclass
       my_dice  = new();
 
       repeat (100) begin
-	 assert (my_dice.randomize()) else  begin 
-	    $display(" ERROR: Mister SVS, randomization failed, miserably.");	 
-	    $fatal(1);	    
+	 assert (my_dice.randomize()) else  begin
+	    $display(" ERROR: Mister SVS, randomization failed, miserably.");
+	    $fatal(1);
 	 end
       end
 
       my_dice.show_stats();
    end
 
-   
+
 endmodule // dice_game
 
 

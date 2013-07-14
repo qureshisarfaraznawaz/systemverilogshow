@@ -1,4 +1,4 @@
-/*--------------------------------------------------------------------------- 
+/*---------------------------------------------------------------------------
 File name   : xcore_in_chan.v
 Title       : XCore input channel
 Project     : XCore SystemVerilog Methodology
@@ -16,7 +16,7 @@ Description : This block provides an XSerial receiver and input FIFO for
             :
             : Central to the design is the fact that the xserial_rx_clock
             : has no relation to the xbus_clock. This means that clock
-            : domain crossing must be correctly implemented so as to 
+            : domain crossing must be correctly implemented so as to
             : avoid metastability. This can be easily achieved because the
             : rate at which frames arrive is significantly slower than the
             : speed of the XBus clock. As each frame arrives, it is latched
@@ -45,7 +45,7 @@ module xcore_in_chan(xbus_clock,
                      flow_ack,
                      xserial_rx_clock,
                      xserial_rx_data);
-   
+
    input    xbus_clock;
    input    xbus_reset;
    output [12:0] frame;
@@ -55,11 +55,11 @@ module xcore_in_chan(xbus_clock,
    output   flow_req;
    output   flow_halt;
    input    flow_ack;
-   
+
    // xserial signals
    input    xserial_rx_clock;
    input    xserial_rx_data;
-   
+
    wire     xbus_clock;
    wire     xbus_reset;
    wire [12:0] frame;
@@ -69,13 +69,13 @@ module xcore_in_chan(xbus_clock,
    wire        flow_req;
    wire        flow_halt;
    wire        flow_ack;
-   
+
    // xserial signals
    wire        xserial_rx_clock;
    wire        xserial_rx_data;
-   
-   
-   
+
+
+
    reg [3:0]   collect_count;
    reg [12:0]  collector;
    reg         collector_valid;
@@ -86,9 +86,9 @@ module xcore_in_chan(xbus_clock,
    reg         rx_frame_valid_cc;
    reg         rx_frame_valid_ccc;
    wire        xbus_frame_valid;
-   
-   
-   
+
+
+
    reg [12:0]  fifo [0:3];
    reg         write_fifo;
    reg [1:0]   write_ptr;
@@ -97,14 +97,14 @@ module xcore_in_chan(xbus_clock,
    reg         flow_req_int;
    reg         flow_halt_int;
 
-`ifdef XCORE_SIM   
+`ifdef XCORE_SIM
 
 // cover FIFO overflow indication
  cover_fifo_overflow : cover property (@(posedge xbus_clock) (write_fifo == 1'b1 |-> ##1 item_count < 3'b100 ));
 
-//Transaction creation for rx_frame   
+//Transaction creation for rx_frame
   trview_rx_frame: cover property (@(posedge xbus_clock) ( ((collect_count == 4'b0000 && xserial_rx_data == 1'b0) ##[1:$] $rose(collector_valid))));
- 
+
 
 //coverage for frame_kind : data, message ( halt ,  resume , idle)
 //message frame
@@ -120,7 +120,7 @@ module xcore_in_chan(xbus_clock,
   cover_rx_mode_data_frame : cover property (@(posedge xbus_clock) (xbus_frame_valid && rx_frame[12] == 1'b0  && rx_frame[3:2] == 2'b00));
 
 `endif
-   
+
    // This process counts the incoming bits from the XSerial RX port
    always @(posedge xserial_rx_clock)
       begin
@@ -143,9 +143,9 @@ module xcore_in_chan(xbus_clock,
                   end // else: !if(collect_count == 4'b0000)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_rx_clock)
-  
 
-   
+
+
    // This process collects the incoming frame
    always@(posedge xserial_rx_clock)
       begin
@@ -155,8 +155,8 @@ module xcore_in_chan(xbus_clock,
                collector[12] <= xserial_rx_data;
             end // if (collect_count != 4'b0000)
       end // always@ (posedge xserial_rx_clock)
-   
-   
+
+
    // This process calculates parity on the incoming frame (which should be
    // even).
    always@(posedge xserial_rx_clock)
@@ -170,9 +170,9 @@ module xcore_in_chan(xbus_clock,
                parity <= parity ^ xserial_rx_data;
             end // else: !if(collect_count == 4'b1101)
       end // always@ (posedge xserial_rx_clock)
-   
-   
-   // This process determines when collector contains a valid frame. 
+
+
+   // This process determines when collector contains a valid frame.
    always@(posedge xserial_rx_clock)
       begin
          if (xbus_reset == 1'b1)
@@ -191,8 +191,8 @@ module xcore_in_chan(xbus_clock,
                   end // else: !if(collect_count == 4'b0001)
             end // else: !if(collector_reset == 1'b1)
       end // always@ (posedge xserial_rx_clock)
-   
-    
+
+
    // This process clocks the collected frame into the frame signal. Note that
    // the 13 bits that are latched are the 12 bit payload plus 1 bit that
    // indicates whether the incoming frame had a parity error (1) or not (0).
@@ -203,8 +203,8 @@ module xcore_in_chan(xbus_clock,
                rx_frame <= {parity,collector[11:0]};
             end // if (collector_valid == 1'b1)
       end // always@ (posedge xserial_rx_clock)
-   
-   
+
+
    // This process signals to the XBus clock domain when the frame signal
    // contains a valid frame. Each valid frame is signalled by a change of
    // state of the rx_frame_valid signal.
@@ -222,8 +222,8 @@ module xcore_in_chan(xbus_clock,
                   end // if (collector_valid == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xserial_rx_clock)
-   
-   
+
+
    // This process double clocks the rx_frame_valid signal into the XBus clock
    // domain. An version with an additional clock cycle delay is also produced
    // to assist in detecting changes in this signal.
@@ -242,13 +242,13 @@ module xcore_in_chan(xbus_clock,
                rx_frame_valid_ccc <= rx_frame_valid_cc;
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-           
-   
+
+
+
    // This signal is high whenever there is a change on rx_frame_valid_cc
    assign xbus_frame_valid = rx_frame_valid_cc ^ rx_frame_valid_ccc;
-   
-   
+
+
    // This process handles received HALT and RESUME messages and drives the
    // halted signal to the TX path.
    always@(posedge xbus_clock)
@@ -258,17 +258,17 @@ module xcore_in_chan(xbus_clock,
                halted <= 1'b0;
             end // if (xbus_reset == 1'b1)
          else
-            begin                                       
-              if((xbus_frame_valid == 1'b1) 
+            begin
+              if((xbus_frame_valid == 1'b1)
                  && (rx_frame[12] == 1'b0)  // Not bad parity
                  && (rx_frame[4:2] == 3'b101)) // HALT MESSAGE frame
-                 
+
                   begin
                      halted <= 1'b1;
                   end // if ((xbus_frame_valid == 1'b1) && (rx_frame == 13'b0000000000101))
                else
                   begin
-                    if( (xbus_frame_valid == 1'b1) 
+                    if( (xbus_frame_valid == 1'b1)
                         &&  (rx_frame[12] == 1'b0)  // Not bad parity
                         && (rx_frame[4:2] == 3'b001)) // RESUME MESSAGE frame
                       begin
@@ -277,9 +277,9 @@ module xcore_in_chan(xbus_clock,
                   end // else: !if((xbus_frame_valid == 1'b1) && (rx_frame == 13'b0000000000101))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-                  
-   
+
+
+
    // This process determines when a non-message frame has been received and
    // needs to be written to the FIFO.
    always@(xbus_frame_valid or rx_frame)
@@ -293,9 +293,9 @@ module xcore_in_chan(xbus_clock,
                write_fifo <= 1'b0;
             end // else: !if((xbus_frame_valid == 1'b1) && (rx_frame[3:2] != 2'b01))
       end // always@ (xbus_fram_valid or rx_frame)
-   
-   
-   // This process handles the write side of the FIFO. 
+
+
+   // This process handles the write side of the FIFO.
    always@(posedge xbus_clock)
       begin
          if (xbus_reset == 1'b1)
@@ -311,12 +311,12 @@ module xcore_in_chan(xbus_clock,
                   end // if (write_fifo == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-                     
-   
+
+
+
    // The output of this block is the next item in the FIFO
    assign  frame = fifo[read_ptr];
-   
+
    // This process handles the read pointer for the FIFO
    always@(posedge xbus_clock)
       begin
@@ -332,11 +332,11 @@ module xcore_in_chan(xbus_clock,
                   end // if (read_fifo == 1'b1)
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
-   
-  
- 
+
+
+
+
+
    // This process keeps track of how many items are currently in the FIFO.
    always@(posedge xbus_clock)
       begin
@@ -359,9 +359,9 @@ module xcore_in_chan(xbus_clock,
                   end // else: !if((write_fifo == 1'b1) && (read_fifo == 1'b0))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
-   
-   
+
+
+
    // This process determines whether the FIFO has valid data in it or not.
    always@(item_count)
       begin
@@ -374,9 +374,9 @@ module xcore_in_chan(xbus_clock,
                frame_valid <= 1'b1;
             end // else: !if(item_count == 4'b0000)
       end // always@ (item_count)
-   
-         
-    
+
+
+
    // This process determines when there is a possibility that the
    // FIFO could overflow and generates requests for flow control messages
    // to prevent this. Note that after a flow control HALT message is sent,
@@ -442,7 +442,7 @@ module xcore_in_chan(xbus_clock,
                   end // else: !if((write_fifo == 1'b1) && (read_fifo == 1'b0) && (item_count == 3'b001))
             end // else: !if(xbus_reset == 1'b1)
       end // always@ (posedge xbus_clock)
-   
+
    assign flow_req = flow_req_int;
    assign flow_halt = flow_halt_int;
 endmodule // xcore_in_chan

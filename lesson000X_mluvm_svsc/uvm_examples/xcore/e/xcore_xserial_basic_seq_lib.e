@@ -1,16 +1,16 @@
-/*------------------------------------------------------------------------- 
-File name   : xcore_xserial_basic_seq_lib.e 
+/*-------------------------------------------------------------------------
+File name   : xcore_xserial_basic_seq_lib.e
 Title       : XSerial sequence lib
 Project     : XCore eVC
 Created     : 2008
 Description : Defines XSerial sequences for sending to XCore
             : based on the seuqcnes define in the xserial eVC
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.All rights reserved worldwide.
 Please refer to the terms and conditions in $IPCM_HOME
 
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -32,6 +32,6 @@ extend XCORE_SEND_FRAME xserial_sequence {
 }; -- extend XCORE...
 
 '>
-   
+
 
 

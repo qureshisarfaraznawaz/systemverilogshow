@@ -1,16 +1,16 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : test_multi_reset.e
 Title       : XBus eVC demo - example of multiple reset handling
 Project     : XBus eVC
 Created     : 2008
 Description : Example testcase file for demo purposes
 Notes       : This file demonstrates the ability of the eVC to cope with
-            : multiple resets. Master_0 perform 6 resets 
+            : multiple resets. Master_0 perform 6 resets
             :
-            : For seeing messages from the Testflow utilitiy (note - there 
+            : For seeing messages from the Testflow utilitiy (note - there
             : are many of them) issue  in Specman prompt:
             :     trace testflow
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -29,7 +29,7 @@ Notes       : This file demonstrates the ability of the eVC to cope with
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -45,7 +45,7 @@ extend MAIN MAIN_TEST xbus_master_sequence {
 -- Issue an extra reset half way through the test
 extend xbus_master_driver_u {
     do_extra_reset() @sys.any is {
-        if tf_get_domain_mgr().get_invocation_count(MAIN_TEST) < 6 
+        if tf_get_domain_mgr().get_invocation_count(MAIN_TEST) < 6
                                                                   then {
             var delay : uint;
             gen delay keeping {it in [1..200]};
@@ -54,7 +54,7 @@ extend xbus_master_driver_u {
             tf_get_domain_mgr().rerun_phase(RESET);
         };
     }; -- do_extra_reset()
-    
+
     tf_main_test() @tf_phase_clock is also {
         do_extra_reset();
     }; -- tf_main_test()

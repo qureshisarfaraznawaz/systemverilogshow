@@ -1,12 +1,12 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xbus_config.e
 Title       : XBus eVC example configuration file
 Project     : XBus eVC
 Created     : 2008
 Description : This file provides XBus eVC configuration that is common to
             : all test cases.
-Notes       : 
---------------------------------------------------------------------------- 
+Notes       :
+---------------------------------------------------------------------------
 //----------------------------------------------------------------------
 //   Copyright 2008-2010 Cadence Design Systems, Inc.
 //   All Rights Reserved Worldwide
@@ -25,7 +25,7 @@ Notes       :
 //   the License for the specific language governing
 //   permissions and limitations under the License.
 //----------------------------------------------------------------------
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 
@@ -34,7 +34,7 @@ import xbus_e/e/xbus_top;
 
 import xbus_e/e/xbus_port_config;
 
--- Create a logical name for the eVC instance. 
+-- Create a logical name for the eVC instance.
 extend xbus_bus_name_t : [XBUS];
 
 -- Instantiate the eVC under sys.
@@ -45,10 +45,10 @@ extend sys {
 -- Create a logical name for each agent in the bus (including both ACTIVE and
 -- PASSIVE agents).
 
-extend xbus_agent_name_t : [MASTER_0, 
-                               MASTER_1, 
-                               SLAVE_0, 
-                               SLAVE_1, 
+extend xbus_agent_name_t : [MASTER_0,
+                               MASTER_1,
+                               SLAVE_0,
+                               SLAVE_1,
                                ARB_0];
 
 -- Instantiate the agents under the eVC instance
@@ -59,7 +59,7 @@ extend XBUS xbus_env_u {
     keep active_master_names    == {MASTER_0; MASTER_1};
     keep passive_slave_names  == {};
     keep active_slave_names     == {SLAVE_0; SLAVE_1};
-    
+
     -- The arbiter agent is called ARB_0 and is ACTIVE
     keep arbiter is a ARB_0 ACTIVE ARBITER xbus_agent_u;
     -- This instance of the eVC has a protocol checker
@@ -81,7 +81,7 @@ extend XBUS xbus_signal_map_u {
     keep sig_bip.hdl_path()   == "xbus_bip";
     keep sig_wait.hdl_path()  == "xbus_wait";
     keep sig_error.hdl_path() == "xbus_error";
-    keep sig_data.hdl_path()  == "xbus_data";  
+    keep sig_data.hdl_path()  == "xbus_data";
 };
 extend XBUS MASTER_0 xbus_master_signal_map_u {
     keep sig_request.hdl_path() == "xbus_req_master_0";
@@ -121,7 +121,7 @@ extend sys {
     };
     init() is also {
         // Use a performance enhancement feature
-        set_config(simulation, enable_ports_unification, TRUE);   
+        set_config(simulation, enable_ports_unification, TRUE);
     };
 };
 

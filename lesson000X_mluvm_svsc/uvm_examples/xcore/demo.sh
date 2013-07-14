@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 # Script for running xcore demo
-# 
+#
 #   demo.sh nc[sim]|mti|vcs|xl verilog|vhdl
 # =============================================================================
 
@@ -20,7 +20,7 @@ else
 fi
 
 package_path=`sn_which.sh xcore`
-xcore_path=`sn_which.sh xcore` 
+xcore_path=`sn_which.sh xcore`
 demo_file="xcore_virtual_seq_test.e"
 vlg_hdl_files="$xcore_path/v/xcore_in_chan.v \
                 $xcore_path/v/xcore_out_chan.v \
@@ -97,17 +97,17 @@ while [ $# -gt 0 ]; do
                         shift
                         ;;
       esac
-      shift       
+      shift
 done
 
 
 do_file=$nc_do_file
 
 
- 
+
 if [ -n "$run_file" ]; then
    cat $do_file > sim_cmd.txt
-   cat $run_file >> sim_cmd.txt 
+   cat $run_file >> sim_cmd.txt
    do_file="sim_cmd.txt"
 fi
 
@@ -119,12 +119,12 @@ hdl_files="$vlg_hdl_files"
 if [ $run_mode = batch ]; then
     gui_flag=""
     echo "run"  >> ./ncsim_run.tcl
-    echo "exit" >> ./ncsim_run.tcl 
+    echo "exit" >> ./ncsim_run.tcl
 
 fi
 
 demo_file=`sn_which.sh $package_path/main_sve/tests/$demo_file`
- 
+
 
  irun \
     -input $nc_do_file \
@@ -139,4 +139,4 @@ demo_file=`sn_which.sh $package_path/main_sve/tests/$demo_file`
     -defineall SPECMAN_INCLUDED
 
 exit
- 
+

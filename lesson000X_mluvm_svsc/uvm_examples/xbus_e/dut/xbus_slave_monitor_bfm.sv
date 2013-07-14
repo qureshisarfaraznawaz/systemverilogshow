@@ -61,11 +61,11 @@ begin
             endcase // case(odata[17:16])
 	  //   $display("SLAVE HW Monitor will send addr %x size %x read %x write %x ",
 		    // odata[15:0], odata[17:16],   odata[18] , odata[19] );
-	     
+
             //$display("SM BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b", $time, sig_addr, sig_read, sig_write, sig_size);
             o_data[0]=8'h00;o_data[1]=8'h00;o_data[2]=8'h00;o_data[3]=8'h00;
             o_data[4]=8'h00;o_data[5]=8'h00;o_data[6]=8'h00;o_data[7]=8'h00;
-	     
+
             opipe.send(1,odata,1);
 	     state = 4'd1;
           end
@@ -92,7 +92,7 @@ begin
             end
             else
               state = 4'd2;
-          end 
+          end
     4'd2: begin
           if(!sig_wait && word_count < sig_data_size)
           begin

@@ -1,4 +1,4 @@
-/*------------------------------------------------------------------------- 
+/*-------------------------------------------------------------------------
 File name   : xserial_top.e
 Title       : Top level of XSerial eVC
 Project     : XSerial eVC
@@ -6,10 +6,10 @@ Created     : 2008
 Description : This file imports all files in the eVC
 Notes       : Files ending in _h.e are public files for the user to read
             : all other files could potentially be encrypted.
---------------------------------------------------------------------------- 
+---------------------------------------------------------------------------
 Copyright (c) 2008-2010 Cadence Design Systems,Inc.
 All rights reserved worldwide
--------------------------------------------------------------------------*/ 
+-------------------------------------------------------------------------*/
 
 <'
 

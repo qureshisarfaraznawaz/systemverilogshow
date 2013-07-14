@@ -1,16 +1,16 @@
-/*----------------------------------------------------------    
+/*----------------------------------------------------------
 File name   : ex_mtm_layering_top.e
-Title       : Top file 
+Title       : Top file
 Project     : many to one layering example
 Created     : 2007
 Description : Imports the required files.
-Notes       : This is one of four layering examples: One to one, 
+Notes       : This is one of four layering examples: One to one,
             : One to many, Many to one and Many to many
-----------------------------------------------------------    
-Copyright (c) 2007 Cadence Design Systems, Inc. 
+----------------------------------------------------------
+Copyright (c) 2007 Cadence Design Systems, Inc.
 All rights reserved worldwide.
-Please refer to the terms and conditions in $IPCM_HOME 
-----------------------------------------------------------*/ 
+Please refer to the terms and conditions in $IPCM_HOME
+----------------------------------------------------------*/
 
 
 <'

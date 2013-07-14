@@ -39,9 +39,9 @@ reg [3:0] state=0;
 reg [3:0]  wait_count=0;
 int word_count=0;
 int i=0;
-   
 
-   
+
+
 always @(posedge sig_clock )
 begin
   case (state)
@@ -51,12 +51,12 @@ begin
           sig_error      = 1'b0;
           sig_wait       = 1'b0;
         end
-        else if(ipipe.can_receive()) 
+        else if(ipipe.can_receive())
           begin
-	     
+
           ipipe.receive(1,num_ele_valid,idata,eom);
           i = 0;
-         // $display("SD BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b, wait_state = %d", 
+         // $display("SD BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b, wait_state = %d",
 	     //	   $time, idata[15:0], idata[18], idata[19], idata[17:16], idata[23:20]);
           //   $display("SD BFM idata[31:24] %x idata[39:32] %x",  idata[31:24], idata[39:32]);
 	     wait_count = idata[23:20];
@@ -121,6 +121,6 @@ begin
         end
   endcase
 end
- 
+
 
 endmodule
