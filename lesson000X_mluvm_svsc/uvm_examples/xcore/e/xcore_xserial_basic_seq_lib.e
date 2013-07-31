@@ -32,6 +32,3 @@ extend XCORE_SEND_FRAME xserial_sequence {
 }; -- extend XCORE...
 
 '>
-
-
-

@@ -91,5 +91,3 @@ extend HEADER ex_mtm_layering_ul_header_sequence {
 };
 
 '>
-
-

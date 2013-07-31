@@ -151,4 +151,3 @@ extend xserial_monitor_u {
 }; -- extend xserial_monitor_u
 
 '>
-

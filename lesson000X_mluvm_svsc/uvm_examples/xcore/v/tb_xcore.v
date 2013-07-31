@@ -80,4 +80,3 @@ module xcore_tb;
                .xserial_tx_data(xserial_tx_data));
 
 endmodule // xcore_tb
-

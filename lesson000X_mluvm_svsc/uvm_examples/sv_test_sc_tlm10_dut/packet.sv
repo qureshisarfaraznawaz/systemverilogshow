@@ -19,4 +19,3 @@ class packet extends uvm_object;
   endfunction
 
 endclass
-

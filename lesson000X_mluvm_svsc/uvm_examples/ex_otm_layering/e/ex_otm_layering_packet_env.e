@@ -138,5 +138,3 @@ unit ex_otm_layering_packet_env_u like uvm_env {
 };
 
 '>
-
-

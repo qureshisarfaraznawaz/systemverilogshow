@@ -356,4 +356,3 @@ module in_channel(clock,
    assign flow_req = flow_req_int;
    assign flow_halt = flow_halt_int;
 endmodule // in_channel
-

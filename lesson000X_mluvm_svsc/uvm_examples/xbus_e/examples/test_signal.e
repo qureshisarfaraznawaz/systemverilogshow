@@ -73,5 +73,3 @@ extend xbus_bus_monitor_u {
     };
 };
 '>
-
-

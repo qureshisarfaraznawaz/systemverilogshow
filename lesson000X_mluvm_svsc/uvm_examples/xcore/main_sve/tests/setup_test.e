@@ -42,6 +42,3 @@ extend MAIN vr_ad_sequence {
 };
 
 '>
-
-
-

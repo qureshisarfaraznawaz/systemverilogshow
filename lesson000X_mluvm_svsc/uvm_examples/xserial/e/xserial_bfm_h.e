@@ -50,5 +50,3 @@ unit xserial_bfm_u like uvm_bfm {
 
 
 '>
-
-

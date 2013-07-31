@@ -81,7 +81,3 @@ extend SLAVE xbus_agent_u {
 
 }; -- extend SLAVE xbus_agent_u
 '>
-
-
-
-

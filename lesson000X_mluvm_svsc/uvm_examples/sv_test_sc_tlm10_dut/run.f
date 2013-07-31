@@ -20,4 +20,3 @@ tbtop.cpp
 
 // specify SystemVerilog test src file
 test.sv
-

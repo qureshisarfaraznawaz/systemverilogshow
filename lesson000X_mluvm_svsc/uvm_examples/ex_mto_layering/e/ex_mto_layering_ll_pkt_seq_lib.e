@@ -95,5 +95,3 @@ extend ALL_RED ex_mto_layering_ll_pkt_sequence {
 };
 
 '>
-
-

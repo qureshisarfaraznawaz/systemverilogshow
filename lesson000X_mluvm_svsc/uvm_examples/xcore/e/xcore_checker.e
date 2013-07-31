@@ -76,7 +76,3 @@ extend has_checks xcore_monitor_u {
 
 }; -- extend xcore_monitor_u
 '>
-
-
-
-

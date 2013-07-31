@@ -57,4 +57,3 @@ extend has_protocol_checker xserial_monitor_u {
 
 
 '>
-

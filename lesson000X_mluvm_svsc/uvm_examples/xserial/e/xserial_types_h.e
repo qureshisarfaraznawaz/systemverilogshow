@@ -25,5 +25,3 @@ type xserial_direction_t : [TX, RX];
 
 
 '>
-
-

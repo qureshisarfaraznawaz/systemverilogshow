@@ -345,4 +345,3 @@ extend xcore_monitor_u {
     event overflow is only rise(sig_halt_int$) @fifo_event;
 };
 '>
-

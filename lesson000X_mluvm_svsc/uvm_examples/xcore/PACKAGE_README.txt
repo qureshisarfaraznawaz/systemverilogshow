@@ -65,4 +65,3 @@ To run the demo:
    local directory.
 
 4. Issue the simulator's "run" command to run the test.
-

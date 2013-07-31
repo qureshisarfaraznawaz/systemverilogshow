@@ -79,4 +79,3 @@ extend DEFAULT_SEQS system_sequence {
 
 
 '>
-

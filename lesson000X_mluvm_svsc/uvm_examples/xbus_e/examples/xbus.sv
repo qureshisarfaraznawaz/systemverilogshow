@@ -65,4 +65,3 @@ waveform format $id -radix %b -trace digital -color #00ff00 -symbol {}
 
 
 waveform xview limits 0 2000ns
-

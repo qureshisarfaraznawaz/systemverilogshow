@@ -88,4 +88,3 @@ extend MONITOR xserial_frame_s {
 }; -- extend xserial_frame_s
 
 '>
-

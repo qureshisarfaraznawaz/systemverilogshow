@@ -43,6 +43,3 @@
    `sn_which.sh ex_mtm_layering`/demo.sh
 
 3. Issue the "test" command to run the test.
-
-
-

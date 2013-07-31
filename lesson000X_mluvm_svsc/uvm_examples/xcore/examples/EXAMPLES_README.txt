@@ -29,4 +29,3 @@ load.do
     Modelsim Macro file for demonstration - peforms load and test of e files
 modelsim.ini
     Initialisation file for demonstration when using Modelsim
-

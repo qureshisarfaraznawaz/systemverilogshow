@@ -5,5 +5,3 @@ interface score_items_if;
    integer if_shoesize;
 
 endinterface // score_items_if
-
-

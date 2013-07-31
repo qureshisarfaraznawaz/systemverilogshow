@@ -261,4 +261,3 @@ struct xserial_frame_s like any_sequence_item {
 
 
 '>
-

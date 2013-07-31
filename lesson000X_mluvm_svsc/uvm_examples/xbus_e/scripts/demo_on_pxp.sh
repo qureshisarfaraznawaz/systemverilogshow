@@ -64,5 +64,3 @@ ln -fs $AXIS_HOME/lib/${BITMODE}bit/libuatba.so libdpi.so
 ###########################################
 
 xeDebug  $RUN_MODE --ncsim -sv_lib libdpi.so -- $XBUS_PATH/scripts/xc_run.tcl
-
-

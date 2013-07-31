@@ -54,4 +54,3 @@ extend MAIN MAIN_TEST xcore_combined_sequence {
     keep count == 0;
 };
 '>
-

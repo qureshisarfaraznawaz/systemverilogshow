@@ -34,4 +34,3 @@ endmodule // dice_game
 5. add another constraint of only odds
 
  */
-

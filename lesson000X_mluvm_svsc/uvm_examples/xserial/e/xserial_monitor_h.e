@@ -126,5 +126,3 @@ unit xserial_monitor_u like uvm_monitor {
 }; -- extend  xserial_monitor_u
 
 '>
-
-

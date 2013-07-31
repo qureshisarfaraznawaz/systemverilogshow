@@ -227,5 +227,3 @@ unit ex_mtm_layering_ll_pkt_env_u like uvm_env {
 };
 
 '>
-
-

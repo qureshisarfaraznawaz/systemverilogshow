@@ -226,4 +226,3 @@ trview_tx_frame: cover property (
             end // else: !if(drive_count == 4'b0001)
       end // always@ (posedge xserial_tx_clock)
 endmodule // xcore_out_chan
-

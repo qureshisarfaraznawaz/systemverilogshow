@@ -226,4 +226,3 @@ extend UNDEFINED xserial_frame_payload_s {
 }; -- extend UNDEFINED xserial_frame_payload_s
 
 '>
-

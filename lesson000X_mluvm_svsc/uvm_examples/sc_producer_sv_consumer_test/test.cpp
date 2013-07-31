@@ -24,4 +24,3 @@ SC_MODULE(sctest) {
 };
 
 NCSC_MODULE_EXPORT(sctest)
-

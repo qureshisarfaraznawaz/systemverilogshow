@@ -78,4 +78,3 @@ extend xserial_frame_payload_s {
 }; -- extend xserial_frame_payload_s
 
 '>
-

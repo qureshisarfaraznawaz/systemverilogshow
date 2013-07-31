@@ -50,4 +50,3 @@ SC_MODULE(tbtop) {
 };
 
 NCSC_MODULE_EXPORT(tbtop)
-

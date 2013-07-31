@@ -37,4 +37,3 @@ extend MAIN xcore_combined_sequence {
 };
 
 '>
-

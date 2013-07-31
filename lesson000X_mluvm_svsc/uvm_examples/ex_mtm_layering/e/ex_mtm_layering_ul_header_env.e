@@ -136,5 +136,3 @@ unit ex_mtm_layering_ul_header_env_u like uvm_env {
 };
 
 '>
-
-

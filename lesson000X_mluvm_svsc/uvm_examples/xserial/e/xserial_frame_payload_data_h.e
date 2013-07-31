@@ -64,4 +64,3 @@ extend DATA xserial_frame_payload_s {
 }; -- extend DATA xserial_frame_payload_s
 
 '>
-

@@ -91,4 +91,3 @@ extend XCORE_FILL_RX_FIFO_AND_READ_IT xcore_combined_sequence {
 
 }; -- extend XCORE_FILL_RX_FIFO_AND_READ_IT
 '>
-

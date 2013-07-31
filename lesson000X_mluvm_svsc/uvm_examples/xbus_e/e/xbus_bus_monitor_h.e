@@ -124,23 +124,3 @@ unit xbus_bus_monitor_u like uvm_monitor {
 }; -- unit xbus_bus_monitor_u
 
 '>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

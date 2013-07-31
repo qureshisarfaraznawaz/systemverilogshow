@@ -60,4 +60,3 @@ This package contains the following directories:
    local directory.
 
 4. Issue the simulator's "run" command to run the test.
-

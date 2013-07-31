@@ -153,4 +153,3 @@ echo " - EMULATOR      : ${EMCONFIG}";
 echo " - EMULATOR TYPE : ${EMTYPE}";
 echo "Done"
 echo " "
-

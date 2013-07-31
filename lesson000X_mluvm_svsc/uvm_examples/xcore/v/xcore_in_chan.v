@@ -446,4 +446,3 @@ module xcore_in_chan(xbus_clock,
    assign flow_req = flow_req_int;
    assign flow_halt = flow_halt_int;
 endmodule // xcore_in_chan
-

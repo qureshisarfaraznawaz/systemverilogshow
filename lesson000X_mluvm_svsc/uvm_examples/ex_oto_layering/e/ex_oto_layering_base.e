@@ -32,4 +32,3 @@ method_type
     check_do_available(stream_id: uint): bool;
 
 '>
-

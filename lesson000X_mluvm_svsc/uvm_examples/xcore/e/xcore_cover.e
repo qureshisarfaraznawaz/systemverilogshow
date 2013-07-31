@@ -275,5 +275,3 @@ extend xcore_monitor_u {
  }; -- extend has_coverage xcore_monitor_u
 
 '>
-
-

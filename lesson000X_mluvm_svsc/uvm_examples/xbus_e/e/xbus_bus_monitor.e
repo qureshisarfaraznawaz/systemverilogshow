@@ -184,5 +184,3 @@ extend xbus_bus_monitor_u {
 }; -- extend xbus_bus_monitor_u
 
 '>
-
-

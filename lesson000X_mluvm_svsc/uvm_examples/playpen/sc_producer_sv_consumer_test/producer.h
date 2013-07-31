@@ -43,5 +43,3 @@ public:
     uvm_stop_request();
   }
 };
-
-

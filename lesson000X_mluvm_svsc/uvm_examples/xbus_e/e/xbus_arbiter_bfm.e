@@ -162,4 +162,3 @@ extend ARBITER xbus_bfm_u {
 }; -- extend ARBITER xbus_bfm_u {
 
 '>
-

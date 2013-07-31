@@ -147,4 +147,3 @@ extend XCORE_READ_WRITE_FRAME xbus_master_sequence {
 
 
 '>
-

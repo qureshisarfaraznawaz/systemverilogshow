@@ -111,4 +111,3 @@ extend MESSAGE xserial_frame_payload_s {
 }; -- extend MESSAGE xserial_frame_payload_s
 
 '>
-

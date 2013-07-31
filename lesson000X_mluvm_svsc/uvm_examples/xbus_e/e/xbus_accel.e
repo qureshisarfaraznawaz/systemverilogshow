@@ -644,5 +644,3 @@ extend MAIN POST_TEST xbus_master_sequence {
     keep soft drain_time == 10;
 };
 '>
-
-

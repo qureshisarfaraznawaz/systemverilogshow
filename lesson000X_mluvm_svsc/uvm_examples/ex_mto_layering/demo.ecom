@@ -4,4 +4,3 @@ load ex_mto_layering/examples/ex_mto_layering_test
 trace sequence
 set message MEDIUM
 test
-

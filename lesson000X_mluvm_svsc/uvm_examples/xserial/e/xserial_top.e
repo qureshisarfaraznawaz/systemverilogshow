@@ -45,4 +45,3 @@ import xserial/e/xserial_protocol_checker;
 import xserial/e/xserial_end_test;
 
 '>
-

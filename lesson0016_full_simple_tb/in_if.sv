@@ -14,4 +14,3 @@ interface in_if (input clk);
    modport drv_mp (clocking drv_cb);
    modport smp_mp (clocking smp_cb);
 endinterface : in_if
-

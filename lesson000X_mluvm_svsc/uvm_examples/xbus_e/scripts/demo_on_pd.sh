@@ -58,4 +58,3 @@ export SPECMAN_DLIB
 export SPECMAN_PRE_COMMANDS
 
 saDebug $YAMP_DIR/scripts/sa_run.tcl $RUN_MODE
-

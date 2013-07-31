@@ -9,4 +9,3 @@ class packet extends uvm_object;
     `uvm_field_int(data, UVM_ALL_ON)
   `uvm_object_utils_end
 endclass
-

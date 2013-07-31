@@ -82,5 +82,3 @@ tbtop.cpp
 packet.sv
 test.sv
   - Contains SystemVerilog source code required in this example.
-
-

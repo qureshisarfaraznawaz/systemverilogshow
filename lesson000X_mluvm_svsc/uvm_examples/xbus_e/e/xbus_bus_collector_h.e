@@ -165,5 +165,3 @@ unit xbus_bus_collector_u like uvm_collector {
                                           MONITOR xbus_trans_s is instance;
 };
 '>
-
-

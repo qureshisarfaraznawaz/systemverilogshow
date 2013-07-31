@@ -26,4 +26,3 @@ struct layering_data_struct_s {
 method_type item_layer_transfer(stream_id: uint):layering_data_struct_s @sys.any;
 
 '>
-

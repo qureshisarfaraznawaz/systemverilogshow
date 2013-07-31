@@ -76,4 +76,3 @@ packet.sv
 consumer.sv
 test.sv
   - Contains SystemVerilog source code required in this example.
-

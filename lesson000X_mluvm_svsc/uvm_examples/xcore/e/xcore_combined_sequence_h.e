@@ -85,5 +85,3 @@ extend xcore_virtual_driver {
 }; -- extend xcore_vi...
 
 '>
-
-

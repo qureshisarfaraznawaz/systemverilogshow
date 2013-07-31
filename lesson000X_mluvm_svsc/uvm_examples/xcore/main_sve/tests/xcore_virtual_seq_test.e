@@ -49,4 +49,3 @@ extend MAIN MAIN_TEST xcore_combined_sequence {
 
 
 '>
-

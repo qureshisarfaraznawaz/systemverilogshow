@@ -52,4 +52,3 @@ UVM_OBJECT_REGISTER(packet)
 /////////////////
 
 #endif
-

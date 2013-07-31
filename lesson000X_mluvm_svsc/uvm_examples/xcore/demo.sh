@@ -139,4 +139,3 @@ demo_file=`sn_which.sh $package_path/main_sve/tests/$demo_file`
     -defineall SPECMAN_INCLUDED
 
 exit
-
