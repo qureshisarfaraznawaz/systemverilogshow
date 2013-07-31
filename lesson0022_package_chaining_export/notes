@@ -8,9 +8,9 @@
 
 3. code change
    action: try to call method from a package that is not directly imported.  it FAILS as expected
-   
+
 3. question
    what does it mean to move the imports in the packages from inside to outside?   what wrt scope?
    result:  w/ irun, it allows the method that is not directly imported to be called.   Why?
 
-4. 
+4.

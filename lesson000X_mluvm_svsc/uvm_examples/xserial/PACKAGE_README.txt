@@ -6,8 +6,8 @@
   uvm_e {1.0..}
 * Modified: 2008
 * Category: Golden eVC
-* Support: Online Support : http://sourcelink.cadence.com, 
-* Documentation: docs/xserial_spec.pdf, 
+* Support: Online Support : http://sourcelink.cadence.com,
+* Documentation: docs/xserial_spec.pdf,
                  docs/xserial_overview.pdf
 * Release notes: docs/xserial_release_notes.txt
 
@@ -22,7 +22,7 @@ XSerial is a simple point to point synchronous serial protocol.
 * Directory structure:
 
 This package contains the following directories:
- 
+
   e/         - e sources
   docs/      - Documents
   examples/  - Test-case files
@@ -39,9 +39,9 @@ This package contains the following directories:
            (this is done automatically to Specman users)
 
       2) Make sure uvm_examples is in SPECMAN_PATH
-  
+
          For example:
-             
+
            setenv SPECMAN_PATH  ${SPECMAN_PATH}:/tools/uvm/uvm_examples
 
 * To demo:
@@ -50,13 +50,13 @@ This package contains the following directories:
 
 2. In a suitable simulation directory, enter the following command:
 
-   `sn_which.sh xserial/demo.sh` 
+   `sn_which.sh xserial/demo.sh`
 
-    where <language> is one of vhdl or verilog and <sim> is one of mti, 
+    where <language> is one of vhdl or verilog and <sim> is one of mti,
     vcs, nc or xl
 
-3. If running in NC, source the command script 'xserial.sv' to add signals 
-   to Simvision. This file is copied from xserial/examples to the 
+3. If running in NC, source the command script 'xserial.sv' to add signals
+   to Simvision. This file is copied from xserial/examples to the
    local directory.
 
 4. Issue the simulator's "run" command to run the test.

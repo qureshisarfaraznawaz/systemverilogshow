@@ -1,9 +1,9 @@
-Incisive Plan-to-Closure Methodology 
+Incisive Plan-to-Closure Methodology
 Version 2.0.1, November 2008
 Copyright (c) 2007-2010 Cadence Design Systems, Inc. All rights reserved worldwide.
 ******************************************************************************
 * Title: Cadence's XSerial Golden eVC - Examples directory
-* Description: 
+* Description:
 
 This directory contains example files that demonstrate the correct usage of
 the XSerial eVC
@@ -48,4 +48,3 @@ modelsim.ini
     Modelsim initialization file
 vcs.i
     Macro file for vcs demo
-

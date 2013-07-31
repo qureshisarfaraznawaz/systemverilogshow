@@ -1,16 +1,16 @@
-* Title: Sequences layering example, one-to-one layering 
+* Title: Sequences layering example, one-to-one layering
 * Name: ex_oto_layering
 * Version: 2.0.1
-* Requires: 
+* Requires:
   specman {8.20..}
   uvm_e {2.0.1..}
 * Category: Example package
 * Modified: 2008
-* Documentation: UVM-e Methodology manual 
+* Documentation: UVM-e Methodology manual
 * Comments to: support@cadence.com
 * Description:
 
-  Demonstrates implementation of One-to-One layering - each upper layer data 
+  Demonstrates implementation of One-to-One layering - each upper layer data
   item is encapsulated within one lower layer data item.
 
   Read the details of layering methodology in the UVM-e Methodology manual.
@@ -26,9 +26,9 @@
            (this is done automatically to Specman users)
 
       2) Make sure uvm_examples is in SPECMAN_PATH
-  
+
          For example:
-             
+
            setenv SPECMAN_PATH  ${SPECMAN_PATH}:/tools/uvm/uvm_examples
 
 
