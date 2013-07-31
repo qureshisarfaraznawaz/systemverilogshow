@@ -25,19 +25,19 @@ tests/
       Tests directory
 
    setup_test.e
-	Setup of all tests in this directory.
+        Setup of all tests in this directory.
    xcore_lpbk_test.e
         Send 5 frames on XSerial. XBus reads and writes back all 5.
         This is the test of the demo.
    xcore_fill_rx_fifo_test.e
         Send frames to the XCore. Do not read them on the XBus. XCore is
-	expected to transmit HALT frame.
+        expected to transmit HALT frame.
    xcore_xbus_seq_test.e
         Send 5 frames on XSerial. XBus reads and writes back all 5.
-	Use XBus transfer sequences instead of vr_ad.
+        Use XBus transfer sequences instead of vr_ad.
    xcore_tx_frames_basic_test.e
         XBus writes several frames to the XCore, to be transmitted on the
-	XSerial.
+        XSerial.
    xcore_error_rx_frames_test.e
         Send some RX frames on the XSerial. Some of them have bad parity.
    xcore_send_idle_frames_test.e

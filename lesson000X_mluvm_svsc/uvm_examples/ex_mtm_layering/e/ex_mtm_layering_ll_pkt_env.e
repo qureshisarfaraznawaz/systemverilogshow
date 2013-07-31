@@ -24,7 +24,7 @@ layer agents. these layers might supply it with lower layer constructs
 <'
 
 struct ex_mtm_layering_ml_pkt_s like any_sequence_item {
-    payload: 	list of byte;
+    payload:    list of byte;
 };
 
 '>
@@ -35,7 +35,7 @@ sent to the BFM.
 <'
 
 struct ex_mtm_layering_ll_pkt_s like any_sequence_item {
-    payload: 	list of byte;
+    payload:    list of byte;
 
     // How to print it in the "trace sequence"/"show sequence" output
     nice_string(): string is also {
@@ -56,9 +56,9 @@ unit ex_mtm_layering_ll_pkt_bfm_u like uvm_bfm {
     d_enable: out simple_port of bit is instance; // ports to the DUT
     d_bus: out simple_port of byte is instance;   // ports to the DUT
 
-    event a_clock is cycle @sys.any;  	-- The LL_PKT main clock
-    event ll_pkt_started;		-- start of transfer to DUT
-    event ll_pkt_ended;			-- end of transfer to DUT
+    event a_clock is cycle @sys.any;    -- The LL_PKT main clock
+    event ll_pkt_started;               -- start of transfer to DUT
+    event ll_pkt_ended;                 -- end of transfer to DUT
 
     driver: ex_mtm_layering_ll_pkt_driver_u;
 
@@ -189,7 +189,7 @@ unit ex_mtm_layering_ll_pkt_agent_u like uvm_agent {
     ml_driver: ex_mtm_layering_ml_pkt_driver_u is instance;
 
     keep ml_driver.ll_driver == ll_driver;
-    event ml_clock is cycle @sys.any;  	-- The LL_PKT main clock
+    event ml_clock is cycle @sys.any;   -- The LL_PKT main clock
     on ml_clock {
         emit ml_driver.clock;
     };

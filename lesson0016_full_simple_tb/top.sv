@@ -18,8 +18,7 @@ module top();
    in_if in_if_u(.clk(clk));
 
    dut dut(.clk(clk),
-	   .data_bus(data_bus),
-	   .result(result)
-	   );
+           .data_bus(data_bus),
+           .result(result)
+           );
 endmodule : top
-

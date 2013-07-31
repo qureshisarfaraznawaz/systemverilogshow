@@ -26,8 +26,8 @@ endclass
       my_dice.constraint_mode(0);
       my_dice.six_sides.constraint_mode(1);
       repeat (8) begin
-	 assert (my_dice.randomize()) else
-	   $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
+         assert (my_dice.randomize()) else
+           $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
       end
 
    end

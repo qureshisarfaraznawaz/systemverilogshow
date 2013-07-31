@@ -1,8 +1,8 @@
 module dut(
-	   input  logic        clk,
-	   input  logic [31:0] data_bus,
-	   output logic [7:0]  result
-	   );
+           input  logic        clk,
+           input  logic [31:0] data_bus,
+           output logic [7:0]  result
+           );
 
    logic [31:0] bus_data;
 

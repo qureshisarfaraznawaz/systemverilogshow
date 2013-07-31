@@ -25,11 +25,11 @@ type ex_otm_layering_atm_color: [RED, GREEN, BLUE];
 type ex_otm_layering_atm_cell_kind: [A1, A2, A3, A4];
 
 struct ex_otm_layering_atm_cell like any_sequence_item {
-    kind: 	ex_otm_layering_atm_cell_kind;
-    color: 	ex_otm_layering_atm_color;
-    header: 	uint(bits:ATM_HEADER_LEN_BITS);
+    kind:       ex_otm_layering_atm_cell_kind;
+    color:      ex_otm_layering_atm_color;
+    header:     uint(bits:ATM_HEADER_LEN_BITS);
     !header_list[ATM_HEADER_LEN]: list of byte;
-    payload[ATM_PAYLOAD_LEN]: 	list of byte;
+    payload[ATM_PAYLOAD_LEN]:   list of byte;
 
     -- How to print it in the "trace sequence"/"show sequence" output
     nice_string(): string is also {
@@ -63,9 +63,9 @@ unit ex_otm_layering_atm_bfm_u like uvm_bfm {
     d_bus    : out simple_port of byte is instance;     // ports to the DUT
     back_pressure: in simple_port of byte is instance; // ports from the DUT
 
-    event a_clock is cycle @sys.any;  	// The ATM main clock
-    event cell_started;			// start of transfer to DUT
-    event cell_ended;			// end of transfer to DUT
+    event a_clock is cycle @sys.any;    // The ATM main clock
+    event cell_started;                 // start of transfer to DUT
+    event cell_ended;                   // end of transfer to DUT
 
     on a_clock {
         emit driver.clock;

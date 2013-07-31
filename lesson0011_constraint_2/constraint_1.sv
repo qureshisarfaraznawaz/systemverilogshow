@@ -24,8 +24,8 @@ endclass
       my_die  = new();
 
       repeat(4) begin
-	 my_die.randomize();
-	 $display(" die roll = %0d",my_die.value);
+         my_die.randomize();
+         $display(" die roll = %0d",my_die.value);
       end
 
    end // initial begin

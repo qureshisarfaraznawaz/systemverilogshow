@@ -11,21 +11,21 @@ class dice;
 //   constraint six_sides { value>=1  && value<=6; }
      constraint fixed_odds{ value dist {6,5,4,3,2,1}; }
 /*     constraint fixed_odds{ value dist {
-				      6:/50,  //50/(50+1+1+1+1+1)
-				      5:/1,   // 1/(50+1+1+1+1+1)
-				      4:/1,   // 1/(50+1+1+1+1+1)
-				      3:/1,   // 1/(50+1+1+1+1+1)
-				      2:/1,   // 1/(50+1+1+1+1+1)
-				      1:/1    // 1/(50+1+1+1+1+1)
-				      }; }
+                                      6:/50,  //50/(50+1+1+1+1+1)
+                                      5:/1,   // 1/(50+1+1+1+1+1)
+                                      4:/1,   // 1/(50+1+1+1+1+1)
+                                      3:/1,   // 1/(50+1+1+1+1+1)
+                                      2:/1,   // 1/(50+1+1+1+1+1)
+                                      1:/1    // 1/(50+1+1+1+1+1)
+                                      }; }
       constraint fixed_odds{ value dist {
-				      6:=50,  //50/(50+1+1+1+1+1)
-				      5:=1,   // 1/(50+1+1+1+1+1)
-				      4:=1,   // 1/(50+1+1+1+1+1)
-				      3:=1,   // 1/(50+1+1+1+1+1)
-				      2:=1,   // 1/(50+1+1+1+1+1)
-				      1:=1    // 1/(50+1+1+1+1+1)
-				      }; }
+                                      6:=50,  //50/(50+1+1+1+1+1)
+                                      5:=1,   // 1/(50+1+1+1+1+1)
+                                      4:=1,   // 1/(50+1+1+1+1+1)
+                                      3:=1,   // 1/(50+1+1+1+1+1)
+                                      2:=1,   // 1/(50+1+1+1+1+1)
+                                      1:=1    // 1/(50+1+1+1+1+1)
+                                      }; }
 */
 
 //   constraint fixed_odds{ value dist {[4:6]:/1, 3:/1, 2:/1, 1:/1}; }
@@ -40,8 +40,8 @@ class dice;
 
    function void show_stats();
       foreach (stats[iii]) begin
-	 $display("%3d : %3d of %3d : %2.2f%",
-		  iii, stats[iii], stats.sum(), (real'(stats[iii])/real'(stats.sum()))*100);
+         $display("%3d : %3d of %3d : %2.2f%",
+                  iii, stats[iii], stats.sum(), (real'(stats[iii])/real'(stats.sum()))*100);
       end
    endfunction
 
@@ -53,10 +53,10 @@ endclass
       my_dice  = new();
 
       repeat (100) begin
-	 assert (my_dice.randomize()) else  begin
-	    $display(" ERROR: Mister SVS, randomization failed, miserably.");
-	    $fatal(1);
-	 end
+         assert (my_dice.randomize()) else  begin
+            $display(" ERROR: Mister SVS, randomization failed, miserably.");
+            $fatal(1);
+         end
       end
 
       my_dice.show_stats();

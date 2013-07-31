@@ -53,7 +53,7 @@ unit ex_mto_layering_ul_pkt_bfm_u like uvm_bfm {
 
     p_driver: ex_mto_layering_ul_pkt_driver_u;
 
-    event p_clock is cycle @sys.any;  	-- The ATM main clock
+    event p_clock is cycle @sys.any;    -- The ATM main clock
 
     on p_clock {
         emit p_driver.clock;

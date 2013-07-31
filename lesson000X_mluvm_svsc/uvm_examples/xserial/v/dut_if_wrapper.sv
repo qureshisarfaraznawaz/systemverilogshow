@@ -20,7 +20,7 @@ Please refer to the terms and conditions in $IPCM_HOME.
  module dut_wrap (interface dut_if);
 
    router dut(
-	      .reset(              dut_if.reset),
+              .reset(              dut_if.reset),
               .clock(              dut_if.clock),
               .port_a_in_data(     dut_if.port_a_in_data),
               .port_a_err(         dut_if.port_a_err),
@@ -33,4 +33,3 @@ Please refer to the terms and conditions in $IPCM_HOME.
               .port_c_out_data(    dut_if.port_c_out_data)   );
 
 endmodule : dut_wrap
-

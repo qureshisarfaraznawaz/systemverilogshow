@@ -57,7 +57,7 @@ if [ -n "$package_path" ]; then
    fi
 else
    echo "$script: Package $package_name not found"
-	exit 1
+        exit 1
 fi
 
 # =============================================================================
@@ -79,13 +79,13 @@ while [ $# -gt 0 ]; do
          exit 1
          ;;
       nc|modelsim|mti|vsim|vcs|xl)
-			sim=$1
-			;;
+                        sim=$1
+                        ;;
       verilog|vhdl)
                         hdl=$1
                         ;;
       -test)
-		     demo_file="$2"
+                     demo_file="$2"
                         shift
                         ;;
       -mode)

@@ -16,19 +16,19 @@ module queue3;
    function void show_q();
       $write("qqq=");
       for (int iii=0; iii<qqq.size(); iii++)
-	$write("[%2d]",iii);
+        $write("[%2d]",iii);
       $display("");  $write("     ");
       for (int iii=0; iii<qqq.size(); iii++)
-	 $write("%2d  ",       qqq[iii]);
+         $write("%2d  ",       qqq[iii]);
       $display("");
    endfunction
    function void show_q2();
       $write("res=");
       for (int iii=0; iii<results.size(); iii++)
-	$write("[%2d]",iii);
+        $write("[%2d]",iii);
       $display("");  $write("     ");
       for (int iii=0; iii<results.size(); iii++)
-	 $write("%2d  ",       results[iii]);
+         $write("%2d  ",       results[iii]);
       $display("");
    endfunction
 

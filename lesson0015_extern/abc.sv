@@ -23,8 +23,8 @@ endclass
 
    function void dice::show_stats();
       foreach (stats[iii]) begin
-	 $display("%3d : %3d of %3d : %2.2f%",
-		  iii, stats[iii], stats.sum(), (real'(stats[iii])/real'(stats.sum()))*100);
+         $display("%3d : %3d of %3d : %2.2f%",
+                  iii, stats[iii], stats.sum(), (real'(stats[iii])/real'(stats.sum()))*100);
       end
    endfunction
 
@@ -35,10 +35,10 @@ endclass
       my_dice  = new();
 
       repeat (100) begin
-	 assert (my_dice.randomize()) else  begin
-	    $display(" ERROR: Mister SVS, randomization failed, miserably.");
-	    $fatal(1);
-	 end
+         assert (my_dice.randomize()) else  begin
+            $display(" ERROR: Mister SVS, randomization failed, miserably.");
+            $fatal(1);
+         end
       end
 
       my_dice.show_stats();

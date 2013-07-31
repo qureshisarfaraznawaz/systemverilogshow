@@ -9,7 +9,7 @@ module aa;
 
    function void show();
       foreach (aa[i]) begin
-	 $write("aa[%4h]=%0d, ",i,aa[i]);
+         $write("aa[%4h]=%0d, ",i,aa[i]);
       end
       $display("");
    endfunction

@@ -4,7 +4,7 @@ class dice;
    rand int value, value2;
 
    constraint six_sides { value>=1 && value<=6
-				 && value2>=1 && value2<=6; }
+                                 && value2>=1 && value2<=6; }
 
    constraint seven_eleven { ((value+value2)==7) || ((value+value2)==11); }
 
@@ -23,12 +23,12 @@ endclass
 
       my_dice.six_sides.constraint_mode(0);
       repeat (6) begin
-//	 assert (my_dice.randomize()) else
-//	   $display(" Mister SVS, randomization failed, miserably.");
-	 if (my_dice.randomize())
-	   ;
-	 else
-	   $display(" ERROR: Mister SVS, randomization failed, miserably.");
+//       assert (my_dice.randomize()) else
+//         $display(" Mister SVS, randomization failed, miserably.");
+         if (my_dice.randomize())
+           ;
+         else
+           $display(" ERROR: Mister SVS, randomization failed, miserably.");
       end
    end
 endmodule // dice_game

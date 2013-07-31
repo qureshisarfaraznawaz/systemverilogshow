@@ -59,15 +59,15 @@ begin
               2'b10: sig_data_size = 4;
               2'b11: sig_data_size = 8;
             endcase // case(odata[17:16])
-	  //   $display("SLAVE HW Monitor will send addr %x size %x read %x write %x ",
-		    // odata[15:0], odata[17:16],   odata[18] , odata[19] );
+          //   $display("SLAVE HW Monitor will send addr %x size %x read %x write %x ",
+                    // odata[15:0], odata[17:16],   odata[18] , odata[19] );
 
             //$display("SM BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b", $time, sig_addr, sig_read, sig_write, sig_size);
             o_data[0]=8'h00;o_data[1]=8'h00;o_data[2]=8'h00;o_data[3]=8'h00;
             o_data[4]=8'h00;o_data[5]=8'h00;o_data[6]=8'h00;o_data[7]=8'h00;
 
             opipe.send(1,odata,1);
-	     state = 4'd1;
+             state = 4'd1;
           end
           end
     4'd1: begin
@@ -80,12 +80,12 @@ begin
               if(word_count == sig_data_size)
               begin
                 odata[31:24]=o_data[0]; odata[39:32]=o_data[1];odata[47:40]=o_data[2]; odata[55:48]=o_data[3];odata[63:56]=o_data[4]; odata[71:64]=o_data[5];odata[79:72]=o_data[6]; odata[87:80]=o_data[7];
-		// $display("SLAVE HW Monitor will send addr %x size %x read %x write %x ",
-		  //    odata[15:0], odata[17:16],   odata[18] , odata[19] );
-		 opipe.send(1,odata,1);
+                // $display("SLAVE HW Monitor will send addr %x size %x read %x write %x ",
+                  //    odata[15:0], odata[17:16],   odata[18] , odata[19] );
+                 opipe.send(1,odata,1);
                  opipe_data.send(1,odata,1);
 
-		 state = 4'd0;
+                 state = 4'd0;
               end
               else
                 state = 4'd2;
@@ -102,9 +102,9 @@ begin
             if(word_count == sig_data_size)
             begin
               odata[31:24]=o_data[0]; odata[39:32]=o_data[1];odata[47:40]=o_data[2]; odata[55:48]=o_data[3];odata[63:56]=o_data[4]; odata[71:64]=o_data[5];odata[79:72]=o_data[6]; odata[87:80]=o_data[7];
-	       opipe.send(1,odata,1);
+               opipe.send(1,odata,1);
                opipe_data.send(1,odata,1);
-	       $display("SMSMSM slave monitor sent on 2");
+               $display("SMSMSM slave monitor sent on 2");
 
               state = 4'd0;
             end
@@ -115,5 +115,3 @@ end
 
 
 endmodule
-
-

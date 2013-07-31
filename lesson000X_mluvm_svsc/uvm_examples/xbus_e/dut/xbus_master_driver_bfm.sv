@@ -90,20 +90,20 @@ begin
           else if(ipipe.can_receive())
           begin
             ipipe.receive(1,num_valid_ele,idata, eom);
-	     // $display("got from ipipe num_valid_ele %d ", num_valid_ele);
+             // $display("got from ipipe num_valid_ele %d ", num_valid_ele);
 
             i_addr = idata[15:0];
-	   //  $display("iaddr %h ", i_addr);
+           //  $display("iaddr %h ", i_addr);
 
             i_size = idata[17:16];
            //  $display("isize %h ", i_size);
-	     i_read = idata[18];
+             i_read = idata[18];
            //  $display("i_read %h ", i_read);
-	     i_write = idata[19];
-	    // $display("iwrite %h ", i_write);
+             i_write = idata[19];
+            // $display("iwrite %h ", i_write);
             i_wait_state = idata[23:20];
-	    // $display("iwait state %h ", i_wait_state);
-	    // $display("  idata[31:24]  %x  idata[39:32] %x",  idata[31:24], idata[39:32]);
+            // $display("iwait state %h ", i_wait_state);
+            // $display("  idata[31:24]  %x  idata[39:32] %x",  idata[31:24], idata[39:32]);
             i_data[0] = idata[31:24];i_data[1] = idata[39:32];i_data[2] = idata[47:40];i_data[3] = idata[55:48];
             i_data[4] = idata[63:56];i_data[5] = idata[71:64];i_data[6] = idata[79:72];i_data[7] = idata[87:80];
             case(i_size)
@@ -222,7 +222,7 @@ begin
                 sig_data = 8'b0;
                 sig_bip = 1'b0;
                  opipe.send(1,odata,1);
-		 slave_ctrl = 1'b0;
+                 slave_ctrl = 1'b0;
                 state = 4'd0;
 `ifdef MULTIPLE_MS
                 active = 1'b0;

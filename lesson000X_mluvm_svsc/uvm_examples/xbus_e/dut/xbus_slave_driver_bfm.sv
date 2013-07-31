@@ -57,9 +57,9 @@ begin
           ipipe.receive(1,num_ele_valid,idata,eom);
           i = 0;
          // $display("SD BFM @ %0t: addr = %0x, read = %0b, write = %0b, size = %0b, wait_state = %d",
-	     //	   $time, idata[15:0], idata[18], idata[19], idata[17:16], idata[23:20]);
+             //            $time, idata[15:0], idata[18], idata[19], idata[17:16], idata[23:20]);
           //   $display("SD BFM idata[31:24] %x idata[39:32] %x",  idata[31:24], idata[39:32]);
-	     wait_count = idata[23:20];
+             wait_count = idata[23:20];
           case(idata[17:16])
             2'b00: begin word_count = 1;i_data[0] = idata[31:24];end
             2'b01: begin word_count = 2;i_data[0] = idata[31:24]; i_data[1] = idata[39:32];end

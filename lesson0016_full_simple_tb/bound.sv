@@ -3,10 +3,10 @@
 endmodule*/
 
 module bound (
-	      clk,
-	      data_bus,
-	      bus_data
-	      );
+              clk,
+              data_bus,
+              bus_data
+              );
 
    input        clk;
    input [31:0] data_bus;
@@ -20,13 +20,12 @@ module bound (
 
 /* doesn't work  #1
    internal_if.smp_mp cleaner(.clk(clk),
-			      .data_bus(data_bus),
-			      .bus_data(bus_data)
-			      );
+                              .data_bus(data_bus),
+                              .bus_data(bus_data)
+                              );
 */
 endmodule : bound
 
 
 module bound2 (internal_if.smp_mp my_if);
 endmodule : bound2
-

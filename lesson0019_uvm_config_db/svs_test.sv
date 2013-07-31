@@ -20,7 +20,7 @@ class svs_test extends uvm_test;
       void'(uvm_config_db#(int)::get(null,null,"albert_variable",albert));
 
       repeat(3)
-	`uvm_info("DBG",$psprintf("Got: >>%0s<<>>%0d<<",receiver,albert),UVM_NONE)
+        `uvm_info("DBG",$psprintf("Got: >>%0s<<>>%0d<<",receiver,albert),UVM_NONE)
 
       phase.drop_objection(this);
    endtask : run_phase

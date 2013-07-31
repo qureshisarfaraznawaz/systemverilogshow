@@ -81,8 +81,8 @@ module xcore(base_addr,
              xbus_clock,
              xbus_reset,
              xbus_start,
-	     xbus_request,
-	     xbus_grant,
+             xbus_request,
+             xbus_grant,
              xbus_addr,
              xbus_size,
              xbus_read,
@@ -801,4 +801,3 @@ module xcore(base_addr,
             end // else: !if(tx_halt_req == 1'b1)
       end // always@ (tx_halt_req or tx_resume_req or tx_data_reg or tx_mode_reg)
 endmodule // xcore
-

@@ -27,13 +27,12 @@ module queue2;
    function void show_q();
       $write("q_queue=");
       for (int iii=0; iii<q_queue.size(); iii++) begin
-	 $write("[%3d]",iii);
+         $write("[%3d]",iii);
       end
       $display("");  $write("         ");
       for (int iii=0; iii<q_queue.size(); iii++) begin
-	 $write("%3s  ",       q_queue[iii]);
+         $write("%3s  ",       q_queue[iii]);
       end
       $display(" (my_string=%0s)\n",my_string);
    endfunction
 endmodule // my_queue
-

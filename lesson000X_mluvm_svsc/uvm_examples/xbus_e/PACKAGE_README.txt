@@ -55,7 +55,7 @@ This package contains the following directories:
       2. Make sure these environment variables are defined correctly:
 
              CDS_TOOLS
-	     LDVHOME
+             LDVHOME
 
       3. Edit scripts/setup.csh, setting environment variables, and run
          the script

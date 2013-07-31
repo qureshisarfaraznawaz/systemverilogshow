@@ -12,7 +12,7 @@ module use_assiciate_array;
 
    function void aa_show;
       foreach (aa_assocarray[iii]) begin
-	 $display(" iii=%0d  aa_assocarray[iii]=%0s", iii, aa_assocarray[iii]);
+         $display(" iii=%0d  aa_assocarray[iii]=%0s", iii, aa_assocarray[iii]);
       end
       $display("");
    endfunction

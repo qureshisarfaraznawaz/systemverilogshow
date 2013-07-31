@@ -83,7 +83,7 @@ begin
           begin
            odata[31:24]=o_data[0]; odata[39:32]=o_data[1];odata[47:40]=o_data[2]; odata[55:48]=o_data[3];odata[63:56]=o_data[4]; odata[71:64]=o_data[5];odata[79:72]=o_data[6]; odata[87:80]=o_data[7];
 
-	     opipe.send(1,odata,1);
+             opipe.send(1,odata,1);
             state = 4'd0;
           end
         end

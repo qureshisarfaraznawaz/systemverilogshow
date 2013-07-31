@@ -16,9 +16,8 @@ module use_queue;
    function void show_q();
       $display("***** Size of q_queue = %0d. **** *",q_queue.size());
       for (int iii=0;iii<q_queue.size();iii++) begin
-	 $write("q_queue[%0d]=%0d, ",iii, q_queue[iii]);
+         $write("q_queue[%0d]=%0d, ",iii, q_queue[iii]);
       end
       $display("    (my_int=%0d)", my_int);
    endfunction
 endmodule
-

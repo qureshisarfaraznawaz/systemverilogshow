@@ -47,7 +47,7 @@ unit ex_mtm_layering_ul_header_bfm_u like uvm_bfm {
 
     h_driver: ex_mtm_layering_ul_header_driver_u;
 
-    event h_clock is cycle @sys.any;  	-- The ATM main clock
+    event h_clock is cycle @sys.any;    -- The ATM main clock
 
     on h_clock {
         emit h_driver.clock;

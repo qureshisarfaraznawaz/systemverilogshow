@@ -1,4 +1,4 @@
-sv_producer_sc_consumer_test:			a mixed-language UVM test with producer in Systemc and consumer in SystemVerilog
+sv_producer_sc_consumer_test:                   a mixed-language UVM test with producer in Systemc and consumer in SystemVerilog
 
 Example Name:
 -------------

@@ -26,11 +26,11 @@ endclass
       my_dice.constraint_mode(0);
       my_dice.six_sides.constraint_mode(1);
       repeat (5) begin
-	 assert (my_dice.randomize() with  { ((value+value2)==2) || ((value+value2)==12); }) else
-	   $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
+         assert (my_dice.randomize() with  { ((value+value2)==2) || ((value+value2)==12); }) else
+           $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
          $display("     ..going to reroll the second die.");
          void'(my_dice.randomize(value2));
-	 $display("     ..going to reroll the first die with inline constraint of >=5.");
+         $display("     ..going to reroll the first die with inline constraint of >=5.");
          void'(my_dice.randomize(value) with {value>=5;});
          $display("\n");
       end

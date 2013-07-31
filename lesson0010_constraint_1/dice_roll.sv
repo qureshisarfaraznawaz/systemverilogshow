@@ -20,7 +20,7 @@ endclass
       my_die  = new();
 
       repeat (4) begin
-	 my_die.randomize();
+         my_die.randomize();
       end
 
    end

@@ -30,11 +30,11 @@ define HEADER_LEN 12;
 type ex_oto_layering_frame_color: [RED, GREEN, BLUE];
 
 struct ex_oto_layering_frame_s like any_sequence_item {
-    color: 	ex_oto_layering_frame_color;
-    source_address: 	   uint(bits:ADDRESS_LEN_BITS);
+    color:      ex_oto_layering_frame_color;
+    source_address:        uint(bits:ADDRESS_LEN_BITS);
     destination_address:   uint(bits:ADDRESS_LEN_BITS);
     !header_list[HEADER_LEN]: list of byte;
-    payload: 	list of byte;
+    payload:    list of byte;
 
     -- How to print it in the "trace sequence"/"show sequence" output
     nice_string(): string is also {
@@ -55,9 +55,9 @@ unit ex_oto_layering_frame_bfm_u like uvm_bfm {
     d_enable: out simple_port of bit is instance; // ports to the DUT
     d_bus: out simple_port of byte is instance;   // ports to the DUT
 
-    event a_clock is cycle @sys.any;  	-- The FRAME main clock
-    event frame_started;			-- start of transfer to DUT
-    event frame_ended;			-- end of transfer to DUT
+    event a_clock is cycle @sys.any;    -- The FRAME main clock
+    event frame_started;                        -- start of transfer to DUT
+    event frame_ended;                  -- end of transfer to DUT
 
     driver:ex_oto_layering_frame_driver_u;
 

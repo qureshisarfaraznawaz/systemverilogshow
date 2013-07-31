@@ -1,4 +1,4 @@
-sv_test_sc_tlm10_dut:			a mixed-language UVM test and DUT, with test in SystemVerilog and DUT in SystemC
+sv_test_sc_tlm10_dut:                   a mixed-language UVM test and DUT, with test in SystemVerilog and DUT in SystemC
 
 Example Name:
 -------------

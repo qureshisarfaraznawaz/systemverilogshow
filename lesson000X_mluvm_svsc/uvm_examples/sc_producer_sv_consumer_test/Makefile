@@ -50,67 +50,67 @@ DEPENDENCIES_FILE = Makefile.depends
 
 # Build a shared object to be linked into NC.
 dynamic:
-	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc 		        \
+	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                        \
 	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}"                     \
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
 	   "USER_IFLAGS=${USER_IFLAGS}"                                 \
 	   "USER_LFLAGS=${USER_LFLAGS}"                                 \
 	   "USER_DFLAGS=${USER_DFLAGS}"                                 \
 	   "USER_LIBS=${USER_LIBS}"                                     \
-           "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
-	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"	\
+	   "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
+	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"   \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" dynamic
 
 # Build a version of the elaborator and the simulator that
 # contain the user's SystemC model statically linked in.
 static:
-	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc 		        \
+	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                        \
 	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}"                     \
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
 	   "USER_IFLAGS=${USER_IFLAGS}"                                 \
 	   "USER_LFLAGS=${USER_LFLAGS}"                                 \
 	   "USER_DFLAGS=${USER_DFLAGS}"                                 \
 	   "USER_LIBS=${USER_LIBS}"                                     \
-	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}" 	\
-           "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
+	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"   \
+	   "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" static
 
 simulate_dynamic:
-	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc            		\
-	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}" 			\
+	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                       \
+	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}"                     \
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
 	   "USER_IFLAGS=${USER_IFLAGS}"                                 \
 	   "USER_LFLAGS=${USER_LFLAGS}"                                 \
 	   "USER_DFLAGS=${USER_DFLAGS}"                                 \
 	   "USER_LIBS=${USER_LIBS}"                                     \
 	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"  \
-	   "DESIGN_TOP=${DESIGN_TOP}"					\
-	   "VERILOG_SOURCES=${VERILOG_SOURCES}"				\
-	   "USER_NCVERILOG_OPTIONS=${USER_NCVERILOG_OPTIONS}"		\
-	   "USER_ELAB_OPTIONS=${USER_ELAB_OPTIONS}"			\
-	   "USER_SIM_OPTIONS=${USER_SIM_OPTIONS}"			\
+	   "DESIGN_TOP=${DESIGN_TOP}"                                   \
+	   "VERILOG_SOURCES=${VERILOG_SOURCES}"                                 \
+	   "USER_NCVERILOG_OPTIONS=${USER_NCVERILOG_OPTIONS}"           \
+	   "USER_ELAB_OPTIONS=${USER_ELAB_OPTIONS}"                     \
+	   "USER_SIM_OPTIONS=${USER_SIM_OPTIONS}"                       \
 	   "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" simulate_dynamic
 
 simulate_static:
-	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc             		\
-	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}" 			\
+	-make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                       \
+	   "SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES}"                     \
 	   "USER_NCSC_OPTIONS=${USER_NCSC_OPTIONS}"                     \
 	   "USER_IFLAGS=${USER_IFLAGS}"                                 \
 	   "USER_LFLAGS=${USER_LFLAGS}"                                 \
 	   "USER_DFLAGS=${USER_DFLAGS}"                                 \
 	   "USER_LIBS=${USER_LIBS}"                                     \
 	   "NC_ROOT=`ncroot`" "ARCH=`cds_plat`" "GCC_VERS=${GCC_VERS}" "COMPILER=${COMPILER}"  \
-	   "DESIGN_TOP=${DESIGN_TOP}"					\
-	   "USER_NCVERILOG_OPTIONS=${USER_NCVERILOG_OPTIONS}"		\
-	   "USER_SIM_OPTIONS=${USER_SIM_OPTIONS}"			\
-	   "USER_ELAB_OPTIONS=${USER_ELAB_OPTIONS}"			\
-	   "VERILOG_SOURCES=${VERILOG_SOURCES}"				\
-           "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
+	   "DESIGN_TOP=${DESIGN_TOP}"                                   \
+	   "USER_NCVERILOG_OPTIONS=${USER_NCVERILOG_OPTIONS}"           \
+	   "USER_SIM_OPTIONS=${USER_SIM_OPTIONS}"                       \
+	   "USER_ELAB_OPTIONS=${USER_ELAB_OPTIONS}"                     \
+	   "VERILOG_SOURCES=${VERILOG_SOURCES}"                                 \
+	   "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                     \
 	   "SYSTEMC_SOURCES=${SYSTEMC_SOURCES}" simulate_static
 
 
-TARGET_TEST_INSTALL	= simulate_dynamic
+TARGET_TEST_INSTALL     = simulate_dynamic
 
 test_install: clean use_irun
 
@@ -129,7 +129,7 @@ use_irun:
 clean:
 	make -f ${SYSTEMC_MAKEFILES}/Makefile.sc                        \
 	SYSTEMC_MAKEFILES=${SYSTEMC_MAKEFILES} NC_ROOT=`ncroot`         \
-        "DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                        \
+	"DEPENDENCIES_FILE=${DEPENDENCIES_FILE}"                        \
 	ARCH=`cds_plat` "GCC_VERS=${GCC_VERS}" COMPILER=${COMPILER} clean
 	irun -clean
 

@@ -19,7 +19,7 @@ endclass
       //my_dice.constraint_mode(0);
 
       repeat (10) begin
-	 assert (my_dice.randomize()) else  $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
+         assert (my_dice.randomize()) else  $fatal(" ERROR: Mister SVS, randomization failed, miserably.");
       end
    end
 

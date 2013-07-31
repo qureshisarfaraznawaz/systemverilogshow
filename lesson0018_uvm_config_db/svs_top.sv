@@ -20,14 +20,14 @@ module svs_top ();
       clk <= ~clk;
    end
    svs_dut svs_dut(
-		   .clk(clk),
-		   .resetn(resetn),
-		   .inbus3(svs_if_u[3].bus32),
-		   .inbus2(svs_if_u[2].bus32),
-		   .inbus1(svs_if_u[1].bus32),
-		   .inbus0(svs_if_u[0].bus32),
-		   .outbus(outbus)
-		   );
+                   .clk(clk),
+                   .resetn(resetn),
+                   .inbus3(svs_if_u[3].bus32),
+                   .inbus2(svs_if_u[2].bus32),
+                   .inbus1(svs_if_u[1].bus32),
+                   .inbus0(svs_if_u[0].bus32),
+                   .outbus(outbus)
+                   );
 
    initial begin
       run_test("");//svs_test");

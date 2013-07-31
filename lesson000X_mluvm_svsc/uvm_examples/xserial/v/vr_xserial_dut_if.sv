@@ -33,34 +33,34 @@ interface xserial_dut_if ( input logic clock, input logic reset);
 
 
    modport port_a (
-	       input   .xserial_reset(reset),
-	       input   .xserial_rx_clock(clock),
+               input   .xserial_reset(reset),
+               input   .xserial_rx_clock(clock),
                input   .xserial_rx_data(port_a_in_data),
-	       input   .xserial_tx_clock(clock),
+               input   .xserial_tx_clock(clock),
                output  .xserial_tx_data(port_a_out_data),
                output  .xserial_err(port_a_err) );
 
 
    modport port_b (
-	       input   .xserial_reset(reset),
-	       input   .xserial_rx_clock(clock),
+               input   .xserial_reset(reset),
+               input   .xserial_rx_clock(clock),
                input   .xserial_rx_data(port_b_in_data),
-	       input   .xserial_tx_clock(clock),
+               input   .xserial_tx_clock(clock),
                output  .xserial_tx_data(port_b_out_data),
                output  .xserial_err(port_b_err));
 
    modport port_c (
-	       input   .xserial_reset(reset),
-	       input   .xserial_rx_clock(clock),
+               input   .xserial_reset(reset),
+               input   .xserial_rx_clock(clock),
                input   .xserial_rx_data(port_b_in_data),
-	       input   .xserial_tx_clock(clock),
+               input   .xserial_tx_clock(clock),
                output  .xserial_tx_data(port_b_out_data),
                output  .xserial_err(port_b_err));
 
    modport monitor(
-	        input   clock,
-	        input   reset,
-		input  port_a_in_data,
+                input   clock,
+                input   reset,
+                input  port_a_in_data,
                 input  port_a_err,
                 input  port_a_out_data,
                 input  port_b_in_data,
@@ -72,5 +72,3 @@ interface xserial_dut_if ( input logic clock, input logic reset);
 
 
 endinterface
-
-

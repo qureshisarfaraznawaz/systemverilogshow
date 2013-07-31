@@ -56,7 +56,7 @@ if [ -n "$package_path" ]; then
    fi
 else
    echo "$script: Package $package_name  not found"
-	exit 1
+        exit 1
 fi
 
 # =============================================================================
@@ -89,7 +89,7 @@ while [ "$#" -gt 0 ]; do
          demo_file="test_tba.e"
       ;;
       -test)
-		        demo_file="$2"
+                        demo_file="$2"
                         shift
                         ;;
       -mode)
@@ -102,7 +102,7 @@ while [ "$#" -gt 0 ]; do
                         ;;
 
       esac
-	shift
+        shift
 done
 
 

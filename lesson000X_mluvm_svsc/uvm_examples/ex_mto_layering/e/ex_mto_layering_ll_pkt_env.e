@@ -23,8 +23,8 @@ define LL_MIN_PKT_LEN 64;
 define LL_MAX_PKT_LEN 1518;
 
 struct ex_mto_layering_ll_pkt_s like any_sequence_item {
-    color: 	ex_mto_layering_ll_pkt_color;
-    payload: 	list of byte;
+    color:      ex_mto_layering_ll_pkt_color;
+    payload:    list of byte;
     keep soft payload.size() in [LL_MIN_PKT_LEN..LL_MAX_PKT_LEN];
 
     -- How to print it in the "trace sequence"/"show sequence" output
@@ -46,9 +46,9 @@ unit ex_mto_layering_ll_pkt_bfm_u like uvm_bfm {
     d_enable: out simple_port of bit is instance; // ports to the DUT
     d_bus: out simple_port of byte is instance;   // ports to the DUT
 
-    event a_clock is cycle @sys.any;  	-- The LL_PKT main clock
-    event ll_pkt_started;			-- start of transfer to DUT
-    event ll_pkt_ended;			-- end of transfer to DUT
+    event a_clock is cycle @sys.any;    -- The LL_PKT main clock
+    event ll_pkt_started;                       -- start of transfer to DUT
+    event ll_pkt_ended;                 -- end of transfer to DUT
 
     driver:ex_mto_layering_ll_pkt_driver_u;
 

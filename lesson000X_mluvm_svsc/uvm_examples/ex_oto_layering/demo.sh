@@ -19,18 +19,18 @@ while [ $# -gt 0 ]; do
             shift
             ;;
       -test_n)
-	    test_name="$2"
+            test_name="$2"
             shift
             ;;
       -h|-help)
          usage
          exit 1
          ;;
-	 -test)
-	command="-p \"@$2 $3\""
+         -test)
+        command="-p \"@$2 $3\""
 
-	shift
-	;;
+        shift
+        ;;
       -run)
          quit_cmd="-c @$2"
 

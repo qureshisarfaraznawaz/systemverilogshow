@@ -48,7 +48,7 @@ extend xserial_bfm_u {
         var bit_list : list of bit;
         bit_list = frame.pack_frame();
         for each (b) in bit_list {
-	    wait delay (1);
+            wait delay (1);
             sig_tx_data$ = b;
             wait cycle;
         };
